@@ -1,12 +1,25 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.eb-team-member-container {
+	display: flex;
+}
 
-.wp-block-create-block-team-member {
-	background-color: var(--wp-admin-theme-color);
-	color: #fff;
-	padding: 2px;
+.eb-team-member-column {
+	padding: 5px;
+	width: 100%;
+}
+
+.eb-team-member-column div {
+	width: 100%;
+}
+
+.eb-team-member-image {
+	height: 150px;
+	width: 150px;
+	background: #e3e3e3 !important;
+	display: inline !important;
+}
+
+// Typography style
+.eb-typography-base div {
+	display: flex;
+	justify-content: space-between;
 }
