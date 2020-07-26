@@ -1,4 +1,4 @@
-=== Team Member ===
+=== Team Member Block ===
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
 Requires at least: 5.0
@@ -29,8 +29,8 @@ This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team
 ## 👨‍💻 DOCUMENTATION AND SUPPORT ##
 
 - For documentation and tutorials go to our [documentation](https://essential-blocks.com/docs/)
-- To report issue and contribution visit [Github](https://github.com/EssentialBlocks/team-member).
-- If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/team-member).
+- To report issue and contribution visit [Github](https://github.com/EssentialBlocks/team-member-block).
+- If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/team-member-block).
 - For more information about features, FAQs and documentation, check out our website at [WPDeveloper](https://wpdeveloper.net/).
 
 ## 🙌 JOIN THE COMMUNITY ##
@@ -39,7 +39,7 @@ This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team
 
 🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
 
-🧡 LOVED Toggle Content? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/team-member/reviews/#new-post)
+🧡 LOVED Toggle Content? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/team-member-block/reviews/#new-post)
 
 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
 
@@ -70,7 +70,7 @@ Visit [WPDeveloper](https://wpdeveloper.net/) to learn more about how to do bett
 3. Install in 1-click
 
 = Old Way: =
-1. Upload `team-member` to the `/wp-content/plugins/` directory
+1. Upload `team-member-block` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Follow the [Documentation](https://essential-blocks.com/docs/)
 
