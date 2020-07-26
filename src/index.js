@@ -5,13 +5,16 @@ import "./style.scss";
 import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
-import icon from './icon'
+import icon from "./icon";
 
 registerBlockType("block/team-member", {
 	title: __("Team Member", "block"),
-	description: __("", "block"),
+	description: __(
+		"Present your team members beautifully & gain instant credibility",
+		"block"
+	),
 	category: "widgets",
-  icon,
+	icon,
 	attributes,
 	edit: Edit,
 	save,

@@ -2,7 +2,7 @@
 	"name": "block/team-member",
 	"title": "Team Member",
 	"category": "widgets",
-	"description": "",
+	"description": " Present your team members beautifully & gain instant credibility ",
 	"textdomain": "team-member",
 	"editorScript": "file:./build/index.js",
 	"style": "file:./build/style-index.css"

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     Team Member
- * Description:     Example block written with ESNext standard and JSX support – build step required.
+ * Description:     Present your team members beautifully & gain instant credibility
  * Version:         0.1.0
  * Author:          The WordPress Contributors
  * License:         GPL-2.0-or-later
