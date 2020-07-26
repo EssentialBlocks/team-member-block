@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class EB_Font_Loader
+class Social_Font_Loader
 {
 
     private static $instance;
@@ -91,4 +91,4 @@ class EB_Font_Loader
         }
     }
 }
-EB_Font_Loader::register();
+Social_Font_Loader::register();
