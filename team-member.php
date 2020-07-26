@@ -1,14 +1,16 @@
 <?php
 /**
  * Plugin Name:     Team Member
+ * Plugin URI: 		https://essential-blocks.com
  * Description:     Present your team members beautifully & gain instant credibility
- * Version:         0.1.0
- * Author:          The WordPress Contributors
- * License:         GPL-2.0-or-later
- * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
+ * Version:         1.0.0
+ * Author:          WPDeveloper
+ * Author URI: 		https://wpdeveloper.net
+ * License:         GPL-3.0-or-later
+ * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:     team-member
  *
- * @package         block
+ * @package         team-member
  */
 
 /**
