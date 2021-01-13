@@ -3,7 +3,7 @@
  * Plugin Name:     Team Member Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Present your team members beautifully & gain instant credibility
- * Version:         1.0.0
+ * Version:         1.0.1
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
