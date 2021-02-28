@@ -4,3 +4,6 @@
 [submodule "util/color-control"]
 	path = util/color-control
 	url = git@github.com:EssentialBlocks/color-control.git
+[submodule "util/image-avatar"]
+	path = util/image-avatar
+	url = git@github.com:EssentialBlocks/image-avatar.git
