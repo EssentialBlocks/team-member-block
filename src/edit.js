@@ -21,9 +21,16 @@ import {
 /**
  * WordPress dependencies
  */
-import {__} from "@wordpress/i18n";
-import {Button} from "@wordpress/components";
-import{ MediaUpload, RichText, BlockControls, BlockAlignmentToolbar }  from "@wordpress/editor";
+import { __ } from "@wordpress/i18n";
+import { Button } from "@wordpress/components";
+import {
+	MediaUpload,
+	RichText,
+	BlockControls,
+	BlockAlignmentToolbar,
+} from "@wordpress/block-editor";
+
+import "./editor.scss";
 
 const Edit = (props) => {
 	const { isSelected, attributes, setAttributes } = props;

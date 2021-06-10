@@ -1,9 +1,9 @@
 {
 	"name": "team-member",
-	"version": "0.1.0",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
-	"author": "The WordPress Contributors",
-	"license": "GPL-2.0-or-later",
+	"version": "1.1.0",
+	"description": "Present your team members beautifully & gain instant credibility",
+	"author": "WPDeveloper",
+	"license": "GPL-3.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
@@ -15,7 +15,12 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@wordpress/scripts": "^12.1.1"
+		"@wordpress/scripts": "^15.0.1",
+		"@wordpress/block-editor": "^5.3.3",
+		"@wordpress/blocks": "^8.0.3",
+		"@wordpress/i18n": "^3.20.0",
+		"node-sass": "^6.0.0",
+		"postcss-loader": "^5.3.0"
 	},
 	"dependencies": {
 		"@fonticonpicker/react-fonticonpicker": "^1.2.0",
