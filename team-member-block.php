@@ -4,7 +4,7 @@
  * Plugin Name:     Team Member Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Present your team members beautifully & gain instant credibility
- * Version:         1.0.1
+ * Version:         1.1.0
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -23,6 +23,7 @@
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_team_member_block_init()
 {
@@ -35,12 +36,17 @@ function create_block_team_member_block_init()
 		);
 	}
 	$index_js     = 'build/index.js';
-	$script_asset = require($script_asset_path);
 	wp_register_script(
 		'create-block-team-member-block-editor',
 		plugins_url($index_js, __FILE__),
-		$script_asset['dependencies'],
-		$script_asset['version']
+		array(
+			'wp-blocks',
+			'wp-i18n',
+			'wp-element',
+			'wp-block-editor',
+			'wp-editor',
+		),
+		filemtime("$dir/$index_js")
 	);
 
 	$editor_css = 'build/index.css';
@@ -52,29 +58,29 @@ function create_block_team_member_block_init()
 	);
 
 
-	$style_css = 'build/style-index.css';
-	wp_register_style(
-		'create-block-team-member-block',
-		plugins_url($style_css, __FILE__),
-		array(),
-		filemtime("$dir/$style_css")
-	);
+	// $style_css = 'build/style-index.css';
+	// wp_register_style(
+	// 	'create-block-team-member-block',
+	// 	plugins_url($style_css, __FILE__),
+	// 	array(),
+	// 	filemtime("$dir/$style_css")
+	// );
 
-	$fontpicker_theme = 'src/css/fonticonpicker.base-theme.react.css';
+	$fontpicker_theme = 'assets/css/fonticonpicker.base-theme.react.css';
 	wp_enqueue_style(
 		'fontpicker-default-theme',
 		plugins_url($fontpicker_theme, __FILE__),
 		array()
 	);
 
-	$fontpicker_material_theme = 'src/css/fonticonpicker.material-theme.react.css';
+	$fontpicker_material_theme = 'assets/css/fonticonpicker.material-theme.react.css';
 	wp_enqueue_style(
 		'fontpicker-matetial-theme',
 		plugins_url($fontpicker_material_theme, __FILE__),
 		array()
 	);
 
-	$fontawesome_css = 'src/css/font-awesome5.css';
+	$fontawesome_css = 'assets/css/font-awesome5.css';
 	wp_enqueue_style(
 		'fontawesome-frontend-css',
 		plugins_url($fontawesome_css, __FILE__),
@@ -82,10 +88,10 @@ function create_block_team_member_block_init()
 	);
 
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/team-member')) {
-		register_block_type('block/team-member', array(
+		register_block_type('team-member/team-member', array(
 			'editor_script' => 'create-block-team-member-block-editor',
 			'editor_style' => 'create-block-team-member-block-editor',
-			'style'         => 'create-block-team-member-block',
+			// 'style'         => 'create-block-team-member-block',
 			'fontpicker_theme' => 'fontpicker-default-theme',
 			'fontpicker_material_theme' => 'fontpicker-material-theme',
 			'fontawesome_css' => 'fontawesome-frontend-css',

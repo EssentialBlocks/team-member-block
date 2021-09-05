@@ -1,9 +1,9 @@
 === Team Member Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, alam789
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
-Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 1.0.1
+Requires at least: 5.6
+Tested up to: 5.8
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -86,6 +86,15 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+
+= 1.1.0 - (dev) =
+* Added: Dynamic asset generation instead of inline styles
+* Added: Responsive controls with preview
+* Added: Design Presets
+* Added: New styling & design options
+* Improved: Controls, styling options and structure. 
+
 
 = 1.0.0 - 09-09-2020 =
 
