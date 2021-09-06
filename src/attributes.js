@@ -123,6 +123,11 @@ const attributes = {
 	},
 
 	//
+	icnEffect: {
+		type: "string",
+	},
+
+	//
 	descsColor: {
 		type: "string",
 	},

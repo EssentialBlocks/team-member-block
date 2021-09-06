@@ -162,6 +162,7 @@ export default function Edit({
 		//
 		imgCnVtAlign,
 		isP9reverse,
+		icnEffect,
 	} = attributes;
 
 	//
@@ -1394,7 +1395,7 @@ ${
 							}}
 						/>
 						{socialInImage && showSocials && (
-							<SocialLinks socialDetails={profilesOnly} />
+							<SocialLinks socialDetails={profilesOnly} icnEffect={icnEffect} />
 						)}
 					</div>
 					<div className="contents">
@@ -1425,7 +1426,10 @@ ${
 						{!socialInImage && showSocials && (
 							<>
 								{showSSeparator && <hr class="social_separator" />}
-								<SocialLinks socialDetails={profilesOnly} />
+								<SocialLinks
+									socialDetails={profilesOnly}
+									icnEffect={icnEffect}
+								/>
 							</>
 						)}
 					</div>

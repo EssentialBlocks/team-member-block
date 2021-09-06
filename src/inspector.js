@@ -105,6 +105,7 @@ import {
 	STYLE_PRESETS,
 	separatorTypes,
 	ContentsVerticalAligns,
+	HOVER_EFFECT,
 } from "./constants";
 
 function Inspector({ attributes, setAttributes }) {
@@ -174,6 +175,9 @@ function Inspector({ attributes, setAttributes }) {
 		//
 		imgCnVtAlign,
 		isP9reverse,
+
+		//
+		icnEffect,
 	} = attributes;
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
@@ -1145,6 +1149,16 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 												</>
 											)}
+
+											<SelectControl
+												label={__("Icon Hover Effect")}
+												value={icnEffect}
+												options={HOVER_EFFECT}
+												// onChange={(preset) => setAttributes({ preset })}
+												onChange={(icnEffect) => {
+													setAttributes({ icnEffect });
+												}}
+											/>
 
 											<PanelBody title={__("Icons Border")} initialOpen={false}>
 												<BorderShadowControl

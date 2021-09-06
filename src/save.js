@@ -29,6 +29,7 @@ export default function Save({ attributes }) {
 
 		//
 		socialInImage,
+		icnEffect,
 	} = attributes;
 
 	return (
@@ -38,7 +39,7 @@ export default function Save({ attributes }) {
 					<div className="image">
 						<img className="avatar" src={imageUrl} alt="member" />
 						{socialInImage && showSocials && (
-							<SocialLinks socialDetails={profilesOnly} />
+							<SocialLinks socialDetails={profilesOnly} icnEffect={icnEffect} />
 						)}
 					</div>
 					<div className="contents">
@@ -63,7 +64,10 @@ export default function Save({ attributes }) {
 						{!socialInImage && showSocials && (
 							<>
 								{showSSeparator && <hr class="social_separator" />}
-								<SocialLinks socialDetails={profilesOnly} />
+								<SocialLinks
+									socialDetails={profilesOnly}
+									icnEffect={icnEffect}
+								/>
 							</>
 						)}
 					</div>
