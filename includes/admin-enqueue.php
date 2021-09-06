@@ -13,6 +13,7 @@ class TeamMemberBlockAdminEnqueue
             wp_enqueue_style('fontpicker-default-theme',);
             wp_enqueue_style('fontpicker-matetial-theme');
             wp_enqueue_style('fontawesome-frontend-css');
+            wp_enqueue_style('essential-blocks-hover-css');
         }
     }
 

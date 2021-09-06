@@ -124,18 +124,6 @@ function Inspector({ attributes, setAttributes }) {
 		isImgHeightAuto,
 
 		//
-		isSocialEffects,
-
-		//
-		sclScale,
-
-		//
-		sclRotate,
-
-		//
-		sclEffTransition,
-
-		//
 		showDescs,
 
 		//
@@ -1194,57 +1182,6 @@ function Inspector({ attributes, setAttributes }) {
 													baseLabel="Padding"
 												/>
 											</PanelBody>
-
-											<br />
-
-											<ToggleControl
-												label={__("More Hover Effects")}
-												checked={isSocialEffects}
-												onChange={() =>
-													setAttributes({
-														isSocialEffects: !isSocialEffects,
-													})
-												}
-											/>
-
-											{isSocialEffects && (
-												<>
-													<RangeControl
-														label={__("Scale [1 for no scale effect]")}
-														value={sclScale}
-														onChange={(sclScale) => setAttributes({ sclScale })}
-														step={0.1}
-														min={0}
-														max={3}
-													/>
-
-													<RangeControl
-														label={__(
-															"Rotate (in deg) [0 for no rotate effect]"
-														)}
-														value={sclRotate}
-														onChange={(sclRotate) =>
-															setAttributes({ sclRotate })
-														}
-														step={1}
-														min={-360}
-														max={360}
-													/>
-
-													<RangeControl
-														label={__(
-															"Effect Transition [0 for no transition effect]"
-														)}
-														value={sclEffTransition}
-														onChange={(sclEffTransition) =>
-															setAttributes({ sclEffTransition })
-														}
-														step={0.1}
-														min={0}
-														max={5}
-													/>
-												</>
-											)}
 										</PanelBody>
 									)}
 

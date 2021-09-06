@@ -81,6 +81,13 @@ function create_block_team_member_block_init()
 		array()
 	);
 
+	$hover_css = 'assets/css/hover-min.css';
+	wp_register_style(
+		'essential-blocks-hover-css',
+		plugins_url($hover_css, __FILE__),
+		array()
+	);
+
 	$fontawesome_css = 'assets/css/font-awesome5.css';
 	wp_register_style(
 		'fontawesome-frontend-css',
@@ -96,6 +103,7 @@ function create_block_team_member_block_init()
 			'render_callback' => function ($attribs, $content) {
 				if (!is_admin()) {
 					wp_enqueue_style('fontawesome-frontend-css');
+					wp_enqueue_style('essential-blocks-hover-css');
 				}
 				return $content;
 			}

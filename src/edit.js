@@ -119,18 +119,6 @@ export default function Edit({
 		profilesOnly,
 
 		//
-		isSocialEffects,
-
-		//
-		sclScale,
-
-		//
-		sclRotate,
-
-		//
-		sclEffTransition,
-
-		//
 		iconsJustify,
 		iconsVAlign,
 
@@ -985,22 +973,13 @@ ${
 			${iconSizeDesktop}
 			${iconPaddingDesktop}
 			${socialBorderDesktop}
-			transition: color 0.5s, background-color 0.5s, ${
-				isSocialEffects && sclEffTransition
-					? `transform ${sclEffTransition}s,`
-					: ""
-			} ${socialBorderTransitionStyle} ;
+			transition: color 0.5s, background-color 0.5s, ${socialBorderTransitionStyle};
 		}
 		
 		.${blockId}.eb-team-wrapper ul.socials li:hover a {	
 			background-color:${hvIcnColor};
 			color:${hvIcnBgc};
 			${socialBordersHoverDesktop}
-			${
-				isSocialEffects
-					? `transform: rotate(${sclRotate}deg) scale(${sclScale});`
-					: ""
-			}
 		}
 		
 		`

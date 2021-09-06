@@ -123,31 +123,6 @@ const attributes = {
 	},
 
 	//
-	isSocialEffects: {
-		type: "boolean",
-		default: true,
-	},
-
-	//
-	//
-	sclScale: {
-		type: "number",
-		default: 1.2,
-	},
-
-	//
-	sclRotate: {
-		type: "number",
-		default: 360,
-	},
-
-	//
-	sclEffTransition: {
-		type: "number",
-		default: 0.5,
-	},
-
-	//
 	descsColor: {
 		type: "string",
 	},
