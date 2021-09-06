@@ -21,6 +21,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
+require_once __DIR__ . '/includes/admin-enqueue.php';
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
@@ -67,21 +68,21 @@ function create_block_team_member_block_init()
 	// );
 
 	$fontpicker_theme = 'assets/css/fonticonpicker.base-theme.react.css';
-	wp_enqueue_style(
+	wp_register_style(
 		'fontpicker-default-theme',
 		plugins_url($fontpicker_theme, __FILE__),
 		array()
 	);
 
 	$fontpicker_material_theme = 'assets/css/fonticonpicker.material-theme.react.css';
-	wp_enqueue_style(
+	wp_register_style(
 		'fontpicker-matetial-theme',
 		plugins_url($fontpicker_material_theme, __FILE__),
 		array()
 	);
 
 	$fontawesome_css = 'assets/css/font-awesome5.css';
-	wp_enqueue_style(
+	wp_register_style(
 		'fontawesome-frontend-css',
 		plugins_url($fontawesome_css, __FILE__),
 		array()
@@ -92,9 +93,12 @@ function create_block_team_member_block_init()
 			'editor_script' => 'create-block-team-member-block-editor',
 			'editor_style' => 'create-block-team-member-block-editor',
 			// 'style'         => 'create-block-team-member-block',
-			'fontpicker_theme' => 'fontpicker-default-theme',
-			'fontpicker_material_theme' => 'fontpicker-material-theme',
-			'fontawesome_css' => 'fontawesome-frontend-css',
+			'render_callback' => function ($attribs, $content) {
+				if (!is_admin()) {
+					wp_enqueue_style('fontawesome-frontend-css');
+				}
+				return $content;
+			}
 		));
 	}
 }
