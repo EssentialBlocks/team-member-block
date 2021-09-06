@@ -94,6 +94,7 @@ Yes, it will work with any standard WordPress theme.
 * Added: Design Presets
 * Added: New styling & design options
 * Improved: Controls, styling options and structure. 
+* Improved: removed all unnecessary enqueues from frontend. 
 
 
 = 1.0.0 - 09-09-2020 =
