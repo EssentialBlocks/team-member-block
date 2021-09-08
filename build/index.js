@@ -6023,9 +6023,10 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["tmbJobPaddingConst"], {// top: 10,
   // bottom: 20,
   // isLinked: false,
-})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["iconsWrapPadding"], {// top: 10,
+})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["iconsWrapPadding"], {
+  top: 10,
   // bottom: 20,
-  // isLinked: false,
+  isLinked: false
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["iconsWrapMargin"], {// top: 10,
   // bottom: 20,
   // isLinked: false,
@@ -6201,15 +6202,15 @@ var STYLE_PRESETS = [{
   label: __("Preset 1"),
   value: "preset1"
 }, {
-  label: __("Preset 2 (hover overly)"),
+  label: __("Preset 2 (hover overlay)"),
   value: "preset2"
 }, // this was preset 3
 {
-  label: __("Preset 3  (hover overly)"),
+  label: __("Preset 3  (hover overlay)"),
   value: "preset3"
 }, // this was preset 5
 {
-  label: __("Preset 4 (hover overly)"),
+  label: __("Preset 4 (hover overlay)"),
   value: "preset4"
 }, // this was preset 8
 {
@@ -7298,6 +7299,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./constants/backgroundsConstants */ "./src/constants/backgroundsConstants.js");
 /* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./constants */ "./src/constants/index.js");
+var _defaultPresetAttrsOb;
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7352,10 +7355,67 @@ var _wp$components = wp.components,
 
 
 
+var defaultPresetAttrsObj = (_defaultPresetAttrsOb = {
+  // test: undefined,
+  socialInImage: false,
+  WrpBg_backgroundColor: undefined,
+  cSepColor: undefined,
+  dscP_Left: undefined,
+  dscP_Right: undefined,
+  hov_imgBgP_gradientColor: undefined,
+  icnSepH: 30,
+  icnSp_Range: 20,
+  icnWp_Bottom: undefined,
+  icnWp_Left: undefined,
+  icnWp_Right: undefined,
+  icnWp_Top: undefined,
+  icnWp_isLinked: true,
+  imgBd_Bdr_Bottom: "1",
+  imgBd_Bdr_Left: "1",
+  imgBd_Bdr_Right: "1",
+  imgBd_Bdr_Top: "1",
+  imgBd_Rds_Bottom: undefined,
+  imgBd_Rds_Left: undefined,
+  imgBd_Rds_Right: undefined,
+  imgBd_Rds_Top: undefined,
+  imgBd_Rds_Unit: "px",
+  imgBd_borderColor: "undefined",
+  imgBd_borderStyle: "none",
+  imgBeforeEl: false,
+  imgBgP_gradientColor: "linear-gradient(45deg,#7967ff,#c277f2)",
+  imgMrg_Top: undefined,
+  imgMrg_isLinked: true,
+  isIconsDevider: false,
+  jobP_Bottom: undefined,
+  jobP_isLinked: true,
+  sSepColor: undefined,
+  showCSeparator: false,
+  showSSeparator: false,
+  wrpBdSd_blur: undefined,
+  wrpBdSd_hOffset: undefined,
+  wrpBdSd_shadowColor: undefined,
+  wrpBdSd_spread: undefined,
+  wrpBdSd_vOffset: undefined,
+  wrpMrg_isLinked: true,
+  wrpPad_isLinked: true,
+  imgH_Range: 200,
+  imgW_Range: 200,
+  nameP_Bottom: "15",
+  nameP_Top: "20",
+  showDescs: true,
+  wrpBdSd_Rds_Unit: "px",
+  imgW_Unit: "px",
+  wrpBdSd_Rds_Bottom: undefined,
+  wrpBdSd_Rds_Left: undefined,
+  wrpBdSd_Rds_Right: undefined,
+  wrpBdSd_Rds_Top: undefined,
+  wrpMrg_Bottom: undefined,
+  wrpW_Range: 100,
+  wrpW_Unit: "%",
+  hov_sclWBg_backgroundColor: undefined
+}, _defineProperty(_defaultPresetAttrsOb, "icnWp_Bottom", undefined), _defineProperty(_defaultPresetAttrsOb, "icnWp_Left", undefined), _defineProperty(_defaultPresetAttrsOb, "icnWp_Right", undefined), _defineProperty(_defaultPresetAttrsOb, "icnWp_Top", 10), _defineProperty(_defaultPresetAttrsOb, "icnWp_isLinked", false), _defineProperty(_defaultPresetAttrsOb, "sclWBg_backgroundColor", undefined), _defineProperty(_defaultPresetAttrsOb, "iconsVAlign", "center"), _defineProperty(_defaultPresetAttrsOb, "isImgHeightAuto", false), _defineProperty(_defaultPresetAttrsOb, "conBgGradient", "linear-gradient(45deg, #7967ff, rgba(194,119,242,0.8))"), _defineProperty(_defaultPresetAttrsOb, "imgW_Unit", "px"), _defaultPresetAttrsOb);
 
 function Inspector(_ref) {
-  var _defaultPresetAttrsOb;
-
   var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
   var resOption = attributes.resOption,
@@ -7428,65 +7488,6 @@ function Inspector(_ref) {
     attributes: attributes,
     objAttributes: _attributes__WEBPACK_IMPORTED_MODULE_13__["default"]
   };
-  var defaultPresetAttrsObj = (_defaultPresetAttrsOb = {
-    // test: undefined,
-    socialInImage: false,
-    WrpBg_backgroundColor: undefined,
-    cSepColor: undefined,
-    dscP_Left: undefined,
-    dscP_Right: undefined,
-    hov_imgBgP_gradientColor: undefined,
-    icnSepH: 30,
-    icnSp_Range: 20,
-    icnWp_Bottom: undefined,
-    icnWp_Left: undefined,
-    icnWp_Right: undefined,
-    icnWp_Top: undefined,
-    icnWp_isLinked: true,
-    imgBd_Bdr_Bottom: "1",
-    imgBd_Bdr_Left: "1",
-    imgBd_Bdr_Right: "1",
-    imgBd_Bdr_Top: "1",
-    imgBd_Rds_Bottom: undefined,
-    imgBd_Rds_Left: undefined,
-    imgBd_Rds_Right: undefined,
-    imgBd_Rds_Top: undefined,
-    imgBd_Rds_Unit: "px",
-    imgBd_borderColor: "undefined",
-    imgBd_borderStyle: "none",
-    imgBeforeEl: false,
-    imgBgP_gradientColor: "linear-gradient(45deg,#7967ff,#c277f2)",
-    imgMrg_Top: undefined,
-    imgMrg_isLinked: true,
-    isIconsDevider: false,
-    jobP_Bottom: undefined,
-    jobP_isLinked: true,
-    sSepColor: undefined,
-    showCSeparator: false,
-    showSSeparator: false,
-    wrpBdSd_blur: undefined,
-    wrpBdSd_hOffset: undefined,
-    wrpBdSd_shadowColor: undefined,
-    wrpBdSd_spread: undefined,
-    wrpBdSd_vOffset: undefined,
-    wrpMrg_isLinked: true,
-    wrpPad_isLinked: true,
-    imgH_Range: 200,
-    imgW_Range: 200,
-    nameP_Bottom: "15",
-    nameP_Top: "20",
-    showDescs: true,
-    wrpBdSd_Rds_Unit: "px",
-    imgW_Unit: "px",
-    wrpBdSd_Rds_Bottom: undefined,
-    wrpBdSd_Rds_Left: undefined,
-    wrpBdSd_Rds_Right: undefined,
-    wrpBdSd_Rds_Top: undefined,
-    wrpMrg_Bottom: undefined,
-    wrpW_Range: 100,
-    wrpW_Unit: "%",
-    hov_sclWBg_backgroundColor: undefined
-  }, _defineProperty(_defaultPresetAttrsOb, "icnWp_Bottom", undefined), _defineProperty(_defaultPresetAttrsOb, "icnWp_Left", undefined), _defineProperty(_defaultPresetAttrsOb, "icnWp_Right", undefined), _defineProperty(_defaultPresetAttrsOb, "icnWp_Top", undefined), _defineProperty(_defaultPresetAttrsOb, "sclWBg_backgroundColor", undefined), _defineProperty(_defaultPresetAttrsOb, "iconsVAlign", "center"), _defineProperty(_defaultPresetAttrsOb, "isImgHeightAuto", false), _defineProperty(_defaultPresetAttrsOb, "conBgGradient", "linear-gradient(45deg, #7967ff, rgba(194,119,242,0.8))"), _defineProperty(_defaultPresetAttrsOb, "imgW_Unit", "px"), _defaultPresetAttrsOb);
 
   var handlePresetChange = function handlePresetChange(preset) {
     switch (preset) {

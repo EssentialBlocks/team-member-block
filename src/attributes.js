@@ -466,9 +466,9 @@ const attributes = {
 		// isLinked: false,
 	}),
 	...generateDimensionsAttributes(iconsWrapPadding, {
-		// top: 10,
+		top: 10,
 		// bottom: 20,
-		// isLinked: false,
+		isLinked: false,
 	}),
 	...generateDimensionsAttributes(iconsWrapMargin, {
 		// top: 10,

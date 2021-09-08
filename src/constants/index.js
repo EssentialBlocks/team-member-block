@@ -25,9 +25,9 @@ export const ContentsVerticalAligns = [
 export const STYLE_PRESETS = [
 	{ label: __("Default"), value: "default" },
 	{ label: __("Preset 1"), value: "preset1" },
-	{ label: __("Preset 2 (hover overly)"), value: "preset2" }, // this was preset 3
-	{ label: __("Preset 3  (hover overly)"), value: "preset3" }, // this was preset 5
-	{ label: __("Preset 4 (hover overly)"), value: "preset4" }, // this was preset 8
+	{ label: __("Preset 2 (hover overlay)"), value: "preset2" }, // this was preset 3
+	{ label: __("Preset 3  (hover overlay)"), value: "preset3" }, // this was preset 5
+	{ label: __("Preset 4 (hover overlay)"), value: "preset4" }, // this was preset 8
 	{ label: __("Preset 5"), value: "preset5" }, // this was preset 9
 	{ label: __("Preset 6"), value: "preset6" }, // this was preset 15
 ];
