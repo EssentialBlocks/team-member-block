@@ -52,7 +52,7 @@ function create_block_team_member_block_init()
 
 	$editor_css = 'build/index.css';
 	wp_register_style(
-		'create-block-team-member-block-editor',
+		'essensial-blocks-editor-css',
 		plugins_url($editor_css, __FILE__),
 		array(),
 		filemtime("$dir/$editor_css")
@@ -98,7 +98,7 @@ function create_block_team_member_block_init()
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/team-member')) {
 		register_block_type('team-member/team-member', array(
 			'editor_script' => 'create-block-team-member-block-editor',
-			'editor_style' => 'create-block-team-member-block-editor',
+			'editor_style' 	=> 'essensial-blocks-editor-css',
 			// 'style'         => 'create-block-team-member-block',
 			'render_callback' => function ($attribs, $content) {
 				if (!is_admin()) {
