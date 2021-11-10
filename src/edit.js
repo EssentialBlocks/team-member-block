@@ -4,7 +4,7 @@
 const { __ } = wp.i18n;
 const { useBlockProps, MediaUpload, RichText } = wp.blockEditor;
 const { Button } = wp.components;
-const { useEffect, useRef } = wp.element;
+const { useEffect } = wp.element;
 
 const { select } = wp.data;
 
@@ -173,6 +173,41 @@ export default function Edit({
 		}));
 
 		setAttributes({ socialDetails: newProfiles });
+
+		if (socialDetails.length > 0) return;
+
+		const newSclDtails = [
+			{
+				icon: "fab fa-facebook-f",
+				color: "#fff",
+				bgColor: "#3b5998",
+				link: "#",
+				isExpanded: false,
+			},
+			{
+				icon: "fab fa-twitter",
+				color: "#fff",
+				bgColor: "#1da1f2",
+				link: "#",
+				isExpanded: false,
+			},
+			{
+				icon: "fab fa-linkedin-in",
+				color: "#fff",
+				bgColor: "#0077b5",
+				link: "#",
+				isExpanded: false,
+			},
+			{
+				icon: "fab fa-youtube",
+				color: "#fff",
+				bgColor: "#cd201f",
+				link: "#",
+				isExpanded: false,
+			},
+		];
+
+		setAttributes({ socialDetails: newSclDtails });
 	}, []);
 
 	//
@@ -618,7 +653,7 @@ export default function Edit({
 
 	// styles related to generateBorderShadowStyles end
 
-	console.log("----edit theke", { attributes });
+	// console.log("----edit theke", { attributes });
 
 	const socialStyles = socialDetails.reduce(
 		(acc, curr, i) => `
@@ -640,8 +675,18 @@ export default function Edit({
 			padding:0;
 		}
 
+		.social-icon {
+			font-style: normal;
+		}
+		
+
+		.${blockId}.eb-team-wrapper > *{
+			position:relative;
+		}
+
 		.${blockId}.eb-team-wrapper {
 			position:relative;
+			overflow:hidden;
 			margin:auto;
 			${wrapWidthDesktop}
 			${wrpBackgroundStylesDesktop}
@@ -1032,6 +1077,18 @@ ${
 			: ""
 	}
 
+
+	${
+		imgBeforeEl
+			? `
+		.${blockId}.eb-team-wrapper .image:before {
+			${imgTopBgHeightTab}
+		}
+		`
+			: ""
+	}
+		
+
 	.${blockId}.eb-team-wrapper .image > img {
 		${imageBdShdStyleTab}
 		${imageMarginTab}
@@ -1182,6 +1239,17 @@ ${
 			: ""
 	}
 
+
+	${
+		imgBeforeEl
+			? `
+		.${blockId}.eb-team-wrapper .image:before {
+			${imgTopBgHeightMobile}
+		}
+		`
+			: ""
+	}
+
 	.${blockId}.eb-team-wrapper .image > img {
 		${preset === "preset5" ? "" : imgWidthMobile}
 		${imageBdShdStyleMobile}
@@ -1298,21 +1366,21 @@ ${
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStyles = softMinifyCssStrings(`		
-		${isCssExists(wrapperStylesDesktop) ? wrapperStylesDesktop : " "}
+		${wrapperStylesDesktop}
 
 
 	`);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesTab) ? wrapperStylesTab : " "}
+		${wrapperStylesTab}
 
 
 	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStyles = softMinifyCssStrings(`
-		${isCssExists(wrapperStylesMobile) ? wrapperStylesMobile : " "}
+		${wrapperStylesMobile}
 
 
 	`);
@@ -1321,7 +1389,7 @@ ${
 	// styling codes End here
 	//
 
-	console.log("-----edit theke:", { attributes });
+	// console.log("-----edit theke:", { attributes });
 
 	// Set All Style in "blockMeta" Attribute
 	useEffect(() => {
@@ -1412,7 +1480,7 @@ ${
 								value={jobTitle}
 								onChange={(jobTitle) => setAttributes({ jobTitle })}
 							/>
-							{showCSeparator && <hr class="content_separator" />}
+							{showCSeparator && <hr className="content_separator" />}
 
 							{showDescs && (
 								<RichText
@@ -1425,7 +1493,7 @@ ${
 						</div>
 						{!socialInImage && showSocials && (
 							<>
-								{showSSeparator && <hr class="social_separator" />}
+								{showSSeparator && <hr className="social_separator" />}
 								<SocialLinks
 									socialDetails={profilesOnly}
 									icnEffect={icnEffect}

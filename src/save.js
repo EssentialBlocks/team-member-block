@@ -51,7 +51,7 @@ export default function Save({ attributes }) {
 								value={jobTitle}
 							/>
 
-							{showCSeparator && <hr class="content_separator" />}
+							{showCSeparator && <hr className="content_separator" />}
 
 							{showDescs && (
 								<RichText.Content
@@ -63,7 +63,7 @@ export default function Save({ attributes }) {
 						</div>
 						{!socialInImage && showSocials && (
 							<>
-								{showSSeparator && <hr class="social_separator" />}
+								{showSSeparator && <hr className="social_separator" />}
 								<SocialLinks
 									socialDetails={profilesOnly}
 									icnEffect={icnEffect}

@@ -7,6 +7,17 @@
  * The following styles get applied inside the editor only.
  */
 /* Common styles for all blocks */
+.components-accessible-toolbar,
+.block-editor-block-contextual-toolbar,
+.components-accessible-toolbar.block-editor-block-contextual-toolbar {
+  z-index: 999999;
+}
+
+.eb-row-wrapper > .eb-row-inner > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .eb-panel-control .components-button-group.eb-unit-control-btn-group .components-button .eb-category-icon {
   margin-left: 8px;
 }
@@ -138,37 +149,12 @@
   width: 20px;
 }
 
-/* Accordion sortable style */
-.drag-helper .profile-wrapper,
-.eb-accordion-sortable-item,
-.eb-pricebox-sortable-item,
-.eb-typed-sortable-item {
-  border: 1px solid #b4b4cb;
-}
-
-.profile-wrapper .drag-handle,
-.eb-accordion-sortable-item .drag-handle,
-.eb-pricebox-sortable-item .drag-handle,
-.eb-typed-sortable-item .drag-handle {
-  background: transparent !important;
-  flex: 2 1 0% !important;
-  border-left: 1px solid #b4b4cb;
-}
-
-.eb-panel-control .components-base-control .components-text-control__input,
-.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item .eb-social-delete-icon,
-.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item .drag-handle,
-.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item {
-  border-color: #ebebeb !important;
-  padding: 8px 10px;
-}
-
-.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item .drag-handle {
-  border-right: none;
-}
-
 .block-editor-block-inspector .eb-panel-control .components-base-control {
   margin-bottom: 15px;
+}
+
+.block-editor-block-inspector .eb-panel-control .components-toggle-control.components-base-control {
+  margin: 10px 0;
 }
 
 .eb-panel-control .components-base-control .components-form-toggle .components-form-toggle__track {
@@ -345,6 +331,10 @@
   padding: 0;
   margin-left: 2px;
   cursor: pointer;
+}
+
+.eb-panel-control .eb-reset-button-margin-fix .eb-range-controller-container .eb-range-reset-button {
+  margin-top: 26px;
 }
 
 .eb-panel-control .eb-range-controller-container .eb-range-reset-button .dashicon {
@@ -720,6 +710,10 @@ dimensions-control submodules css start
   text-align: center;
 }
 
+.input-container.left-right-disabled {
+  justify-content: flex-start;
+}
+
 .input-container {
   display: flex;
   flex-direction: row;
@@ -1053,6 +1047,299 @@ unit-control submodule's css end
 }
 .eb-panel-control .eb-parent-tab-panel .eb-slider-item-single-panel textarea {
   border-color: #ebebeb;
+}
+.eb-panel-control .eb-parent-tab-panel .eb-slider-item-single-panel .error {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Accordion sortable style */
+.drag-helper .profile-wrapper,
+.eb-accordion-sortable-item,
+.eb-pricebox-sortable-item,
+.eb-typed-sortable-item {
+  border: 1px solid #b4b4cb;
+}
+
+.profile-wrapper .drag-handle,
+.eb-accordion-sortable-item .drag-handle,
+.eb-pricebox-sortable-item .drag-handle,
+.eb-typed-sortable-item .drag-handle {
+  background: transparent !important;
+  flex: 2 1 0% !important;
+  border-left: 1px solid #b4b4cb;
+}
+
+.eb-panel-control .components-base-control .components-text-control__input,
+.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item .eb-social-delete-icon,
+.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item .drag-handle,
+.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item {
+  border-color: #ebebeb !important;
+  padding: 5px 0;
+}
+
+.eb-panel-control .components-base-control .drag-helper .eb-accordion-sortable-item .drag-handle {
+  border-right: none;
+}
+
+.eb-accordion-sortable-item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid;
+  line-height: 2.5em;
+}
+
+.eb-accordion-sortable-title {
+  flex: 10;
+  padding-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eb-accordion-sortable-trash {
+  font-size: 16px;
+  border-left: 1px solid gray;
+  line-height: 2.5em;
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+}
+
+.eb-accordion-sortable-trash:hover {
+  background: #f44336;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.eb-accordion-hidden {
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
+
+.eb-accordion-expanded {
+  overflow: visible;
+  opacity: 1;
+}
+
+.eb-accordion-upload-button {
+  height: 100px;
+  width: 100%;
+  background: #e3e3e3;
+  color: #666666;
+  display: inline-block;
+}
+
+.eb-accordion-add-button {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.eb-accordion-add-button-label {
+  margin-left: 10px;
+}
+
+.eb-panel-control .eb-accordion-add-button {
+  margin-top: 0px;
+}
+
+.eb-accordion-sortable-base {
+  margin-bottom: 0px !important;
+}
+
+.eb-sortable-accordion-list {
+  margin-bottom: 0px;
+}
+.eb-sortable-accordion-list li:last-child {
+  margin-bottom: 0px;
+}
+
+.eb-control-item-wrapper {
+  margin-bottom: 10px;
+}
+
+.eb-panel-control .components-base-control__field .components-text-control__input {
+  padding: 10px;
+}
+
+.eb-margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.eb-margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.eb-margin-bottom-30 {
+  margin-bottom: 30px;
+}
+
+.eb-row-wrapper .eb-guten-block-main-parent-wrapper.eb-column-editor-wrap.wp-block,
+.eb-row-wrapper .eb-guten-block-main-parent-wrapper.eb-column-editor-wrap.wp-block .wp-block {
+  max-width: none;
+}
+
+body.eb-mimmik-added .eb-guten-block-main-parent-wrapper.eb-row-editor-wrap .eb-row-root-container {
+  overflow-x: hidden;
+}
+body.eb-mimmik-added .marginPaddingNaai.wp-block,
+body.eb-mimmik-added .eb-guten-block-main-parent-wrapper.eb-row-editor-wrap .wp-block,
+body.eb-mimmik-added .eb-guten-block-main-parent-wrapper.eb-row-editor-wrap .block-editor-block-list__block.wp-block {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.eb-row-wrapper > .eb-row-inner > .block-editor-inner-blocks {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.eb-row-wrapper > .eb-row-inner > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  max-width: none !important;
+  width: auto !important;
+}
+
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap {
+  position: relative !important;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .eb-column-inner .block-list-appender {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change {
+  display: none;
+  position: absolute;
+  z-index: 8;
+  right: -5px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  cursor: col-resize;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change > .dragger-inner {
+  margin: 0 5px;
+  height: 100%;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change > .dragger-inner .circle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change > .dragger-inner > .dashicons {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #a3a5c0;
+  border-radius: 50%;
+  top: 50%;
+  left: -8px;
+  transform: translateY(-50%);
+  color: #a3a5c0;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change:hover > .dragger-inner {
+  background-color: #000;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip {
+  width: 170px;
+  position: absolute;
+  top: 50%;
+  background: no-repeat;
+  color: #fff;
+  padding: 0;
+  transform: translateY(-50%);
+  left: -77px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 9999;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip i.ovl_shapes {
+  position: absolute;
+  background: #fff;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip i.ovl_circle1 {
+  left: 55px;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip i.ovl_circle2 {
+  right: 55px;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip > span {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip > span.dashicons {
+  color: #a3a5c0;
+  border: 1px solid #a3a5c0;
+  border-radius: 50%;
+  width: 30px;
+  font-size: 26px;
+  background: #fff;
+  z-index: 333;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip > span:not(.dashicons) {
+  background: #a3a5c0;
+  color: #fff;
+  width: 65px;
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip > :not(.dashicons):first-child {
+  padding-right: 10px;
+  -webkit-clip-path: polygon(100% 0, 90% 50%, 100% 100%, 0% 100%, 0 50%, 0% 0%);
+          clip-path: polygon(100% 0, 90% 50%, 100% 100%, 0% 100%, 0 50%, 0% 0%);
+}
+.eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .cols-width-tooltip > :not(.dashicons):nth-child(3) {
+  padding-left: 10px;
+  -webkit-clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 10% 50%, 0% 0%);
+          clip-path: polygon(100% 0, 100% 50%, 100% 100%, 0% 100%, 10% 50%, 0% 0%);
+}
+
+body.eb-responsive-preview-option-Desktop .eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change {
+  display: block;
+}
+
+body.eb-mimmik-added .edit-post-visual-editor .eb-column-wrapper > .eb-column-inner .components-button {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+body.eb-mimmik-added .edit-post-visual-editor .block-editor-block-toolbar {
+  position: relative;
+  z-index: 999;
+}
+
+body.eb-mimmik-added .edit-post-visual-editor .components-popover.block-editor-block-list__block-popover {
+  z-index: 999;
+}
+
+body.eb-mimmik-added .edit-post-visual-editor .wp-block.editor-post-title.editor-post-title__block {
+  padding-bottom: 40px;
 }
 
 /*# sourceMappingURL=index.css.map*/

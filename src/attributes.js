@@ -104,7 +104,8 @@ const attributes = {
 		selector: ".avatar",
 		attribute: "src",
 		// default: "https://source.unsplash.com/5vg_SarQimA/150x150",
-		default: "../wp-content/plugins/team-member-block/assets/person.jpeg",
+		// default: "../wp-content/plugins/essential-blocks/assets/images/person.jpeg",
+		default: "../wp-content/plugins/team-member-block/assets/user.jpg",
 
 		// default:
 		// 	"https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTE5NzI3NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150",
@@ -160,36 +161,7 @@ const attributes = {
 
 	socialDetails: {
 		type: "array",
-		default: [
-			{
-				icon: "fab fa-facebook-f",
-				color: "#fff",
-				bgColor: "#3b5998",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "fab fa-twitter",
-				color: "#fff",
-				bgColor: "#1da1f2",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "fab fa-linkedin-in",
-				color: "#fff",
-				bgColor: "#0077b5",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "fab fa-youtube",
-				color: "#fff",
-				bgColor: "#cd201f",
-				link: "#",
-				isExpanded: false,
-			},
-		],
+		default: [],
 	},
 
 	//

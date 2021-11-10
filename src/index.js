@@ -20,7 +20,7 @@ import metadata from "../block.json";
 const { name, category } = metadata;
 
 registerBlockType(name, {
-	title: __("Team Members", "essential-blocks"),
+	title: __("Team Member", "essential-blocks"),
 	description: __(
 		"Present your team members beautifully & gain instant credibility"
 	),
@@ -32,6 +32,15 @@ registerBlockType(name, {
 		__("member", "essential-blocks"),
 		__("eb essential", "essential-blocks"),
 	],
+	supports: {
+		// inserter: false,
+		// reusable: false,
+		// html: false,
+		// anchor: true,
+		// Declare support for specific alignment options.
+		// align: ["wide", "full"],
+		align: true,
+	},
 	edit: Edit,
 	save: Save,
 	example,

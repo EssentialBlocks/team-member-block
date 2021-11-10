@@ -175,7 +175,6 @@ const defaultPresetAttrsObj = {
 	iconsVAlign: "center",
 	isImgHeightAuto: false,
 	conBgGradient: "linear-gradient(45deg, #7967ff, rgba(194,119,242,0.8))",
-	imgW_Unit: "px",
 };
 
 function Inspector({ attributes, setAttributes }) {
@@ -277,6 +276,15 @@ function Inspector({ attributes, setAttributes }) {
 		};
 	}, []);
 
+	//
+	useEffect(() => {
+		const newSclDtails = socialDetails.map((item) => ({
+			...item,
+			isExpanded: false,
+		}));
+		setAttributes({ socialDetails: newSclDtails });
+	}, []);
+
 	const resRequiredProps = {
 		setAttributes,
 		resOption,
@@ -300,6 +308,8 @@ function Inspector({ attributes, setAttributes }) {
 						"linear-gradient(45deg, #7967ff 0% , rgba(194,119,242,0.8) 100%)",
 					imgW_Unit: "%",
 					isImgHeightAuto: true,
+					wrpW_Range: 400,
+					wrpW_Unit: "px",
 				});
 				break;
 
@@ -315,6 +325,8 @@ function Inspector({ attributes, setAttributes }) {
 					icnWp_Top: "50",
 					iconsVAlign: "flex-end",
 					imgW_Unit: "%",
+					wrpW_Range: 400,
+					wrpW_Unit: "px",
 					isImgHeightAuto: true,
 					sclWBg_backgroundColor: "rgba(0,0,0,0.5)",
 					socialInImage: true,
@@ -380,8 +392,9 @@ function Inspector({ attributes, setAttributes }) {
 					imgBd_Rds_Right: "50",
 					imgBd_Rds_Top: "50",
 					imgBd_Rds_Unit: "%",
-					imgH_Range: 600,
-					imgW_Range: 600,
+					isImgHeightAuto: true,
+					imgW_Range: 100,
+					imgW_Unit: "%",
 					jobP_Bottom: "15",
 					jobP_isLinked: false,
 					nameP_Bottom: "10",
@@ -394,7 +407,7 @@ function Inspector({ attributes, setAttributes }) {
 					wrpBdSd_Rds_Unit: "%",
 					wrpMrg_Bottom: "80",
 					wrpMrg_isLinked: false,
-					wrpW_Range: 600,
+					wrpW_Range: 400,
 					wrpW_Unit: "px",
 				});
 				break;
@@ -430,12 +443,12 @@ function Inspector({ attributes, setAttributes }) {
 						},
 						{
 							name: "styles",
-							title: "Styles",
+							title: "Style",
 							className: "eb-tab styles",
 						},
 						{
 							name: "advance",
-							title: "Advance",
+							title: "Advanced",
 							className: "eb-tab advance",
 						},
 					]}
@@ -1096,7 +1109,7 @@ function Inspector({ attributes, setAttributes }) {
 												}}
 											>
 												<i>
-													N.B. 'Rows Gap' is used when U have multiple rows of
+													N.B. 'Rows Gap' is used when you have multiple rows of
 													social profiles. Normally in case of only one row,
 													it's not needed
 												</i>
@@ -1137,7 +1150,7 @@ function Inspector({ attributes, setAttributes }) {
 														onChange={(icnSepH) => setAttributes({ icnSepH })}
 														step={1}
 														min={1}
-														max={50}
+														max={300}
 													/>
 
 													<ResponsiveRangeController
