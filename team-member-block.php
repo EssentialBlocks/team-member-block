@@ -21,93 +21,126 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-require_once __DIR__ . '/includes/admin-enqueue.php';
+define('TEAM_MEMBER_BLOCK_VERSION', "1.1.0");
+define('TEAM_MEMBER_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
+define('TEAM_MEMBER_BLOCK_ADMIN_PATH', dirname(__FILE__));
+
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_team_member_block_init()
 {
-	$dir = dirname(__FILE__);
 
-	$script_asset_path = "$dir/build/index.asset.php";
+	$script_asset_path = TEAM_MEMBER_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "create-block/team-member" block first.'
+			'You need to run `npm start` or `npm run build` for the "block/testimonial" block first.'
 		);
 	}
-	$index_js     = 'build/index.js';
+	$script_asset = require($script_asset_path);
+	$all_dependencies = array_merge($script_asset['dependencies'], array(
+		'wp-blocks',
+		'wp-i18n',
+		'wp-element',
+		'wp-block-editor',
+		'team-member-block-controls-util',
+	));
+
+	$index_js     = TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/index.js';
 	wp_register_script(
 		'create-block-team-member-block-editor',
-		plugins_url($index_js, __FILE__),
-		array(
-			'wp-blocks',
-			'wp-i18n',
-			'wp-element',
-			'wp-block-editor',
-			'wp-editor',
-		),
-		filemtime("$dir/$index_js")
+		$index_js,
+		$all_dependencies,
+		$script_asset['version'],
+		true
 	);
 
-	$editor_css = 'build/index.css';
-	wp_register_style(
-		'essensial-blocks-editor-css',
-		plugins_url($editor_css, __FILE__),
-		array(),
-		filemtime("$dir/$editor_css")
+	// 
+	// 
+	// 
+	$controls_dependencies = require TEAM_MEMBER_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+
+	wp_register_script(
+		"team-member-block-controls-util",
+		TEAM_MEMBER_BLOCK_ADMIN_URL . '/dist/controls.js',
+		array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
+		$controls_dependencies['version'],
+		true
 	);
 
+	wp_localize_script('team-member-block-controls-util', 'EssentialBlocksLocalize', array(
+		'eb_wp_version' => (float) get_bloginfo('version'),
+		'rest_rootURL' => get_rest_url(),
+	));
 
-	// $style_css = 'build/style-index.css';
-	// wp_register_style(
-	// 	'create-block-team-member-block',
-	// 	plugins_url($style_css, __FILE__),
-	// 	array(),
-	// 	filemtime("$dir/$style_css")
-	// );
+	wp_localize_script('team-member-block-controls-util', 'TeamMemberLocalize', array(
+		'eb_plugins_url' => TEAM_MEMBER_BLOCK_ADMIN_URL,
+	));
 
-	$fontpicker_theme = 'assets/css/fonticonpicker.base-theme.react.css';
 	wp_register_style(
 		'fontpicker-default-theme',
-		plugins_url($fontpicker_theme, __FILE__),
-		array()
+		TEAM_MEMBER_BLOCK_ADMIN_URL . '/assets/css/fonticonpicker.base-theme.react.css',
+		array(),
+		TEAM_MEMBER_BLOCK_VERSION,
+		"all"
 	);
 
-	$fontpicker_material_theme = 'assets/css/fonticonpicker.material-theme.react.css';
 	wp_register_style(
 		'fontpicker-matetial-theme',
-		plugins_url($fontpicker_material_theme, __FILE__),
-		array()
+		TEAM_MEMBER_BLOCK_ADMIN_URL . '/assets/css/fonticonpicker.material-theme.react.css',
+		array(),
+		TEAM_MEMBER_BLOCK_VERSION,
+		"all"
 	);
 
-	$hover_css = 'assets/css/hover-min.css';
-	wp_register_style(
-		'essential-blocks-hover-css',
-		plugins_url($hover_css, __FILE__),
-		array()
-	);
-
-	$fontawesome_css = 'assets/css/font-awesome5.css';
 	wp_register_style(
 		'fontawesome-frontend-css',
-		plugins_url($fontawesome_css, __FILE__),
-		array()
+		TEAM_MEMBER_BLOCK_ADMIN_URL . '/assets/css/font-awesome5.css',
+		array(),
+		TEAM_MEMBER_BLOCK_VERSION,
+		"all"
+	);
+
+
+	wp_register_style(
+		'essential-blocks-hover-css',
+		TEAM_MEMBER_BLOCK_ADMIN_URL . '/assets/css/hover-min.css',
+		array(),
+		TEAM_MEMBER_BLOCK_VERSION,
+		"all"
+	);
+
+	wp_register_style(
+		'accordion-editor-css',
+		TEAM_MEMBER_BLOCK_ADMIN_URL . '/dist/controls.css',
+		array(
+			'essential-blocks-hover-css',
+			'fontpicker-default-theme',
+			'fontpicker-matetial-theme',
+			'fontawesome-frontend-css',
+		),
+		$controls_dependencies['version'],
+		'all'
 	);
 
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/team-member')) {
-		register_block_type('team-member/team-member', array(
-			'editor_script' => 'create-block-team-member-block-editor',
-			'editor_style' 	=> 'essensial-blocks-editor-css',
-			// 'style'         => 'create-block-team-member-block',
-			'render_callback' => function ($attribs, $content) {
-				if (!is_admin()) {
-					wp_enqueue_style('fontawesome-frontend-css');
-					wp_enqueue_style('essential-blocks-hover-css');
+		register_block_type(
+			Team_Member_Helper::get_block_register_path("team-member-block/team-member-block", TEAM_MEMBER_BLOCK_ADMIN_PATH),
+			array(
+				'editor_script'	=> 'create-block-team-member-block-editor',
+				'editor_style' 	=> 'accordion-editor-css',
+				'render_callback' => function ($attributes, $content) {
+					if (!is_admin()) {
+						wp_enqueue_style('fontawesome-frontend-css');
+						wp_enqueue_style('essential-blocks-hover-css');
+					}
+					return $content;
 				}
-				return $content;
-			}
-		));
+			)
+		);
 	}
 }
+
 add_action('init', 'create_block_team_member_block_init');

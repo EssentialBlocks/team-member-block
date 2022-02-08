@@ -1,51 +1,72 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { InspectorControls, MediaUpload } = wp.blockEditor;
-const { useEffect, useState, useRef } = wp.element;
-const { select } = wp.data;
-const {
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
+import { InspectorControls, MediaUpload } from "@wordpress/block-editor";
+import {
 	PanelBody,
 	SelectControl,
 	ToggleControl,
-	TextControl,
 	Button,
 	RangeControl,
 	BaseControl,
 	ButtonGroup,
-	DateTimePicker,
 	TabPanel,
-} = wp.components;
+} from "@wordpress/components";
+import { select } from "@wordpress/data";
 
 /**
  * Internal dependencies
  */
 
-import TypographyDropdown from "../util/typography-control-v2";
-import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
-import ResponsiveRangeController from "../util/responsive-range-control";
-import ImageAvatar from "../util/image-avatar/";
-import ColorControl from "../util/color-control";
-import ResetControl from "../util/reset-control";
-import GradientColorControl from "../util/gradient-color-controller";
-import BorderShadowControl from "../util/border-shadow-control";
-import BackgroundControl from "../util/background-control";
-import DealSocialProfiles from "../util/social-profiles-v2/DealSocialProfiles";
-// import IconList from "../util/social-profiles-v2/IconList";
-import IconList from "../util/faIcons";
-import {
+const {
 	// TypographyIcon,
 	// UserIcon,
 	LeftAlignIcon,
 	RightAlignIcon,
 	CenterAlignIcon,
-} from "../util/icons";
+} = window.EBTeamMemberControls;
 
-import {
-	mimmikCssForResBtns,
-	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-} from "../util/helpers";
+// import TypographyDropdown from "../../../util/typography-control-v2";
+// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
+// import ResponsiveRangeController from "../../../util/responsive-range-control";
+// import ImageAvatar from "../../../util/image-avatar/";
+// import ColorControl from "../../../util/color-control";
+// import ResetControl from "../../../util/reset-control";
+// import GradientColorControl from "../../../util/gradient-color-controller";
+// import BorderShadowControl from "../../../util/border-shadow-control";
+// import BackgroundControl from "../../../util/background-control";
+// import DealSocialProfiles from "../../../util/social-profiles-v2/DealSocialProfiles";
+// import IconList from "../../../util/faIcons";
+// import {
+// 	mimmikCssForResBtns,
+// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+// } from "../../../util/helpers";
+
+const {
+	//
+	// mimmikCssForResBtns,
+	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
+
+	//
+	TypographyDropdown,
+	ResponsiveDimensionsControl,
+	ResponsiveRangeController,
+	ImageAvatar,
+	ColorControl,
+	// ResetControl,
+	GradientColorControl,
+	BorderShadowControl,
+	BackgroundControl,
+	DealSocialProfiles,
+	faIcons: IconList,
+} = window.EBTeamMemberControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
 
 import objAttributes from "./attributes";
 
@@ -96,6 +117,7 @@ import {
 	WrpBdShadowConst,
 	prefixSocialBdShadow,
 	prefixImgBd,
+	ovlBdPrefix,
 } from "./constants/borderShadowConstants";
 
 import {
@@ -180,9 +202,9 @@ const defaultPresetAttrsObj = {
 function Inspector({ attributes, setAttributes }) {
 	const {
 		resOption,
-		blockId,
-		blockRoot,
-		blockMeta,
+		// blockId,
+		// blockRoot,
+		// blockMeta,
 
 		//
 		imageUrl,
@@ -252,29 +274,29 @@ function Inspector({ attributes, setAttributes }) {
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 	useEffect(() => {
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	useEffect(() => {
-		mimmikCssForResBtns({
-			domObj: document,
-			resOption,
-		});
-	}, [resOption]);
+	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	// useEffect(() => {
+	// 	mimmikCssForResBtns({
+	// 		domObj: document,
+	// 		resOption,
+	// 	});
+	// }, [resOption]);
 
-	// this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-	useEffect(() => {
-		const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-			domObj: document,
-			select,
-			setAttributes,
-		});
-		return () => {
-			cleanUp();
-		};
-	}, []);
+	// // this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+	// useEffect(() => {
+	// 	const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+	// 		domObj: document,
+	// 		select,
+	// 		setAttributes,
+	// 	});
+	// 	return () => {
+	// 		cleanUp();
+	// 	};
+	// }, []);
 
 	//
 	useEffect(() => {
@@ -458,12 +480,14 @@ function Inspector({ attributes, setAttributes }) {
 							{tab.name === "general" && (
 								<>
 									<PanelBody
-										title={__("Presets")}
+										title={__("Presets", "essential-blocks")}
 										// initialOpen={false}
 									>
-										<BaseControl label={__("Design Preset")}>
+										<BaseControl
+											label={__("Design Preset", "essential-blocks")}
+										>
 											<SelectControl
-												// label={__("Design Preset")}
+												// label={__("Design Preset", "essential-blocks")}
 												value={preset}
 												options={STYLE_PRESETS}
 												// onChange={(preset) => setAttributes({ preset })}
@@ -474,7 +498,7 @@ function Inspector({ attributes, setAttributes }) {
 										{preset === "preset5" && (
 											<>
 												<ToggleControl
-													label={__("Reverse Layout")}
+													label={__("Reverse Layout", "essential-blocks")}
 													checked={isP9reverse}
 													onChange={() =>
 														setAttributes({
@@ -485,7 +509,7 @@ function Inspector({ attributes, setAttributes }) {
 
 												<ResponsiveRangeController
 													// noUnits
-													baseLabel={__("Gap")}
+													baseLabel={__("Gap", "essential-blocks")}
 													controlName={p9LGap}
 													resRequiredProps={resRequiredProps}
 													min={0}
@@ -497,7 +521,7 @@ function Inspector({ attributes, setAttributes }) {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Avatar")}
+										title={__("Avatar", "essential-blocks")}
 										// initialOpen={false}
 									>
 										{!imageUrl && (
@@ -511,7 +535,7 @@ function Inspector({ attributes, setAttributes }) {
 													return (
 														<Button
 															className="eb-background-control-inspector-panel-img-btn components-button"
-															label={__("Upload Image")}
+															label={__("Upload Image", "essential-blocks")}
 															icon="format-image"
 															onClick={open}
 														/>
@@ -535,12 +559,12 @@ function Inspector({ attributes, setAttributes }) {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Social Profiles")}
+										title={__("Social Profiles", "essential-blocks")}
 										// initialOpen={false}
 									>
 										<>
 											<ToggleControl
-												label={__("Enable Social Profiles")}
+												label={__("Enable Social Profiles", "essential-blocks")}
 												checked={showSocials}
 												onChange={() =>
 													setAttributes({
@@ -561,11 +585,11 @@ function Inspector({ attributes, setAttributes }) {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Separators")}
+										title={__("Separators", "essential-blocks")}
 										// initialOpen={false}
 									>
 										<ToggleControl
-											label={__("Enable Content Separator")}
+											label={__("Enable Content Separator", "essential-blocks")}
 											checked={showCSeparator}
 											onChange={() =>
 												setAttributes({
@@ -576,7 +600,10 @@ function Inspector({ attributes, setAttributes }) {
 
 										{showSocials && (
 											<ToggleControl
-												label={__("Enable Social Separator")}
+												label={__(
+													"Enable Social Separator",
+													"essential-blocks"
+												)}
 												checked={showSSeparator}
 												onChange={() =>
 													setAttributes({
@@ -591,12 +618,12 @@ function Inspector({ attributes, setAttributes }) {
 							{tab.name === "styles" && (
 								<>
 									<PanelBody
-										title={__("Container width")}
+										title={__("Container width", "essential-blocks")}
 										// initialOpen={false}
 									>
 										<ResponsiveRangeController
 											// noUnits
-											baseLabel={__("Max Width")}
+											baseLabel={__("Max Width", "essential-blocks")}
 											controlName={wrapperWidth}
 											resRequiredProps={resRequiredProps}
 											min={100}
@@ -605,46 +632,69 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									{preset === "preset4" && (
+									{/preset[2,3,4]/i.test(preset || "") && (
 										<PanelBody
-											title={__("Overlay Contents")}
+											title={__("Overlay Contents", "essential-blocks")}
 											// initialOpen={false}
 										>
-											<ResponsiveDimensionsControl
-												resRequiredProps={resRequiredProps}
-												controlName={contentsMargin}
-												baseLabel="margin"
-											/>
+											{/preset[3,4]/i.test(preset || "") && (
+												<>
+													<ResponsiveDimensionsControl
+														resRequiredProps={resRequiredProps}
+														controlName={contentsMargin}
+														baseLabel="margin"
+													/>
 
-											<ResponsiveDimensionsControl
-												resRequiredProps={resRequiredProps}
-												controlName={contentsPad}
-												baseLabel="Padding"
-											/>
+													<ResponsiveDimensionsControl
+														resRequiredProps={resRequiredProps}
+														controlName={contentsPad}
+														baseLabel="Padding"
+													/>
 
+													{preset === "preset4" && (
+														<>
+															<BaseControl
+																id="eb-team-content-vertical-alignments"
+																label="Vertical alignments"
+															>
+																<ButtonGroup id="eb-team-content-vertical-alignments">
+																	{ContentsVerticalAligns.map(
+																		({ value, label }) => (
+																			<Button
+																				// isLarge
+																				isSecondary={conVtAlign !== value}
+																				isPrimary={conVtAlign === value}
+																				onClick={() =>
+																					setAttributes({ conVtAlign: value })
+																				}
+																			>
+																				{label}
+																			</Button>
+																		)
+																	)}
+																</ButtonGroup>
+															</BaseControl>
+														</>
+													)}
+
+													<BorderShadowControl
+														controlName={ovlBdPrefix}
+														resRequiredProps={resRequiredProps}
+														noShadow
+														noBdrHover
+														// noBorder
+														// noShdowHover
+													/>
+												</>
+											)}
 											<BaseControl
-												id="eb-team-content-vertical-alignments"
-												label="Vertical alignments"
-											>
-												<ButtonGroup id="eb-team-content-vertical-alignments">
-													{ContentsVerticalAligns.map(({ value, label }) => (
-														<Button
-															isLarge
-															isSecondary={conVtAlign !== value}
-															isPrimary={conVtAlign === value}
-															onClick={() =>
-																setAttributes({ conVtAlign: value })
-															}
-														>
-															{label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
-
-											<BaseControl label={__("Background")}></BaseControl>
+												label={__("Background", "essential-blocks")}
+											></BaseControl>
 											<ToggleControl
-												label={__("Use Background Gradient")}
+												label={__(
+													"Use Background Gradient",
+													"essential-blocks"
+												)}
 												checked={isConBgGradient}
 												onChange={() =>
 													setAttributes({
@@ -662,7 +712,7 @@ function Inspector({ attributes, setAttributes }) {
 												/>
 											) : (
 												<ColorControl
-													label={__("Color")}
+													label={__("Color", "essential-blocks")}
 													color={conBgColor}
 													onChange={(conBgColor) =>
 														setAttributes({ conBgColor })
@@ -672,14 +722,14 @@ function Inspector({ attributes, setAttributes }) {
 										</PanelBody>
 									)}
 
-									<PanelBody title={__("Alignments")}>
+									<PanelBody title={__("Alignments", "essential-blocks")}>
 										{preset === "preset5" ? (
 											<BaseControl
 												id="eb-team-avatar-vertical-alignments"
 												label="Avatar/Content Vertical Alignment"
 											>
 												<SelectControl
-													// label={__("Icons Horizontal Alignment")}
+													// label={__("Icons Horizontal Alignment", "essential-blocks")}
 													value={imgCnVtAlign}
 													options={ContentsVerticalAligns}
 													onChange={(imgCnVtAlign) =>
@@ -772,7 +822,7 @@ function Inspector({ attributes, setAttributes }) {
 													label="Social Icons Horizontal Alignments"
 												>
 													<SelectControl
-														// label={__("Icons Horizontal Alignment")}
+														// label={__("Icons Horizontal Alignment", "essential-blocks")}
 														value={iconsJustify}
 														options={IconsHzAligns}
 														onChange={(iconsJustify) =>
@@ -787,7 +837,7 @@ function Inspector({ attributes, setAttributes }) {
 														label="Social Icons Vertical Alignments"
 													>
 														<SelectControl
-															// label={__("Icons Horizontal Alignment")}
+															// label={__("Icons Horizontal Alignment", "essential-blocks")}
 															value={iconsVAlign}
 															options={ContentsVerticalAligns}
 															onChange={(iconsVAlign) =>
@@ -876,7 +926,10 @@ function Inspector({ attributes, setAttributes }) {
 										)}
 									</PanelBody>
 
-									<PanelBody title={__("Avatar")} initialOpen={false}>
+									<PanelBody
+										title={__("Avatar", "essential-blocks")}
+										initialOpen={false}
+									>
 										{!imageUrl && (
 											<MediaUpload
 												onSelect={({ id, url }) =>
@@ -888,7 +941,7 @@ function Inspector({ attributes, setAttributes }) {
 													return (
 														<Button
 															className="eb-background-control-inspector-panel-img-btn components-button"
-															label={__("Upload Image")}
+															label={__("Upload Image", "essential-blocks")}
 															icon="format-image"
 															onClick={open}
 														/>
@@ -899,14 +952,14 @@ function Inspector({ attributes, setAttributes }) {
 										{imageUrl && (
 											<>
 												<ResponsiveRangeController
-													baseLabel={__("Image Width")}
+													baseLabel={__("Image Width", "essential-blocks")}
 													controlName={imageWidth}
 													resRequiredProps={resRequiredProps}
 													units={sizeUnitTypes}
 													max={2000}
 												/>
 												<ToggleControl
-													label={__("Auto Image Height")}
+													label={__("Auto Image Height", "essential-blocks")}
 													checked={isImgHeightAuto}
 													onChange={() =>
 														setAttributes({
@@ -917,7 +970,7 @@ function Inspector({ attributes, setAttributes }) {
 
 												{!isImgHeightAuto && (
 													<ResponsiveRangeController
-														baseLabel={__("Image Height", "infobox")}
+														baseLabel={__("Image Height", "essential-blocks")}
 														controlName={imageHeight}
 														resRequiredProps={resRequiredProps}
 														units={sizeUnitTypes}
@@ -945,7 +998,10 @@ function Inspector({ attributes, setAttributes }) {
 												/>
 
 												<ToggleControl
-													label={__("Enable Background before Image")}
+													label={__(
+														"Enable Background before Image",
+														"essential-blocks"
+													)}
 													checked={imgBeforeEl}
 													onChange={() =>
 														setAttributes({
@@ -965,7 +1021,7 @@ function Inspector({ attributes, setAttributes }) {
 
 														<ResponsiveRangeController
 															noUnits
-															baseLabel={__("Height")}
+															baseLabel={__("Height", "essential-blocks")}
 															controlName={imgTopBgHeight}
 															resRequiredProps={resRequiredProps}
 															min={0}
@@ -978,9 +1034,12 @@ function Inspector({ attributes, setAttributes }) {
 										)}
 									</PanelBody>
 
-									<PanelBody title={__("Name")} initialOpen={false}>
+									<PanelBody
+										title={__("Name", "essential-blocks")}
+										initialOpen={false}
+									>
 										<ColorControl
-											label={__("Color")}
+											label={__("Color", "essential-blocks")}
 											color={nameColor}
 											onChange={(nameColor) => setAttributes({ nameColor })}
 										/>
@@ -997,9 +1056,12 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Job Title")} initialOpen={false}>
+									<PanelBody
+										title={__("Job Title", "essential-blocks")}
+										initialOpen={false}
+									>
 										<ColorControl
-											label={__("Color")}
+											label={__("Color", "essential-blocks")}
 											color={jobColor}
 											onChange={(jobColor) => setAttributes({ jobColor })}
 										/>
@@ -1016,9 +1078,12 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Description")} initialOpen={false}>
+									<PanelBody
+										title={__("Description", "essential-blocks")}
+										initialOpen={false}
+									>
 										<ToggleControl
-											label={__("Enable Description")}
+											label={__("Enable Description", "essential-blocks")}
 											checked={showDescs}
 											onChange={() => setAttributes({ showDescs: !showDescs })}
 										/>
@@ -1026,7 +1091,7 @@ function Inspector({ attributes, setAttributes }) {
 										{showDescs && (
 											<>
 												<ColorControl
-													label={__("Color")}
+													label={__("Color", "essential-blocks")}
 													color={descsColor}
 													onChange={(descsColor) =>
 														setAttributes({ descsColor })
@@ -1049,22 +1114,25 @@ function Inspector({ attributes, setAttributes }) {
 									</PanelBody>
 
 									{showSocials && (
-										<PanelBody title={__("Social Icons")} initialOpen={false}>
+										<PanelBody
+											title={__("Social Icons", "essential-blocks")}
+											initialOpen={false}
+										>
 											<ColorControl
-												label={__("Hover Color")}
+												label={__("Hover Color", "essential-blocks")}
 												color={hvIcnColor}
 												onChange={(hvIcnColor) => setAttributes({ hvIcnColor })}
 											/>
 
 											<ColorControl
-												label={__("Hover Background")}
+												label={__("Hover Background", "essential-blocks")}
 												color={hvIcnBgc}
 												onChange={(hvIcnBgc) => setAttributes({ hvIcnBgc })}
 											/>
 
 											<ResponsiveRangeController
 												noUnits
-												baseLabel={__("Size")}
+												baseLabel={__("Size", "essential-blocks")}
 												controlName={rangeIconSize}
 												resRequiredProps={resRequiredProps}
 												min={5}
@@ -1074,7 +1142,7 @@ function Inspector({ attributes, setAttributes }) {
 
 											<ResponsiveRangeController
 												noUnits
-												baseLabel={__("Padding")}
+												baseLabel={__("Padding", "essential-blocks")}
 												controlName={rangeIconPadding}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1084,7 +1152,7 @@ function Inspector({ attributes, setAttributes }) {
 
 											<ResponsiveRangeController
 												noUnits
-												baseLabel={__("Spacing")}
+												baseLabel={__("Spacing", "essential-blocks")}
 												controlName={rangeIconDistance}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1094,7 +1162,7 @@ function Inspector({ attributes, setAttributes }) {
 
 											<ResponsiveRangeController
 												noUnits
-												baseLabel={__("Rows Gap")}
+												baseLabel={__("Rows Gap", "essential-blocks")}
 												controlName={rangeIconRowGap}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1116,7 +1184,7 @@ function Inspector({ attributes, setAttributes }) {
 											</label>
 
 											<ToggleControl
-												label={__("Icons Devider")}
+												label={__("Icons Devider", "essential-blocks")}
 												checked={isIconsDevider}
 												onChange={() =>
 													setAttributes({
@@ -1128,7 +1196,7 @@ function Inspector({ attributes, setAttributes }) {
 											{isIconsDevider && (
 												<>
 													<ColorControl
-														label={__("Color")}
+														label={__("Color", "essential-blocks")}
 														color={icnsDevideColor}
 														onChange={(icnsDevideColor) =>
 															setAttributes({ icnsDevideColor })
@@ -1136,7 +1204,7 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 
 													<RangeControl
-														label={__("Width")}
+														label={__("Width", "essential-blocks")}
 														value={icnSepW}
 														onChange={(icnSepW) => setAttributes({ icnSepW })}
 														step={1}
@@ -1145,7 +1213,7 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 
 													<RangeControl
-														label={__("Height")}
+														label={__("Height", "essential-blocks")}
 														value={icnSepH}
 														onChange={(icnSepH) => setAttributes({ icnSepH })}
 														step={1}
@@ -1154,7 +1222,10 @@ function Inspector({ attributes, setAttributes }) {
 													/>
 
 													<ResponsiveRangeController
-														baseLabel={__("Position From Right")}
+														baseLabel={__(
+															"Position From Right",
+															"essential-blocks"
+														)}
 														controlName={sclDeviderPosRight}
 														resRequiredProps={resRequiredProps}
 														min={0}
@@ -1165,7 +1236,7 @@ function Inspector({ attributes, setAttributes }) {
 											)}
 
 											<SelectControl
-												label={__("Icon Hover Effect")}
+												label={__("Icon Hover Effect", "essential-blocks")}
 												value={icnEffect}
 												options={HOVER_EFFECT}
 												// onChange={(preset) => setAttributes({ preset })}
@@ -1174,7 +1245,10 @@ function Inspector({ attributes, setAttributes }) {
 												}}
 											/>
 
-											<PanelBody title={__("Icons Border")} initialOpen={false}>
+											<PanelBody
+												title={__("Icons Border", "essential-blocks")}
+												initialOpen={false}
+											>
 												<BorderShadowControl
 													controlName={prefixSocialBdShadow}
 													resRequiredProps={resRequiredProps}
@@ -1184,7 +1258,7 @@ function Inspector({ attributes, setAttributes }) {
 											</PanelBody>
 
 											<PanelBody
-												title={__("Container Background ")}
+												title={__("Container Background ", "essential-blocks")}
 												initialOpen={false}
 											>
 												<BackgroundControl
@@ -1195,7 +1269,10 @@ function Inspector({ attributes, setAttributes }) {
 												/>
 											</PanelBody>
 											<PanelBody
-												title={__("Container Margin Padding ")}
+												title={__(
+													"Container Margin Padding ",
+													"essential-blocks"
+												)}
 												initialOpen={false}
 											>
 												<ResponsiveDimensionsControl
@@ -1215,17 +1292,17 @@ function Inspector({ attributes, setAttributes }) {
 
 									{showCSeparator && (
 										<PanelBody
-											title={__("Content Separator")}
+											title={__("Content Separator", "essential-blocks")}
 											initialOpen={false}
 										>
 											<ColorControl
-												label={__("Color")}
+												label={__("Color", "essential-blocks")}
 												color={cSepColor}
 												onChange={(cSepColor) => setAttributes({ cSepColor })}
 											/>
 
 											<ResponsiveRangeController
-												baseLabel={__("Width")}
+												baseLabel={__("Width", "essential-blocks")}
 												controlName={cSepWPrefix}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1234,7 +1311,7 @@ function Inspector({ attributes, setAttributes }) {
 											/>
 
 											<ResponsiveRangeController
-												baseLabel={__("Height")}
+												baseLabel={__("Height", "essential-blocks")}
 												controlName={cSepHPrefix}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1242,9 +1319,11 @@ function Inspector({ attributes, setAttributes }) {
 												step={1}
 											/>
 
-											<BaseControl label={__("Separator Type")}>
+											<BaseControl
+												label={__("Separator Type", "essential-blocks")}
+											>
 												<SelectControl
-													// label={__("Design Preset")}
+													// label={__("Design Preset", "essential-blocks")}
 													value={cSepType}
 													options={separatorTypes}
 													// onChange={(preset) => setAttributes({ preset })}
@@ -1257,17 +1336,17 @@ function Inspector({ attributes, setAttributes }) {
 									)}
 									{showSocials && showSSeparator && (
 										<PanelBody
-											title={__("Social Separator")}
+											title={__("Social Separator", "essential-blocks")}
 											initialOpen={false}
 										>
 											<ColorControl
-												label={__("Color")}
+												label={__("Color", "essential-blocks")}
 												color={sSepColor}
 												onChange={(sSepColor) => setAttributes({ sSepColor })}
 											/>
 
 											<ResponsiveRangeController
-												baseLabel={__("Width")}
+												baseLabel={__("Width", "essential-blocks")}
 												controlName={sSepWPrefix}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1276,7 +1355,7 @@ function Inspector({ attributes, setAttributes }) {
 											/>
 
 											<ResponsiveRangeController
-												baseLabel={__("Height")}
+												baseLabel={__("Height", "essential-blocks")}
 												controlName={sSepHPrefix}
 												resRequiredProps={resRequiredProps}
 												min={0}
@@ -1284,9 +1363,11 @@ function Inspector({ attributes, setAttributes }) {
 												step={1}
 											/>
 
-											<BaseControl label={__("Separator Type")}>
+											<BaseControl
+												label={__("Separator Type", "essential-blocks")}
+											>
 												<SelectControl
-													// label={__("Design Preset")}
+													// label={__("Design Preset", "essential-blocks")}
 													value={sSepType}
 													options={separatorTypes}
 													// onChange={(preset) => setAttributes({ preset })}
@@ -1317,7 +1398,10 @@ function Inspector({ attributes, setAttributes }) {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Background ")} initialOpen={false}>
+									<PanelBody
+										title={__("Background ", "essential-blocks")}
+										initialOpen={false}
+									>
 										<BackgroundControl
 											controlName={WrpBgConst}
 											resRequiredProps={resRequiredProps}

@@ -180,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: name, title, category, description, textdomain, editorScript, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"team-member/team-member\",\"title\":\"Team Member\",\"category\":\"widgets\",\"description\":\"Present your team members beautifully & gain instant credibility\",\"textdomain\":\"team-member-block\",\"editorScript\":\"file:./build/index.js\"}");
+module.exports = JSON.parse("{\"name\":\"team-member-block/team-member-block\",\"title\":\"Team Member\",\"category\":\"widgets\",\"description\":\"Present your team members beautifully & gain instant credibility\",\"textdomain\":\"team-member-block\",\"editorScript\":\"file:./build/index.js\"}");
 
 /***/ }),
 

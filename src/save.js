@@ -1,4 +1,4 @@
-const { useBlockProps, RichText } = wp.blockEditor;
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 import SocialLinks from "./components/social-links";
 

@@ -1,30 +1,44 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { useBlockProps, MediaUpload, RichText } = wp.blockEditor;
-const { Button } = wp.components;
-const { useEffect } = wp.element;
-
-const { select } = wp.data;
-
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
+import { useBlockProps, MediaUpload, RichText } from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
+import { select } from "@wordpress/data";
 /**
  * Internal dependencies
  */
 
-import "./editor.scss";
+// import {
+// 	softMinifyCssStrings,
+// 	generateBackgroundControlStyles,
+// 	generateDimensionsControlStyles,
+// 	generateTypographyStyles,
+// 	generateBorderShadowStyles,
+// 	generateResponsiveRangeStyles,
+// 	mimmikCssForPreviewBtnClick,
+// 	duplicateBlockIdFix,
+// } from "../../../util/helpers";
 
-import {
+const {
+	//
 	softMinifyCssStrings,
-	isCssExists,
 	generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	mimmikCssForPreviewBtnClick,
+	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} from "../util/helpers";
+} = window.EBTeamMemberControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
+
+import classnames from "classnames";
 
 import Inspector from "./inspector";
 import SocialLinks from "./components/social-links";
@@ -76,6 +90,7 @@ import {
 	WrpBdShadowConst,
 	prefixSocialBdShadow,
 	prefixImgBd,
+	ovlBdPrefix,
 } from "./constants/borderShadowConstants";
 
 export default function Edit({
@@ -83,6 +98,7 @@ export default function Edit({
 	setAttributes,
 	isSelected,
 	clientId,
+	className,
 }) {
 	const {
 		resOption,
@@ -220,15 +236,15 @@ export default function Edit({
 		setAttributes({ profilesOnly });
 	}, [socialDetails]);
 
-	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
+		// this codes is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
-	}, []);
 
-	// this useEffect is for creating a unique blockId for each block's unique className
-	useEffect(() => {
+		// this codes is for creating a unique blockId for each block's unique className
 		const BLOCK_PREFIX = "eb-team-member";
 		duplicateBlockIdFix({
 			BLOCK_PREFIX,
@@ -237,18 +253,29 @@ export default function Edit({
 			select,
 			clientId,
 		});
+
+		// // this codes is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+		// mimmikCssForPreviewBtnClick({
+		// 	domObj: document,
+		// 	select,
+		// });
+
+		//
+		if (
+			// imageUrl ===
+			// "../wp-content/plugins/essential-blocks/assets/images/user.jpg"
+			/assets\/images\/user\.jpg/gi.test(imageUrl || " ")
+		) {
+			setAttributes({
+				imageUrl: `${TeamMemberLocalize.eb_plugins_url}assets/images/user.jpg`,
+			});
+		}
 	}, []);
 
-	// this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	useEffect(() => {
-		mimmikCssForPreviewBtnClick({
-			domObj: document,
-			select,
-		});
-	}, []);
+	console.log({ EssentialBlocksLocalize, TeamMemberLocalize });
 
 	const blockProps = useBlockProps({
-		className: `eb-guten-block-main-parent-wrapper`,
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
 
 	//
@@ -651,9 +678,18 @@ export default function Edit({
 		// noBorder: true,
 	});
 
-	// styles related to generateBorderShadowStyles end
+	const {
+		styesDesktop: ovlBdShdStyleDesktop,
+		styesTab: ovlBdShdStyleTab,
+		styesMobile: ovlBdShdStyleMobile,
+	} = generateBorderShadowStyles({
+		controlName: ovlBdPrefix,
+		attributes,
+		// noShadow: true,
+		// noBorder: true,
+	});
 
-	// console.log("----edit theke", { attributes });
+	// styles related to generateBorderShadowStyles end
 
 	const socialStyles = socialDetails.reduce(
 		(acc, curr, i) => `
@@ -703,48 +739,6 @@ export default function Edit({
 				.${blockId}.eb-team-wrapper .image{
 					position: relative;
 				}
-
-				.${blockId}.eb-team-wrapper:hover ul.socials {
-					opacity: 1;
-				}
-				
-				`
-				: ""
-		}
-
-		${
-			preset === "preset4"
-				? `
-				.${blockId}.eb-team-wrapper .eb-team-inner {
-					position: relative;
-				}
-
-				.${blockId}.eb-team-wrapper:hover .contents {
-					opacity: 1;
-					z-index: 1;
-				}
-
-				.${blockId}.eb-team-wrapper .contents {
-					transition: 0.5s;
-					opacity: 0;
-					z-index: -1;
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 0;
-					display: flex;
-					flex-direction: column;
-					justify-content: ${conVtAlign || "center"};
-					${contentsPaddingDesktop}
-					${contentsMarginDesktop}
-					${
-						isConBgGradient
-							? `background-image: ${conBgGradient};`
-							: `background-color: ${conBgColor};`
-					}
-				}
-
 				`
 				: ""
 		}
@@ -753,7 +747,11 @@ export default function Edit({
 			preset === "preset2"
 				? `
 				.${blockId}.eb-team-wrapper:hover .contents{
-					background-color: rgba(255, 255, 255, 0.5);
+					${
+						isConBgGradient
+							? `background-image: ${conBgGradient};`
+							: `background-color: ${conBgColor};`
+					}
 					top: 50%;
 					height: 50%;
 					display: flex;
@@ -841,24 +839,24 @@ export default function Edit({
 		}
 
 
-	${
-		imgBeforeEl
-			? `
-		.${blockId}.eb-team-wrapper .image:before {
-			content: "";
-			display: block;
-			${imgTopBgHeightDesktop}
-			${imgTopBackgroundStyles}
-			transition: ${imgTopBgTransitionStyle};
-			
-		}
+		${
+			imgBeforeEl
+				? `
+			.${blockId}.eb-team-wrapper .image:before {
+				content: "";
+				display: block;
+				${imgTopBgHeightDesktop}
+				${imgTopBackgroundStyles}
+				transition: ${imgTopBgTransitionStyle};
+				
+			}
 
-		.${blockId}.eb-team-wrapper .image:hover:before{
-			${imgTopHoverBackgroundStyles}
+			.${blockId}.eb-team-wrapper .image:hover:before{
+				${imgTopHoverBackgroundStyles}
+			}
+			`
+				: ""
 		}
-		`
-			: ""
-	}
 		
 
 
@@ -949,8 +947,43 @@ ${
 		`
 		: ""
 }
-		
-		
+
+${
+	preset === "preset4"
+		? `
+		.${blockId}.eb-team-wrapper .eb-team-inner {
+			position: relative;
+		}
+
+		.${blockId}.eb-team-wrapper:hover .contents {
+			opacity: 1;
+		}
+
+		.${blockId}.eb-team-wrapper .contents {
+			transition: 0.5s;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: ${conVtAlign || "center"};
+			${contentsPaddingDesktop}
+			${contentsMarginDesktop}
+			${ovlBdShdStyleDesktop}
+			${
+				isConBgGradient
+					? `background-image: ${conBgGradient};`
+					: `background-color: ${conBgColor};`
+			}
+		}
+
+		`
+		: ""
+}
+
 ${
 	showSocials
 		? `
@@ -960,8 +993,6 @@ ${
 			list-style: none;
 			flex-wrap: wrap;
 			align-items: ${iconsVAlign || "center"};
-			${iconsWrapMarginDesktop}
-			${iconsWrapPaddingDesktop}
 			justify-content: ${iconsJustify};
 			${iconSpaceDesktop}
 			${iconRowGapDesktop}
@@ -975,11 +1006,33 @@ ${
 				position: absolute;
 				top: 0;
 				bottom: 0;
-				width:100%;
+				left:0;
+				right:0;
 				box-sizing:border-box;
+				${contentsPaddingDesktop}
+				${contentsMarginDesktop}
+				${ovlBdShdStyleDesktop}
+				${
+					isConBgGradient
+						? `background-image: ${conBgGradient};`
+						: `background-color: ${conBgColor};`
+				}
 			`
-					: ""
+					: `
+					${iconsWrapMarginDesktop}
+					${iconsWrapPaddingDesktop}
+					`
 			}
+		}
+
+		${
+			preset === "preset3"
+				? `
+				.${blockId}.eb-team-wrapper:hover ul.socials {
+					opacity: 1;
+				}
+				`
+				: ""
 		}
 
 		.${blockId}.eb-team-wrapper ul.socials:hover {
@@ -1023,8 +1076,8 @@ ${
 		}
 		
 		.${blockId}.eb-team-wrapper ul.socials li:hover a {	
-			background-color:${hvIcnColor};
-			color:${hvIcnBgc};
+			background-color:${hvIcnBgc};
+			color:${hvIcnColor};
 			${socialBordersHoverDesktop}
 		}
 		
@@ -1115,17 +1168,6 @@ ${
 			: ""
 	}	
 
-	${
-		preset === "preset4"
-			? `
-			.${blockId}.eb-team-wrapper .contents {
-				${contentsPaddingTab}
-				${contentsMarginTab}
-			}
-			`
-			: ""
-	}
-
 	.${blockId}.eb-team-wrapper .contents .name {
 		${nameTypoStylesTab}
 		${namePaddingTab}
@@ -1160,6 +1202,17 @@ ${
 		: ""
 }
 	
+${
+	preset === "preset4"
+		? `
+		.${blockId}.eb-team-wrapper .contents {
+			${contentsPaddingTab}
+			${contentsMarginTab}
+			${ovlBdShdStyleTab}
+		}
+		`
+		: ""
+}
 
 ${
 	showSocials
@@ -1171,6 +1224,15 @@ ${
 			${iconsWrapPaddingTab}
 			${iconSpaceTab}
 			${iconRowGapTab}
+			${
+				preset === "preset3"
+					? `
+						${contentsPaddingTab}
+						${contentsMarginTab}
+						${ovlBdShdStyleTab}
+					`
+					: ""
+			}
 		}	
 
 
@@ -1265,18 +1327,6 @@ ${
 	.${blockId}.eb-team-wrapper .image:hover > img {
 		${imageBdShdStylesHoverMobile}
 	}
-
-
-	${
-		preset === "preset4"
-			? `
-			.${blockId}.eb-team-wrapper .contents {
-				${contentsPaddingMobile}
-				${contentsMarginMobile}
-			}
-			`
-			: ""
-	}
 	
 	${
 		showDescs
@@ -1300,66 +1350,87 @@ ${
 	}
 
 
-		
-${
-	showCSeparator
-		? `
-		.${blockId}.eb-team-wrapper .contents .content_separator {
-			${contentSepWidthMobile}
-			${contentSepHeightMobile}
-		}
-		`
-		: ""
-}
-
-${
-	showSocials && showSSeparator
-		? `
-		.${blockId}.eb-team-wrapper .social_separator {
-			${socialSepWidthMobile}
-			${socialSepHeightMobile}
-		}
-		`
-		: ""
-}
-
-${
-	showSocials
-		? `
-		${socialStyles}
-
-		.${blockId}.eb-team-wrapper ul.socials {
-			${iconSpaceMobile}
-			${iconRowGapMobile}
-			${iconsWrapPaddingMobile}
-			${iconsWrapMarginMobile}
-		}
-
-
+			
 	${
-		isIconsDevider
+		showCSeparator
 			? `
-			.${blockId}.eb-team-wrapper ul.socials li + li:before {
-				${sSepPosRightMobile}
+			.${blockId}.eb-team-wrapper .contents .content_separator {
+				${contentSepWidthMobile}
+				${contentSepHeightMobile}
 			}
 			`
 			: ""
 	}
-			
-		.${blockId}.eb-team-wrapper ul.socials li a {
-			${iconSizeMobile}
-			${iconPaddingMobile}
-			${socialBorderMobile}
-		}
 
-		
-		.${blockId}.eb-team-wrapper ul.socials li:hover a {	
-			${socialBordersHoverMobile}
-		}
-		
-		`
-		: ""
-}
+	${
+		showSocials && showSSeparator
+			? `
+			.${blockId}.eb-team-wrapper .social_separator {
+				${socialSepWidthMobile}
+				${socialSepHeightMobile}
+			}
+			`
+			: ""
+	}
+
+
+	${
+		preset === "preset4"
+			? `
+			.${blockId}.eb-team-wrapper .contents {
+				${contentsPaddingMobile}
+				${contentsMarginMobile}
+				${ovlBdShdStyleMobile}
+			}
+			`
+			: ""
+	}
+
+	${
+		showSocials
+			? `
+			${socialStyles}
+
+			.${blockId}.eb-team-wrapper ul.socials {
+				${iconSpaceMobile}
+				${iconRowGapMobile}
+				${iconsWrapPaddingMobile}
+				${iconsWrapMarginMobile}
+				${
+					preset === "preset3"
+						? `
+							${contentsPaddingMobile}
+							${contentsMarginMobile}
+							${ovlBdShdStyleMobile}
+						`
+						: ""
+				}
+			}
+
+			${
+				isIconsDevider
+					? `
+					.${blockId}.eb-team-wrapper ul.socials li + li:before {
+						${sSepPosRightMobile}
+					}
+					`
+					: ""
+			}
+					
+			.${blockId}.eb-team-wrapper ul.socials li a {
+				${iconSizeMobile}
+				${iconPaddingMobile}
+				${socialBorderMobile}
+			}
+
+			
+			.${blockId}.eb-team-wrapper ul.socials li:hover a {	
+				${socialBordersHoverMobile}
+			}
+			
+			`
+			: ""
+	}
 
 
 	`;
@@ -1388,8 +1459,6 @@ ${
 	//
 	// styling codes End here
 	//
-
-	// console.log("-----edit theke:", { attributes });
 
 	// Set All Style in "blockMeta" Attribute
 	useEffect(() => {
@@ -1452,7 +1521,7 @@ ${
 									return (
 										<Button
 											className="eb-infobox-img-btn components-button"
-											label={__("Upload Image")}
+											label={__("Upload Image", "essential-blocks")}
 											icon="format-image"
 											onClick={open}
 										/>

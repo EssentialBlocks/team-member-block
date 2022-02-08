@@ -24,6 +24,7 @@ import {
 	WrpBdShadowConst,
 	prefixSocialBdShadow,
 	prefixImgBd,
+	ovlBdPrefix,
 } from "./constants/borderShadowConstants";
 
 import {
@@ -43,13 +44,22 @@ import {
 	p9LGap,
 } from "./constants/rangeNames";
 
-import {
+// import {
+// 	generateDimensionsAttributes,
+// 	generateTypographyAttributes,
+// 	generateBackgroundAttributes,
+// 	generateBorderShadowAttributes,
+// 	generateResponsiveRangeAttributes,
+// } from "../../../util/helpers";
+
+const {
+	//
 	generateDimensionsAttributes,
 	generateTypographyAttributes,
 	generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
-} from "../util/helpers";
+} = window.EBTeamMemberControls;
 
 const attributes = {
 	// the following 4 attributes is must required for responsive options and asset generation for frontend
@@ -100,12 +110,13 @@ const attributes = {
 
 	//
 	imageUrl: {
+		type: "string",
 		source: "attribute",
 		selector: ".avatar",
 		attribute: "src",
 		// default: "https://source.unsplash.com/5vg_SarQimA/150x150",
 		// default: "../wp-content/plugins/essential-blocks/assets/images/person.jpeg",
-		default: "../wp-content/plugins/team-member-block/assets/user.jpg",
+		default: "../wp-content/plugins/team-member-block/assets/images/user.jpg",
 
 		// default:
 		// 	"https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTE5NzI3NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150",
@@ -385,6 +396,17 @@ const attributes = {
 			right: 1,
 			left: 1,
 		},
+		// noBorder: true,
+	}),
+	...generateBorderShadowAttributes(ovlBdPrefix, {
+		noShadow: true,
+		noBdrHover: true,
+		// bdrDefaults: {
+		// 	top: 1,
+		// 	bottom: 1,
+		// 	right: 1,
+		// 	left: 1,
+		// },
 		// noBorder: true,
 	}),
 	// ...generateBorderShadowAttributes(cdBoxsBdShadowConst, {
