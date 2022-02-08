@@ -36,9 +36,9 @@ package-lock.json
 dist/controls.js.map
 dist/controls.css.map
 
-dist/frontend/
-dist/index.asset.php
-dist/index.js
-dist/index.js.map
-dist/style.css
-dist/style.css.map
+# dist/frontend/
+# dist/index.asset.php
+# dist/index.js
+# dist/index.js.map
+# dist/style.css
+# dist/style.css.map
