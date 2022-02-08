@@ -39,7 +39,7 @@ This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team
 
 🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
 
-🧡 LOVED Toggle Content? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/team-member-block/reviews/#new-post)
+🧡 LOVED Team Member Block? Rate us on [WordPress Repository](https://wordpress.org/support/plugin/team-member-block/reviews/#new-post)
 
 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
 
