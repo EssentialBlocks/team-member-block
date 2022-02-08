@@ -1,8 +1,8 @@
 export default function SocialLinks({ socialDetails = [], icnEffect }) {
 	return (
 		<ul className="socials">
-			{socialDetails.map(({ link, icon }) => (
-				<li>
+			{socialDetails.map(({ link, icon }, index) => (
+				<li key={index}>
 					<a className={icnEffect || " "} href={link}>
 						<i className={`hvr-icon social-icon ${icon}`}></i>
 					</a>

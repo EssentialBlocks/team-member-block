@@ -274,7 +274,9 @@ function Inspector({ attributes, setAttributes }) {
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 	useEffect(() => {
 		setAttributes({
-			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
@@ -659,8 +661,9 @@ function Inspector({ attributes, setAttributes }) {
 															>
 																<ButtonGroup id="eb-team-content-vertical-alignments">
 																	{ContentsVerticalAligns.map(
-																		({ value, label }) => (
+																		({ value, label }, index) => (
 																			<Button
+																				key={index}
 																				// isLarge
 																				isSecondary={conVtAlign !== value}
 																				isPrimary={conVtAlign === value}

@@ -1472,14 +1472,14 @@ ${
 		}
 	}, [attributes]);
 
-	return [
-		isSelected && (
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
-		),
-		// Edit view
-		<div {...blockProps}>
-			<style>
-				{`
+	return (
+		<>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
+			<div {...blockProps}>
+				<style>
+					{`
 				${desktopAllStyles}
 
 				/* mimmikcssStart */
@@ -1505,73 +1505,79 @@ ${
 				
 				}
 				`}
-			</style>
+				</style>
 
-			<div className={`${blockId} eb-team-wrapper`}>
-				<div className="eb-team-inner">
-					<div className="image">
-						<MediaUpload
-							onSelect={({ id, url }) =>
-								setAttributes({ imageUrl: url, imageId: id })
-							}
-							type="image"
-							value={imageId}
-							render={({ open }) => {
-								if (!imageUrl) {
-									return (
-										<Button
-											className="eb-infobox-img-btn components-button"
-											label={__("Upload Image", "essential-blocks")}
-											icon="format-image"
-											onClick={open}
-										/>
-									);
-								} else {
-									return <img className="avatar" alt="member" src={imageUrl} />;
+				<div className={`${blockId} eb-team-wrapper`}>
+					<div className="eb-team-inner">
+						<div className="image">
+							<MediaUpload
+								onSelect={({ id, url }) =>
+									setAttributes({ imageUrl: url, imageId: id })
 								}
-							}}
-						/>
-						{socialInImage && showSocials && (
-							<SocialLinks socialDetails={profilesOnly} icnEffect={icnEffect} />
-						)}
-					</div>
-					<div className="contents">
-						<div className="texts">
-							<RichText
-								tagName="h3"
-								className="name"
-								value={name}
-								onChange={(name) => setAttributes({ name })}
+								type="image"
+								value={imageId}
+								render={({ open }) => {
+									if (!imageUrl) {
+										return (
+											<Button
+												className="eb-infobox-img-btn components-button"
+												label={__("Upload Image", "essential-blocks")}
+												icon="format-image"
+												onClick={open}
+											/>
+										);
+									} else {
+										return (
+											<img className="avatar" alt="member" src={imageUrl} />
+										);
+									}
+								}}
 							/>
-							<RichText
-								tagName="h4"
-								className="job_title"
-								value={jobTitle}
-								onChange={(jobTitle) => setAttributes({ jobTitle })}
-							/>
-							{showCSeparator && <hr className="content_separator" />}
-
-							{showDescs && (
-								<RichText
-									tagName="p"
-									className="description"
-									value={description}
-									onChange={(description) => setAttributes({ description })}
-								/>
-							)}
-						</div>
-						{!socialInImage && showSocials && (
-							<>
-								{showSSeparator && <hr className="social_separator" />}
+							{socialInImage && showSocials && (
 								<SocialLinks
 									socialDetails={profilesOnly}
 									icnEffect={icnEffect}
 								/>
-							</>
-						)}
+							)}
+						</div>
+						<div className="contents">
+							<div className="texts">
+								<RichText
+									tagName="h3"
+									className="name"
+									value={name}
+									onChange={(name) => setAttributes({ name })}
+								/>
+								<RichText
+									tagName="h4"
+									className="job_title"
+									value={jobTitle}
+									onChange={(jobTitle) => setAttributes({ jobTitle })}
+								/>
+								{showCSeparator && <hr className="content_separator" />}
+
+								{showDescs && (
+									<RichText
+										tagName="p"
+										className="description"
+										value={description}
+										onChange={(description) => setAttributes({ description })}
+									/>
+								)}
+							</div>
+							{!socialInImage && showSocials && (
+								<>
+									{showSSeparator && <hr className="social_separator" />}
+									<SocialLinks
+										socialDetails={profilesOnly}
+										icnEffect={icnEffect}
+									/>
+								</>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>,
-	];
+		</>
+	);
 }
