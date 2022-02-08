@@ -272,7 +272,7 @@ export default function Edit({
 		}
 	}, []);
 
-	console.log({ EssentialBlocksLocalize, TeamMemberLocalize });
+	// console.log({ EssentialBlocksLocalize, TeamMemberLocalize });
 
 	const blockProps = useBlockProps({
 		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
