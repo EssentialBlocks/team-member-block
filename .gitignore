@@ -32,7 +32,6 @@ package-lock.json
 yarn.lock
 
 
-package-lock.json
 dist/controls.js.map
 dist/controls.css.map
 
