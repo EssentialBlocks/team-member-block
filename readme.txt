@@ -1,8 +1,8 @@
 === Team Member Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
 Requires at least: 5.6
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -89,12 +89,17 @@ Yes, it will work with any standard WordPress theme.
 
 
 = 1.1.0 - (dev) =
+* Added: Wide width & full width support
 * Added: Dynamic asset generation instead of inline styles
 * Added: Responsive controls with preview
 * Added: Design Presets
 * Added: New styling & design options
-* Improved: Controls, styling options and structure. 
-* Improved: removed all unnecessary enqueues from frontend. 
+* Added: Support for full site editing & wp5.9
+* fixed: Block registration name changed from "block/team-member" to "team-member-block/team-member-block" 
+* fixed: IconPicker model auto closing on first page & last page issue
+* Fixed: Typo in 'readme' file
+* Improved: Controls, styling options and structure.
+* Improved: Removed all unnecessary enqueues from frontend.
 
 
 = 1.0.0 - 09-09-2020 =
