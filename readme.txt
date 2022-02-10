@@ -22,7 +22,7 @@ Using this Team member plugin, you can create a team member section easily withi
 **Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
 
-## 🚀 BACKED BY A TRUSTED TEAM ## 
+## 🚀 BACKED BY A TRUSTED TEAM ##
 
 This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 700,000 happy users from 180+ countries).
 
@@ -66,7 +66,7 @@ Visit [WPDeveloper](https://wpdeveloper.net/) to learn more about how to do bett
 
 = Modern Way: =
 1. Go to the WordPress Block/Gutenberg Editor
-2. Search For "Team Member". 
+2. Search For "Team Member".
 3. Install in 1-click
 
 = Old Way: =
@@ -88,14 +88,14 @@ Yes, it will work with any standard WordPress theme.
 == Changelog ==
 
 
-= 1.1.0 - (dev) =
+= 1.1.0 - 10-02-2022 =
 * Added: Wide width & full width support
 * Added: Dynamic asset generation instead of inline styles
 * Added: Responsive controls with preview
 * Added: Design Presets
 * Added: New styling & design options
 * Added: Support for full site editing & wp5.9
-* fixed: Block registration name changed from "block/team-member" to "team-member-block/team-member-block" 
+* fixed: Block registration name changed from "block/team-member" to "team-member-block/team-member-block"
 * fixed: IconPicker model auto closing on first page & last page issue
 * Fixed: Typo in 'readme' file
 * Improved: Controls, styling options and structure.
