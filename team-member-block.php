@@ -149,9 +149,9 @@ add_action('init', 'create_block_team_member_block_init');
 if(!function_exists('eb_migrate_old_blocks')){
 	function eb_migrate_old_blocks($old_namespace, $new_namespace){
 		global $wpdb;
-		$posts = $wpdb->query("select * from  ".$wpdb->prefix."posts where `post_content` like '%".$old_namespace."%'");
+		$posts = $wpdb->query("select * from  ".$wpdb->prefix."posts where `post_content` like '%wp:".$old_namespace."%'");
 		if($posts){
-			$wpdb->query("update ".$wpdb->prefix."posts set `post_content`= replace(post_content, '".$old_namespace."', '".$new_namespace."') where `post_content` like '%".$old_namespace."%'");
+			$wpdb->query("update ".$wpdb->prefix."posts set `post_content`= replace(post_content, 'wp:".$old_namespace."', 'wp:".$new_namespace."') where `post_content` like '%wp:".$old_namespace."%'");
 		}
 	}
 }
