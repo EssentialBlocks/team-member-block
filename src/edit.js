@@ -1,287 +1,1586 @@
 /**
- * Internal dependencies
- */
-import SocialLinks from "./social-links";
-import Inspector from "./inspector";
-import {
-	DEFAULT_NAME_SIZE,
-	DEFAULT_NAME_COLOR,
-	DEFAULT_SHADOW_COLOR,
-	DEFAULT_BORDER_COLOR,
-	UPLOAD_BUTTON_HEIGHT,
-	UPLOAD_BUTTON_WIDTH,
-	DEFAULT_JOB_TITLE_SIZE,
-	DEFAULT_JOB_DETAILS_SIZE,
-	DEFAULT_JOB_DETAILS_COLOR,
-	DEFAULT_JOB_TITLE_COLOR,
-	DEFAULT_PROFILE_COLOR,
-	DEFAULT_PROFILE_SIZE,
-} from "./constants";
-
-/**
  * WordPress dependencies
  */
-import {__} from "@wordpress/i18n";
-import {Button} from "@wordpress/components";
-import{ MediaUpload, RichText, BlockControls, BlockAlignmentToolbar }  from "@wordpress/editor";
+import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
+import { useBlockProps, MediaUpload, RichText } from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
+import { select } from "@wordpress/data";
+/**
+ * Internal dependencies
+ */
 
-const Edit = (props) => {
-	const { isSelected, attributes, setAttributes } = props;
+// import {
+// 	softMinifyCssStrings,
+// 	generateBackgroundControlStyles,
+// 	generateDimensionsControlStyles,
+// 	generateTypographyStyles,
+// 	generateBorderShadowStyles,
+// 	generateResponsiveRangeStyles,
+// 	mimmikCssForPreviewBtnClick,
+// 	duplicateBlockIdFix,
+// } from "../../../util/helpers";
+
+const {
+	//
+	softMinifyCssStrings,
+	generateBackgroundControlStyles,
+	generateDimensionsControlStyles,
+	generateTypographyStyles,
+	generateBorderShadowStyles,
+	generateResponsiveRangeStyles,
+	// mimmikCssForPreviewBtnClick,
+	duplicateBlockIdFix,
+} = window.EBTeamMemberControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
+
+import classnames from "classnames";
+
+import Inspector from "./inspector";
+import SocialLinks from "./components/social-links";
+
+import {
+	typoPrefix_descs,
+	typoPrefix_name,
+	typoPrefix_job,
+} from "./constants/typographyPrefixConstants";
+
+import {
+	wrapperWidth,
+	imageWidth,
+	imageHeight,
+	rangeIconSize,
+	rangeIconPadding,
+	rangeIconDistance,
+	rangeIconRowGap,
+	imgTopBgHeight,
+	cSepWPrefix,
+	sSepWPrefix,
+	cSepHPrefix,
+	sSepHPrefix,
+	sclDeviderPosRight,
+	p9LGap,
+} from "./constants/rangeNames";
+
+import {
+	tmbWrapMarginConst,
+	tmbWrapPaddingConst,
+	tmbDescsPaddingConst,
+	tmbNamePaddingConst,
+	tmbJobPaddingConst,
+	iconsWrapPadding,
+	iconsWrapMargin,
+	imageMarginConst,
+	imagePaddingConst,
+	contentsPad,
+	contentsMargin,
+} from "./constants/dimensionsConstants";
+
+import {
+	WrpBgConst,
+	imgTopBgPrefix,
+	socialWrpBg,
+} from "./constants/backgroundsConstants";
+
+import {
+	WrpBdShadowConst,
+	prefixSocialBdShadow,
+	prefixImgBd,
+	ovlBdPrefix,
+} from "./constants/borderShadowConstants";
+
+export default function Edit({
+	attributes,
+	setAttributes,
+	isSelected,
+	clientId,
+	className,
+}) {
 	const {
+		resOption,
+		blockId,
+		blockMeta,
+
+		// member name
+		name,
+
+		// job title
+		jobTitle,
+
+		// member description
+		description,
+
+		//
+		showDescs,
+
+		//
 		imageUrl,
 		imageId,
-		imageHeight,
-		imageWidth,
-		memberName,
-		jobTitle,
-		jobDetails,
-		contactAlign,
-		borderRadius,
-		nameColor,
-		jobTitleColor,
-		jobDetailsColor,
-		nameFontSize,
-		jobTitleFontSize,
-		jobDetailsFontSize,
-		socialIconSize,
-		socialProfiles,
-		socialIconSpacing,
-		socialIconColor,
-		socialIconAlign,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		paddingTop,
-		paddingRight,
-		paddingBottom,
-		paddingLeft,
-		shadowColor,
-		shadowHOffset,
-		shadowVOffset,
-		shadowBlur,
-		shadowSpread,
-		borderColor,
-		borderWidth,
-		borderStyle,
-		nameUnit,
-		jobTitleUnit,
-		jobDetailsUnit,
-		marginUnit,
-		paddingUnit,
-		iconSizeUnit,
-		iconSpaceUnit,
-		nameFontFamily,
-		nameFontSizeUnit,
-		nameFontWeight,
-		nameTextDecoration,
-		nameTextTransform,
-		nameLineHeight,
-		nameLineHeightUnit,
-		nameLetterSpacing,
-		nameLetterSpacingUnit,
-		jobTitleFontFamily,
-		jobTitleFontSizeUnit,
-		jobTitleFontWeight,
-		jobTitleTextDecoration,
-		jobTitleTextTransform,
-		jobTitleLineHeight,
-		jobTitleLineHeightUnit,
-		jobTitleLetterSpacing,
-		jobTitleLetterSpacingUnit,
-		detailsFontFamily,
-		detailsFontSizeUnit,
-		detailsFontWeight,
-		detailsTextDecoration,
-		detailsTextTransform,
-		detailsLineHeight,
-		detailsLineHeightUnit,
-		detailsLetterSpacing,
-		detailsLetterSpacingUnit,
+
+		//
+		isImgHeightAuto,
+
+		//
+		descsColor = "#9f9f9f",
+		jobColor = "#4b4b4b",
+		nameColor = "#4b4b4b",
+
+		// social profiles
+		showSocials,
+		socialDetails,
+		profilesOnly,
+
+		//
+		iconsJustify,
+		iconsVAlign,
+
+		//
+		contentsAlign,
+		imageAlign,
+		cSepAlign,
+		sSepAlign,
+
+		//
+		preset,
+		socialInImage,
+
+		//
+		imgBeforeEl,
+
+		//
+		showCSeparator,
+		showSSeparator,
+		cSepType = "solid",
+		sSepType = "solid",
+		cSepColor = "#84AFFF",
+		sSepColor = "#CACACA",
+
+		//
+		isIconsDevider,
+		icnsDevideColor = "#cacaca",
+		icnSepW = 1,
+		icnSepH = 30,
+
+		//
+		hvIcnColor,
+		hvIcnBgc,
+
+		//
+		conVtAlign,
+		isConBgGradient,
+		conBgGradient,
+		conBgColor = "rgba(0,0,0,.4)",
+
+		//
+		imgCnVtAlign,
+		isP9reverse,
+		icnEffect,
 	} = attributes;
 
-	const wrapperStyle = {
-		margin: `${marginTop || 0}${marginUnit} ${marginRight || 0}${marginUnit} ${
-			marginBottom || 0
-		}${marginUnit} ${marginLeft || 0}${marginUnit}`,
-		padding: `${paddingTop || 0}${paddingUnit} ${
-			paddingRight || 0
-		}${paddingUnit} ${paddingBottom || 0}${paddingUnit} ${
-			paddingLeft || 0
-		}${paddingUnit}`,
-		boxShadow: `${shadowHOffset || 0}px ${shadowVOffset || 0}px ${
-			shadowBlur || 0
-		}px ${shadowSpread || 0}px ${shadowColor || DEFAULT_SHADOW_COLOR}`,
-		border: `${borderWidth || 0}px ${borderStyle} ${
-			borderColor || DEFAULT_BORDER_COLOR
-		}`,
-	};
-	const uploadButtonStyle = {
-		margin:
-			contactAlign === "left"
-				? "0px 0px 0px 0px"
-				: contactAlign === "center"
-				? "0 auto"
-				: "0px 0px 0px auto",
-		height: UPLOAD_BUTTON_HEIGHT,
-		width: UPLOAD_BUTTON_WIDTH,
-	};
+	//
+	useEffect(() => {
+		const newProfiles = socialDetails.map((profile) => ({
+			...profile,
+			isExpanded: false,
+		}));
 
-	const imageStyle = {
-		margin:
-			contactAlign === "left"
-				? "0px 0px 0px 0px"
-				: contactAlign === "center"
-				? "0 auto"
-				: "0px 0px 0px auto",
-		height: `${imageHeight}px`,
-		width: `${imageWidth}px`,
-		borderRadius: `${borderRadius}%`,
-		backgroundSize: "cover",
-		backgroundPosition: "center",
-	};
+		setAttributes({ socialDetails: newProfiles });
 
-	const contactStyle = {
-		textAlign: contactAlign,
-	};
+		if (socialDetails.length > 0) return;
 
-	const memberNameStyle = {
-		color: nameColor || DEFAULT_NAME_COLOR,
-		fontSize: `${nameFontSize || DEFAULT_NAME_SIZE}${nameUnit}`,
-		fontFamily: nameFontFamily,
-		fontWeight: nameFontWeight,
-		textTransform: nameTextTransform,
-		textDecoration: nameTextDecoration,
-		letterSpacing: nameLetterSpacing
-			? `${nameLetterSpacing}${nameLetterSpacingUnit}`
-			: undefined,
-		lineHeight: nameLineHeight
-			? `${nameLineHeight}${nameLineHeightUnit}`
-			: undefined,
-	};
+		const newSclDtails = [
+			{
+				icon: "fab fa-facebook-f",
+				color: "#fff",
+				bgColor: "#3b5998",
+				link: "#",
+				isExpanded: false,
+			},
+			{
+				icon: "fab fa-twitter",
+				color: "#fff",
+				bgColor: "#1da1f2",
+				link: "#",
+				isExpanded: false,
+			},
+			{
+				icon: "fab fa-linkedin-in",
+				color: "#fff",
+				bgColor: "#0077b5",
+				link: "#",
+				isExpanded: false,
+			},
+			{
+				icon: "fab fa-youtube",
+				color: "#fff",
+				bgColor: "#cd201f",
+				link: "#",
+				isExpanded: false,
+			},
+		];
 
-	const jobTitleStyle = {
-		color: jobTitleColor || DEFAULT_JOB_TITLE_COLOR,
-		fontSize: `${jobTitleFontSize || DEFAULT_JOB_TITLE_SIZE}${jobTitleUnit}`,
-		fontFamily: jobTitleFontFamily,
-		fontWeight: jobTitleFontWeight,
-		textTransform: jobTitleTextTransform,
-		textDecoration: jobTitleTextDecoration,
-		letterSpacing: jobTitleLetterSpacing
-			? `${jobTitleLetterSpacing}${jobTitleLetterSpacingUnit}`
-			: undefined,
-		lineHeight: jobTitleLineHeight
-			? `${jobTitleLineHeight}${jobTitleLineHeightUnit}`
-			: undefined,
-	};
+		setAttributes({ socialDetails: newSclDtails });
+	}, []);
 
-	const jobDetailsStyle = {
-		color: jobDetailsColor || DEFAULT_JOB_DETAILS_COLOR,
-		fontSize: `${
-			jobDetailsFontSize || DEFAULT_JOB_DETAILS_SIZE
-		}${jobDetailsUnit}`,
-		fontFamily: detailsFontFamily,
-		fontWeight: detailsFontWeight,
-		textTransform: detailsTextTransform,
-		textDecoration: detailsTextDecoration,
-		letterSpacing: detailsLetterSpacing
-			? `${detailsLetterSpacing}${detailsLetterSpacingUnit}`
-			: undefined,
-		lineHeight: detailsLineHeight
-			? `${detailsLineHeight}${detailsLineHeightUnit}`
-			: undefined,
-	};
+	//
+	useEffect(() => {
+		const profilesOnly = socialDetails.map(({ icon, link }) => ({
+			icon,
+			link,
+		}));
 
-	const profileStyles = {
-		container: {
-			fontSize: `${socialIconSize || DEFAULT_PROFILE_SIZE}${iconSizeUnit}`,
-			display: "flex",
-			justifyContent: socialIconAlign,
-		},
-		iconWrapper: {
-			textDecoration: "none",
-			color: socialIconColor || DEFAULT_PROFILE_COLOR,
-			paddingRight: `${socialIconSpacing || 10}${iconSpaceUnit}`,
-		},
-	};
+		setAttributes({ profilesOnly });
+	}, [socialDetails]);
 
-	return [
-		isSelected && <Inspector {...props} />,
-		<BlockControls>
-			<BlockAlignmentToolbar
-				value={contactAlign}
-				onChange={(newAlign) => setAttributes({ contactAlign: newAlign })}
-				controls={["left", "center", "right"]}
-			/>
-		</BlockControls>,
+	useEffect(() => {
+		// this codes is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
+		setAttributes({
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
+		});
 
-		<div className="eb-team-member-container">
-			<div className="eb-team-member-column" style={wrapperStyle}>
-				<MediaUpload
-					onSelect={(media) =>
-						setAttributes({
-							imageUrl: media.url,
-							imageId: media.id,
-						})
+		// this codes is for creating a unique blockId for each block's unique className
+		const BLOCK_PREFIX = "eb-team-member";
+		duplicateBlockIdFix({
+			BLOCK_PREFIX,
+			blockId,
+			setAttributes,
+			select,
+			clientId,
+		});
+
+		// // this codes is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+		// mimmikCssForPreviewBtnClick({
+		// 	domObj: document,
+		// 	select,
+		// });
+
+		//
+		if (
+			// imageUrl ===
+			// "../wp-content/plugins/essential-blocks/assets/images/user.jpg"
+			/assets\/images\/user\.jpg/gi.test(imageUrl || " ")
+		) {
+			setAttributes({
+				imageUrl: `${TeamMemberLocalize.eb_plugins_url}assets/images/user.jpg`,
+			});
+		}
+	}, []);
+
+	// console.log({ EssentialBlocksLocalize, TeamMemberLocalize });
+
+	const blockProps = useBlockProps({
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
+	});
+
+	//
+	// styling codes start from here
+	//
+
+	// styles related to generateTypographyStyles start ⬇
+
+	const {
+		typoStylesDesktop: nameTypoStylesDesktop,
+		typoStylesTab: nameTypoStylesTab,
+		typoStylesMobile: nameTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_name,
+		defaultFontSize: 20,
+	});
+
+	const {
+		typoStylesDesktop: jobTypoStylesDesktop,
+		typoStylesTab: jobTypoStylesTab,
+		typoStylesMobile: jobTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_job,
+		defaultFontSize: 16,
+	});
+
+	const {
+		typoStylesDesktop: descsTypoStylesDesktop,
+		typoStylesTab: descsTypoStylesTab,
+		typoStylesMobile: descsTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_descs,
+		defaultFontSize: 16,
+	});
+
+	// styles related to generateTypographyStyles end ⬇
+
+	// styles related to generateResponsiveRangeStyles start ⬇
+	const {
+		rangeStylesDesktop: wrapWidthDesktop,
+		rangeStylesTab: wrapWidthTab,
+		rangeStylesMobile: wrapWidthMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: wrapperWidth,
+		// customUnit: "px",
+		property: "max-width",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: imgWidthDesktop,
+		rangeStylesTab: imgWidthTab,
+		rangeStylesMobile: imgWidthMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: imageWidth,
+		// customUnit: "px",
+		property: "width",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: p9flexGapDesktop,
+		rangeStylesTab: p9flexGapTab,
+		rangeStylesMobile: p9flexGapMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: p9LGap,
+		// customUnit: "px",
+		property: "Gap",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: imgHeightDesktop,
+		rangeStylesTab: imgHeightTab,
+		rangeStylesMobile: imgHeightMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: imageHeight,
+		// customUnit: "px",
+		property: "height",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: iconSizeDesktop,
+		rangeStylesTab: iconSizeTab,
+		rangeStylesMobile: iconSizeMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: rangeIconSize,
+		customUnit: "px",
+		property: "font-size",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: iconPaddingDesktop,
+		rangeStylesTab: iconPaddingTab,
+		rangeStylesMobile: iconPaddingMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: rangeIconPadding,
+		customUnit: "em",
+		property: "padding",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: iconSpaceDesktop,
+		rangeStylesTab: iconSpaceTab,
+		rangeStylesMobile: iconSpaceMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: rangeIconDistance,
+		customUnit: "px",
+		property: "column-gap",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: iconRowGapDesktop,
+		rangeStylesTab: iconRowGapTab,
+		rangeStylesMobile: iconRowGapMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: rangeIconRowGap,
+		customUnit: "px",
+		property: "row-gap",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: imgTopBgHeightDesktop,
+		rangeStylesTab: imgTopBgHeightTab,
+		rangeStylesMobile: imgTopBgHeightMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: imgTopBgHeight,
+		customUnit: "px",
+		property: "height",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: contentSepWidthDesktop,
+		rangeStylesTab: contentSepWidthTab,
+		rangeStylesMobile: contentSepWidthMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: cSepWPrefix,
+		property: "width",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: socialSepWidthDesktop,
+		rangeStylesTab: socialSepWidthTab,
+		rangeStylesMobile: socialSepWidthMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: sSepWPrefix,
+		property: "width",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: contentSepHeightDesktop,
+		rangeStylesTab: contentSepHeightTab,
+		rangeStylesMobile: contentSepHeightMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: cSepHPrefix,
+		property: "border-bottom-width",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: socialSepHeightDesktop,
+		rangeStylesTab: socialSepHeightTab,
+		rangeStylesMobile: socialSepHeightMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: sSepHPrefix,
+		property: "border-bottom-width",
+		attributes,
+	});
+
+	const {
+		rangeStylesDesktop: sSepPosRightDesktop,
+		rangeStylesTab: sSepPosRightTab,
+		rangeStylesMobile: sSepPosRightMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: sclDeviderPosRight,
+		property: "margin-right",
+		attributes,
+	});
+
+	// styles related to generateResponsiveRangeStyles end
+
+	// styles related to generateBackgroundControlStyles start ⬇
+
+	const {
+		backgroundStylesDesktop: wrpBackgroundStylesDesktop,
+		hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
+		backgroundStylesTab: wrpBackgroundStylesTab,
+		hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
+		backgroundStylesMobile: wrpBackgroundStylesMobile,
+		hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
+		overlayStylesDesktop: wrpOverlayStylesDesktop,
+		hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
+		overlayStylesTab: wrpOverlayStylesTab,
+		hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
+		overlayStylesMobile: wrpOverlayStylesMobile,
+		hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
+		bgTransitionStyle: wrpBgTransitionStyle,
+		ovlTransitionStyle: wrpOvlTransitionStyle,
+	} = generateBackgroundControlStyles({
+		attributes,
+		controlName: WrpBgConst,
+		// noOverlay: true,
+		// noMainBgi: true,
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	});
+
+	const {
+		backgroundStylesDesktop: imgTopBackgroundStyles,
+		hoverBackgroundStylesDesktop: imgTopHoverBackgroundStyles,
+		bgTransitionStyle: imgTopBgTransitionStyle,
+	} = generateBackgroundControlStyles({
+		attributes,
+		controlName: imgTopBgPrefix,
+		noOverlay: true,
+		noMainBgi: true,
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	});
+
+	const {
+		backgroundStylesDesktop: socialWrapBackgroundStyles,
+		hoverBackgroundStylesDesktop: socialWrapHoverBackgroundStyles,
+		bgTransitionStyle: socialWrapTransitionStyle,
+	} = generateBackgroundControlStyles({
+		attributes,
+		controlName: socialWrpBg,
+		noOverlay: true,
+		noMainBgi: true,
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	});
+
+	// styles related to generateBackgroundControlStyles end
+
+	// styles related to generateDimensionsControlStyles start ⬇
+	const {
+		dimensionStylesDesktop: wrpMarginDesktop,
+		dimensionStylesTab: wrpMarginTab,
+		dimensionStylesMobile: wrpMarginMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: tmbWrapMarginConst,
+		styleFor: "margin",
+	});
+
+	const {
+		dimensionStylesDesktop: wrpPaddingDesktop,
+		dimensionStylesTab: wrpPaddingTab,
+		dimensionStylesMobile: wrpPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: tmbWrapPaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: descsPaddingDesktop,
+		dimensionStylesTab: descsPaddingTab,
+		dimensionStylesMobile: descsPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: tmbDescsPaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: namePaddingDesktop,
+		dimensionStylesTab: namePaddingTab,
+		dimensionStylesMobile: namePaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: tmbNamePaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: jobPaddingDesktop,
+		dimensionStylesTab: jobPaddingTab,
+		dimensionStylesMobile: jobPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: tmbJobPaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: iconsWrapPaddingDesktop,
+		dimensionStylesTab: iconsWrapPaddingTab,
+		dimensionStylesMobile: iconsWrapPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: iconsWrapPadding,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: iconsWrapMarginDesktop,
+		dimensionStylesTab: iconsWrapMarginTab,
+		dimensionStylesMobile: iconsWrapMarginMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: iconsWrapMargin,
+		styleFor: "margin",
+	});
+
+	const {
+		dimensionStylesDesktop: imageMarginDesktop,
+		dimensionStylesTab: imageMarginTab,
+		dimensionStylesMobile: imageMarginMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: imageMarginConst,
+		styleFor: "margin",
+	});
+
+	const {
+		dimensionStylesDesktop: imagePaddingDesktop,
+		dimensionStylesTab: imagePaddingTab,
+		dimensionStylesMobile: imagePaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: imagePaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: contentsPaddingDesktop,
+		dimensionStylesTab: contentsPaddingTab,
+		dimensionStylesMobile: contentsPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: contentsPad,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: contentsMarginDesktop,
+		dimensionStylesTab: contentsMarginTab,
+		dimensionStylesMobile: contentsMarginMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: contentsMargin,
+		styleFor: "margin",
+	});
+
+	// styles related to generateDimensionsControlStyles end
+
+	// styles related to generateBorderShadowStyles start ⬇
+	const {
+		styesDesktop: wrpBdShdStyesDesktop,
+		styesTab: wrpBdShdStyesTab,
+		styesMobile: wrpBdShdStyesMobile,
+		stylesHoverDesktop: wrpBdShdStylesHoverDesktop,
+		stylesHoverTab: wrpBdShdStylesHoverTab,
+		stylesHoverMobile: wrpBdShdStylesHoverMobile,
+		transitionStyle: wrpBdShdTransitionStyle,
+	} = generateBorderShadowStyles({
+		controlName: WrpBdShadowConst,
+		attributes,
+		// noShadow: true,
+		// noBorder: true,
+	});
+
+	const {
+		styesDesktop: socialBorderDesktop,
+		styesTab: socialBorderTab,
+		styesMobile: socialBorderMobile,
+		stylesHoverDesktop: socialBordersHoverDesktop,
+		stylesHoverTab: socialBordersHoverTab,
+		stylesHoverMobile: socialBordersHoverMobile,
+		transitionStyle: socialBorderTransitionStyle,
+	} = generateBorderShadowStyles({
+		controlName: prefixSocialBdShadow,
+		attributes,
+		noShadow: true,
+		// noBorder: true,
+	});
+
+	const {
+		styesDesktop: imageBdShdStyleDesktop,
+		styesTab: imageBdShdStyleTab,
+		styesMobile: imageBdShdStyleMobile,
+		stylesHoverDesktop: imageBdShdStylesHoverDesktop,
+		stylesHoverTab: imageBdShdStylesHoverTab,
+		stylesHoverMobile: imageBdShdStylesHoverMobile,
+		transitionStyle: imageBdShdTransitionStyle,
+	} = generateBorderShadowStyles({
+		controlName: prefixImgBd,
+		attributes,
+		// noShadow: true,
+		// noBorder: true,
+	});
+
+	const {
+		styesDesktop: ovlBdShdStyleDesktop,
+		styesTab: ovlBdShdStyleTab,
+		styesMobile: ovlBdShdStyleMobile,
+	} = generateBorderShadowStyles({
+		controlName: ovlBdPrefix,
+		attributes,
+		// noShadow: true,
+		// noBorder: true,
+	});
+
+	// styles related to generateBorderShadowStyles end
+
+	const socialStyles = socialDetails.reduce(
+		(acc, curr, i) => `
+		${acc}
+		.${blockId}.eb-team-wrapper ul.socials li:nth-child(${i + 1}) a {			
+			background-color: ${curr.bgColor || "#000"};
+			color: ${curr.color || "#fff"};
+		}
+		`,
+		""
+	);
+
+	const wrapperStylesDesktop = `
+		div.eb-team-wrapper h3,
+		div.eb-team-wrapper h4,
+		div.eb-team-wrapper p,
+		div.eb-team-wrapper ul {
+			margin: 0;
+			padding:0;
+		}
+
+		.social-icon {
+			font-style: normal;
+		}
+		
+
+		.${blockId}.eb-team-wrapper > *{
+			position:relative;
+		}
+
+		.${blockId}.eb-team-wrapper {
+			position:relative;
+			overflow:hidden;
+			margin:auto;
+			${wrapWidthDesktop}
+			${wrpBackgroundStylesDesktop}
+			${wrpMarginDesktop}
+			${wrpPaddingDesktop}
+			${wrpBdShdStyesDesktop}
+			transition: ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
+		}
+
+
+		${
+			preset === "preset3"
+				? `
+				.${blockId}.eb-team-wrapper .image{
+					position: relative;
+				}
+				`
+				: ""
+		}
+
+		${
+			preset === "preset2"
+				? `
+				.${blockId}.eb-team-wrapper .contents{
+					${
+						isConBgGradient
+							? `background-image: ${conBgGradient};`
+							: `background-color: ${conBgColor};`
 					}
-					type="image"
-					value={imageId}
-					render={({ open }) =>
-						!imageUrl && (
-							<div style={uploadButtonStyle}>
-								<Button
-									className="eb-team-member-image components-button"
-									label={__("Upload Image")}
-									icon="format-image"
-									onClick={open}
+					height: 50%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;		
+				}
+				
+				.${blockId}.eb-team-wrapper div.contents .job_title {
+					display: block;
+				}
+				
+				.${blockId}.eb-team-wrapper div.contents ul.socials {
+					display: flex;
+				}
+
+				.${blockId}.eb-team-wrapper:hover .contents{
+					top: 50%;
+				}
+			
+				`
+				: ""
+		}
+
+		
+		${
+			preset === "preset5"
+				? `
+				.${blockId}.eb-team-wrapper .eb-team-inner {
+					display: flex;
+					justify-content: space-between;
+					flex-direction: ${isP9reverse ? "row-reverse" : "row"};
+					align-items: ${imgCnVtAlign || "flex-start"};
+					${p9flexGapDesktop}
+				}
+				
+				.${blockId}.eb-team-wrapper .image {
+					${imgWidthDesktop}
+				}
+
+				.${blockId}.eb-team-wrapper .contents {
+					flex:1;
+				}
+				`
+				: ""
+		}
+		
+  
+
+		.${blockId}.eb-team-wrapper:hover{
+			${preset === "preset2" ? `overflow:hidden;` : ""}
+
+			${wrpHoverBackgroundStylesDesktop}
+			${wrpBdShdStylesHoverDesktop}
+		}
+		
+		.${blockId}.eb-team-wrapper:before{
+			${wrpOverlayStylesDesktop}
+			transition: ${wrpOvlTransitionStyle};
+
+		}
+		
+		.${blockId}.eb-team-wrapper:hover:before{
+			${wrpHoverOverlayStylesDesktop}
+
+		}
+		
+		.${blockId}.eb-team-wrapper .image > img {
+			max-width: 100%;
+			object-fit: cover;
+			display:block;
+			margin:auto;
+			${
+				imageAlign === "left"
+					? "margin-left:0;"
+					: imageAlign === "right"
+					? "margin-right:0;"
+					: ""
+			}
+			${preset === "preset5" ? "width:100%;" : imgWidthDesktop}
+			${imageBdShdStyleDesktop}
+			${imageMarginDesktop}
+			${imagePaddingDesktop}
+			${isImgHeightAuto ? `height:auto;` : imgHeightDesktop}
+			${
+				preset === "preset6"
+					? `clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);`
+					: ""
+			}
+		}
+
+
+		${
+			imgBeforeEl
+				? `
+			.${blockId}.eb-team-wrapper .image:before {
+				content: "";
+				display: block;
+				${imgTopBgHeightDesktop}
+				${imgTopBackgroundStyles}
+				transition: ${imgTopBgTransitionStyle};
+				
+			}
+
+			.${blockId}.eb-team-wrapper .image:hover:before{
+				${imgTopHoverBackgroundStyles}
+			}
+			`
+				: ""
+		}
+		
+
+
+		.${blockId}.eb-team-wrapper .image:hover > img {
+			${imageBdShdStylesHoverDesktop}
+			transition: ${imageBdShdTransitionStyle};
+		}
+		
+		.${blockId}.eb-team-wrapper .contents {
+			text-align: ${contentsAlign};
+			box-sizing: border-box;
+			${
+				preset === "preset2"
+					? `
+					position: absolute;
+					left: 0;
+					right: 0;
+					top: 100%;
+					transition: 0.5s;
+					`
+					: ""
+			}
+		}
+		
+		.${blockId}.eb-team-wrapper .contents .name {
+			${nameTypoStylesDesktop}
+			${namePaddingDesktop}
+			color: ${nameColor};
+		}
+		
+		.${blockId}.eb-team-wrapper .contents .job_title {
+			${jobTypoStylesDesktop}
+			${jobPaddingDesktop}
+			color: ${jobColor};
+			${preset === "preset2" ? `display:none;` : ""}
+		}
+		
+		${
+			showDescs
+				? `
+				.${blockId}.eb-team-wrapper .contents .description {
+					color: ${descsColor};
+					${descsPaddingDesktop}
+					${descsTypoStylesDesktop}
+				}
+				`
+				: ""
+		}		
+		
+${
+	showCSeparator
+		? `
+		.${blockId}.eb-team-wrapper .contents .content_separator {
+			border: none;
+			margin: auto;
+			border-bottom: 1px ${cSepType} ${cSepColor};
+			${contentSepWidthDesktop}
+			${contentSepHeightDesktop}
+			${
+				cSepAlign === "left"
+					? "margin-left:0;"
+					: cSepAlign === "right"
+					? "margin-right:0;"
+					: ""
+			}
+		}
+		`
+		: ""
+}
+
+${
+	showSocials && showSSeparator
+		? `
+		.${blockId}.eb-team-wrapper .social_separator {
+			border: none;
+			margin: auto;
+			border-bottom: 1px ${sSepType} ${sSepColor};
+			${socialSepWidthDesktop}
+			${socialSepHeightDesktop}
+			${
+				sSepAlign === "left"
+					? "margin-left:0;"
+					: sSepAlign === "right"
+					? "margin-right:0;"
+					: ""
+			}
+		}
+		`
+		: ""
+}
+
+${
+	preset === "preset4"
+		? `
+		.${blockId}.eb-team-wrapper .eb-team-inner {
+			position: relative;
+		}
+
+		.${blockId}.eb-team-wrapper .contents {
+			transition: 0.5s;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: ${conVtAlign || "center"};
+			${contentsPaddingDesktop}
+			${contentsMarginDesktop}
+			${ovlBdShdStyleDesktop}
+			${
+				isConBgGradient
+					? `background-image: ${conBgGradient};`
+					: `background-color: ${conBgColor};`
+			}
+		}
+
+		.${blockId}.eb-team-wrapper:hover .contents {
+			opacity: 1;
+		}
+
+		`
+		: ""
+}
+
+${
+	showSocials
+		? `
+		${socialStyles}
+		
+		.${blockId}.eb-team-wrapper ul.socials {
+			list-style: none;
+			flex-wrap: wrap;
+			align-items: ${iconsVAlign || "center"};
+			justify-content: ${iconsJustify};
+			${iconSpaceDesktop}
+			${iconRowGapDesktop}
+			${socialWrapBackgroundStyles}
+			transition: ${socialWrapTransitionStyle}, opacity .5s;
+			${preset === "preset2" ? `display:none;` : "display: flex;"}
+			${
+				preset === "preset3"
+					? `
+				opacity:0;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left:0;
+				right:0;
+				box-sizing:border-box;
+				${contentsPaddingDesktop}
+				${contentsMarginDesktop}
+				${ovlBdShdStyleDesktop}
+				${
+					isConBgGradient
+						? `background-image: ${conBgGradient};`
+						: `background-color: ${conBgColor};`
+				}
+			`
+					: `
+					${iconsWrapMarginDesktop}
+					${iconsWrapPaddingDesktop}
+					`
+			}
+		}
+
+		${
+			preset === "preset3"
+				? `
+				.${blockId}.eb-team-wrapper:hover ul.socials {
+					opacity: 1;
+				}
+				`
+				: ""
+		}
+
+		.${blockId}.eb-team-wrapper ul.socials:hover {
+			${socialWrapHoverBackgroundStyles}
+		}
+
+	${
+		isIconsDevider
+			? `
+		.${blockId}.eb-team-wrapper ul.socials li{
+			position:relative;
+		}
+
+		.${blockId}.eb-team-wrapper ul.socials li + li:before {
+			content: "";
+			background-color: ${icnsDevideColor};
+			height: ${icnSepH}px;
+			width: ${icnSepW}px;
+			position: absolute;
+			top: 2px;
+			right: 100%;
+			${sSepPosRightDesktop}
+		}
+		`
+			: ""
+	}
+
+		.${blockId}.eb-team-wrapper ul.socials li a {			
+			box-sizing:content-box;
+			text-decoration: none;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 0;
+			width: 0;
+			${iconSizeDesktop}
+			${iconPaddingDesktop}
+			${socialBorderDesktop}
+			transition: color 0.5s, background-color 0.5s, ${socialBorderTransitionStyle};
+		}
+		
+		.${blockId}.eb-team-wrapper ul.socials li:hover a {	
+			background-color:${hvIcnBgc};
+			color:${hvIcnColor};
+			${socialBordersHoverDesktop}
+		}
+		
+		`
+		: ""
+}
+	
+  
+
+	`;
+
+	const wrapperStylesTab = `
+	.${blockId}.eb-team-wrapper {
+		${wrapWidthTab}
+		${wrpBackgroundStylesTab}
+		${wrpMarginTab}
+		${wrpPaddingTab}
+		${wrpBdShdStyesTab}
+	}
+	
+	.${blockId}.eb-team-wrapper:hover{
+		${wrpHoverBackgroundStylesTab}
+		${wrpBdShdStylesHoverTab}
+		
+	}
+	
+	.${blockId}.eb-team-wrapper:before{
+		${wrpOverlayStylesTab}
+
+	}
+	
+	.${blockId}.eb-team-wrapper:hover:before{
+		${wrpHoverOverlayStylesTab}
+
+	}
+
+	
+	${
+		preset === "preset5"
+			? `			
+			.${blockId}.eb-team-wrapper .image {
+				${imgWidthTab}
+			}
+
+			.${blockId}.eb-team-wrapper .eb-team-inner {
+				${p9flexGapTab}
+			}
+			
+			`
+			: ""
+	}
+
+
+	${
+		imgBeforeEl
+			? `
+		.${blockId}.eb-team-wrapper .image:before {
+			${imgTopBgHeightTab}
+		}
+		`
+			: ""
+	}
+		
+
+	.${blockId}.eb-team-wrapper .image > img {
+		${imageBdShdStyleTab}
+		${imageMarginTab}
+		${imagePaddingTab}
+		${preset === "preset5" ? "" : imgWidthTab}		
+		${isImgHeightAuto ? "" : imgHeightTab}
+	}
+
+
+	.${blockId}.eb-team-wrapper .image:hover > img {
+		${imageBdShdStylesHoverTab}
+
+	}
+
+
+	${
+		showDescs
+			? `
+			.${blockId}.eb-team-wrapper .contents .description {
+				${descsTypoStylesTab}
+				${descsPaddingTab}
+			}		
+			`
+			: ""
+	}	
+
+	.${blockId}.eb-team-wrapper .contents .name {
+		${nameTypoStylesTab}
+		${namePaddingTab}
+	}
+	
+	.${blockId}.eb-team-wrapper .contents .job_title {
+		${jobTypoStylesTab}
+		${jobPaddingTab}
+	}	
+
+
+		
+${
+	showCSeparator
+		? `
+		.${blockId}.eb-team-wrapper .contents .content_separator {
+			${contentSepWidthTab}
+			${contentSepHeightTab}
+		}
+		`
+		: ""
+}
+
+${
+	showSocials && showSSeparator
+		? `
+		.${blockId}.eb-team-wrapper .social_separator {
+			${socialSepWidthTab}
+			${socialSepHeightTab}
+		}
+		`
+		: ""
+}
+	
+${
+	preset === "preset4"
+		? `
+		.${blockId}.eb-team-wrapper .contents {
+			${contentsPaddingTab}
+			${contentsMarginTab}
+			${ovlBdShdStyleTab}
+		}
+		`
+		: ""
+}
+
+${
+	showSocials
+		? `
+		${socialStyles}
+		
+		.${blockId}.eb-team-wrapper ul.socials {
+			${iconsWrapMarginTab}
+			${iconsWrapPaddingTab}
+			${iconSpaceTab}
+			${iconRowGapTab}
+			${
+				preset === "preset3"
+					? `
+						${contentsPaddingTab}
+						${contentsMarginTab}
+						${ovlBdShdStyleTab}
+					`
+					: ""
+			}
+		}	
+
+
+	${
+		isIconsDevider
+			? `
+			.${blockId}.eb-team-wrapper ul.socials li + li:before {
+				${sSepPosRightTab}
+			}
+			`
+			: ""
+	}
+
+		.${blockId}.eb-team-wrapper ul.socials li a {
+			${iconSizeTab}
+			${iconPaddingTab}
+			${socialBorderTab}
+		}
+		
+		.${blockId}.eb-team-wrapper ul.socials li:hover a {	
+			${socialBordersHoverTab}
+		}
+		`
+		: ""
+}
+
+	
+	`;
+
+	const wrapperStylesMobile = `
+	.${blockId}.eb-team-wrapper {
+		${wrapWidthMobile}
+		${wrpBackgroundStylesMobile}
+		${wrpMarginMobile}
+		${wrpPaddingMobile}
+		${wrpBdShdStyesMobile}
+	}
+	
+	.${blockId}.eb-team-wrapper:hover{
+		${wrpHoverBackgroundStylesMobile}
+		${wrpBdShdStylesHoverMobile}
+		
+	}
+	
+	.${blockId}.eb-team-wrapper:before{
+		${wrpOverlayStylesMobile}
+
+	}
+	
+	.${blockId}.eb-team-wrapper:hover:before{
+		${wrpHoverOverlayStylesMobile}
+
+	}
+
+	${
+		preset === "preset5"
+			? `			
+			.${blockId}.eb-team-wrapper .image {
+				${imgWidthMobile}
+			}
+
+			.${blockId}.eb-team-wrapper .eb-team-inner {
+				${p9flexGapMobile}
+			}
+			`
+			: ""
+	}
+
+
+	${
+		imgBeforeEl
+			? `
+		.${blockId}.eb-team-wrapper .image:before {
+			${imgTopBgHeightMobile}
+		}
+		`
+			: ""
+	}
+
+	.${blockId}.eb-team-wrapper .image > img {
+		${preset === "preset5" ? "" : imgWidthMobile}
+		${imageBdShdStyleMobile}
+		${imageMarginMobile}
+		${imagePaddingMobile}
+
+		${isImgHeightAuto ? "" : imgHeightMobile}
+	}
+
+
+	
+
+	.${blockId}.eb-team-wrapper .image:hover > img {
+		${imageBdShdStylesHoverMobile}
+	}
+	
+	${
+		showDescs
+			? `
+			.${blockId}.eb-team-wrapper .contents .description {
+				${descsTypoStylesMobile}
+				${descsPaddingMobile}
+			}	
+			`
+			: ""
+	}
+	
+	.${blockId}.eb-team-wrapper .contents .name {
+		${nameTypoStylesMobile}
+		${namePaddingMobile}
+	}
+	
+	.${blockId}.eb-team-wrapper .contents .job_title {
+		${jobTypoStylesMobile}
+		${jobPaddingMobile}
+	}
+
+
+			
+	${
+		showCSeparator
+			? `
+			.${blockId}.eb-team-wrapper .contents .content_separator {
+				${contentSepWidthMobile}
+				${contentSepHeightMobile}
+			}
+			`
+			: ""
+	}
+
+	${
+		showSocials && showSSeparator
+			? `
+			.${blockId}.eb-team-wrapper .social_separator {
+				${socialSepWidthMobile}
+				${socialSepHeightMobile}
+			}
+			`
+			: ""
+	}
+
+
+	${
+		preset === "preset4"
+			? `
+			.${blockId}.eb-team-wrapper .contents {
+				${contentsPaddingMobile}
+				${contentsMarginMobile}
+				${ovlBdShdStyleMobile}
+			}
+			`
+			: ""
+	}
+
+	${
+		showSocials
+			? `
+			${socialStyles}
+
+			.${blockId}.eb-team-wrapper ul.socials {
+				${iconSpaceMobile}
+				${iconRowGapMobile}
+				${iconsWrapPaddingMobile}
+				${iconsWrapMarginMobile}
+				${
+					preset === "preset3"
+						? `
+							${contentsPaddingMobile}
+							${contentsMarginMobile}
+							${ovlBdShdStyleMobile}
+						`
+						: ""
+				}
+			}
+
+			${
+				isIconsDevider
+					? `
+					.${blockId}.eb-team-wrapper ul.socials li + li:before {
+						${sSepPosRightMobile}
+					}
+					`
+					: ""
+			}
+					
+			.${blockId}.eb-team-wrapper ul.socials li a {
+				${iconSizeMobile}
+				${iconPaddingMobile}
+				${socialBorderMobile}
+			}
+
+			
+			.${blockId}.eb-team-wrapper ul.socials li:hover a {	
+				${socialBordersHoverMobile}
+			}
+			
+			`
+			: ""
+	}
+
+
+	`;
+
+	// all css styles for large screen width (desktop/laptop) in strings ⬇
+	const desktopAllStyles = softMinifyCssStrings(`		
+		${wrapperStylesDesktop}
+
+
+	`);
+
+	// all css styles for Tab in strings ⬇
+	const tabAllStyles = softMinifyCssStrings(`
+		${wrapperStylesTab}
+
+
+	`);
+
+	// all css styles for Mobile in strings ⬇
+	const mobileAllStyles = softMinifyCssStrings(`
+		${wrapperStylesMobile}
+
+
+	`);
+
+	//
+	// styling codes End here
+	//
+
+	// Set All Style in "blockMeta" Attribute
+	useEffect(() => {
+		const styleObject = {
+			desktop: desktopAllStyles,
+			tab: tabAllStyles,
+			mobile: mobileAllStyles,
+		};
+		if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
+			setAttributes({ blockMeta: styleObject });
+		}
+	}, [attributes]);
+
+	return (
+		<>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
+			<div {...blockProps}>
+				<style>
+					{`
+				${desktopAllStyles}
+
+				/* mimmikcssStart */
+
+				${resOption === "Tablet" ? tabAllStyles : " "}
+				${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
+
+				/* mimmikcssEnd */
+
+				@media all and (max-width: 1024px) {	
+
+					/* tabcssStart */			
+					${softMinifyCssStrings(tabAllStyles)}
+					/* tabcssEnd */			
+				
+				}
+				
+				@media all and (max-width: 767px) {
+					
+					/* mobcssStart */			
+					${softMinifyCssStrings(mobileAllStyles)}
+					/* mobcssEnd */			
+				
+				}
+				`}
+				</style>
+
+				<div className={`${blockId} eb-team-wrapper`}>
+					<div className="eb-team-inner">
+						<div className="image">
+							<MediaUpload
+								onSelect={({ id, url }) =>
+									setAttributes({ imageUrl: url, imageId: id })
+								}
+								type="image"
+								value={imageId}
+								render={({ open }) => {
+									if (!imageUrl) {
+										return (
+											<Button
+												className="eb-infobox-img-btn components-button"
+												label={__("Upload Image", "essential-blocks")}
+												icon="format-image"
+												onClick={open}
+											/>
+										);
+									} else {
+										return (
+											<img className="avatar" alt="member" src={imageUrl} />
+										);
+									}
+								}}
+							/>
+							{socialInImage && showSocials && (
+								<SocialLinks
+									socialDetails={profilesOnly}
+									icnEffect={icnEffect}
 								/>
+							)}
+						</div>
+						<div className="contents">
+							<div className="texts">
+								<RichText
+									tagName="h3"
+									className="name"
+									value={name}
+									onChange={(name) => setAttributes({ name })}
+								/>
+								<RichText
+									tagName="h4"
+									className="job_title"
+									value={jobTitle}
+									onChange={(jobTitle) => setAttributes({ jobTitle })}
+								/>
+								{showCSeparator && <hr className="content_separator" />}
+
+								{showDescs && (
+									<RichText
+										tagName="p"
+										className="description"
+										value={description}
+										onChange={(description) => setAttributes({ description })}
+									/>
+								)}
 							</div>
-						)
-					}
-				/>
-
-				<div
-					style={{
-						...imageStyle,
-						backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
-						display: imageUrl ? "block" : "none",
-					}}
-				/>
-
-				<div style={contactStyle}>
-					<RichText
-						tagName="h3"
-						className="eb-member-name"
-						placeholder={__("Name")}
-						value={memberName}
-						onChange={(newName) => setAttributes({ memberName: newName })}
-						style={memberNameStyle}
-					/>
-					<RichText
-						tagName="h4"
-						className="eb-member-job-title"
-						placeholder={__("Job Title")}
-						value={jobTitle}
-						onChange={(newTitle) => setAttributes({ jobTitle: newTitle })}
-						style={jobTitleStyle}
-					/>
-					<RichText
-						tagName="p"
-						className="eb-member-job-details"
-						placeholder={__("Job Details")}
-						value={jobDetails}
-						onChange={(newDetails) => setAttributes({ jobDetails: newDetails })}
-						style={jobDetailsStyle}
-					/>
-
-					<SocialLinks
-						profiles={socialProfiles}
-						profileStyles={profileStyles}
-					/>
+							{!socialInImage && showSocials && (
+								<>
+									{showSSeparator && <hr className="social_separator" />}
+									<SocialLinks
+										socialDetails={profilesOnly}
+										icnEffect={icnEffect}
+									/>
+								</>
+							)}
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>,
-	];
-};
-
-export default Edit;
+		</>
+	);
+}

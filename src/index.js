@@ -1,21 +1,29 @@
-import { registerBlockType } from "@wordpress/blocks";
+/**
+ * WordPress depencencies
+ */
 import { __ } from "@wordpress/i18n";
-import "./style.scss";
+import { registerBlockType } from "@wordpress/blocks";
 
+/**
+ * Internal dependencies
+ */
+import { TeamMembersIcon } from "./icon";
 import Edit from "./edit";
-import save from "./save";
+import Save from "./save";
 import attributes from "./attributes";
-import icon from "./icon";
+import example from "./example";
+import metadata from "../block.json";
+const { ebConditionalRegisterBlockType } = EBTeamMemberControls;
 
-registerBlockType("block/team-member", {
-	title: __("Team Member", "block"),
-	description: __(
-		"Present your team members beautifully & gain instant credibility",
-		"block"
-	),
-	category: "widgets",
-	icon,
+ebConditionalRegisterBlockType(metadata, {
+	icon: TeamMembersIcon,
 	attributes,
+	keywords: [
+		__("team", "essential-blocks"),
+		__("member", "essential-blocks"),
+		__("eb essential", "essential-blocks"),
+	],
 	edit: Edit,
-	save,
+	save: Save,
+	example,
 });

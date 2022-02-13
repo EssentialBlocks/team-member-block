@@ -1,288 +1,474 @@
+import * as typoPrefixs from "./constants/typographyPrefixConstants";
+
+import {
+	tmbWrapMarginConst,
+	tmbWrapPaddingConst,
+	tmbDescsPaddingConst,
+	tmbNamePaddingConst,
+	tmbJobPaddingConst,
+	iconsWrapPadding,
+	iconsWrapMargin,
+	imageMarginConst,
+	imagePaddingConst,
+	contentsPad,
+	contentsMargin,
+} from "./constants/dimensionsConstants";
+
+import {
+	WrpBgConst,
+	imgTopBgPrefix,
+	socialWrpBg,
+} from "./constants/backgroundsConstants";
+
+import {
+	WrpBdShadowConst,
+	prefixSocialBdShadow,
+	prefixImgBd,
+	ovlBdPrefix,
+} from "./constants/borderShadowConstants";
+
+import {
+	wrapperWidth,
+	imageWidth,
+	imageHeight,
+	rangeIconSize,
+	rangeIconPadding,
+	rangeIconDistance,
+	rangeIconRowGap,
+	imgTopBgHeight,
+	cSepWPrefix,
+	sSepWPrefix,
+	cSepHPrefix,
+	sSepHPrefix,
+	sclDeviderPosRight,
+	p9LGap,
+} from "./constants/rangeNames";
+
+// import {
+// 	generateDimensionsAttributes,
+// 	generateTypographyAttributes,
+// 	generateBackgroundAttributes,
+// 	generateBorderShadowAttributes,
+// 	generateResponsiveRangeAttributes,
+// } from "../../../util/helpers";
+
+const {
+	//
+	generateDimensionsAttributes,
+	generateTypographyAttributes,
+	generateBackgroundAttributes,
+	generateBorderShadowAttributes,
+	generateResponsiveRangeAttributes,
+} = window.EBTeamMemberControls;
+
 const attributes = {
-	imageSize: {
+	// the following 4 attributes is must required for responsive options and asset generation for frontend
+	// responsive control attributes ⬇
+	resOption: {
 		type: "string",
-		default: "thumbnail",
+		default: "Desktop",
 	},
-	imageUrl: {
+
+	// blockId attribute for making unique className and other uniqueness ⬇
+	blockId: {
 		type: "string",
 	},
-	imageId: {
-		type: "number",
+	blockRoot: {
+		type: "string",
+		default: "essential_block",
 	},
-	imageHeight: {
-		type: "number",
-		default: 150,
+
+	// blockMeta is for keeping all the styles ⬇
+	blockMeta: {
+		type: "object",
 	},
-	imageWidth: {
-		type: "number",
-		default: 150,
-	},
-	customSize: {
-		type: "boolean",
-		default: false,
-	},
-	borderRadius: {
-		type: "number",
-		default: 0,
-	},
-	memberName: {
-		type: "text",
-		selector: ".eb-member-name",
+
+	// member name
+	name: {
+		type: "string",
 		default: "John Doe",
 	},
+
+	// job title
 	jobTitle: {
-		type: "text",
-		selector: ".eb-job-title",
+		type: "string",
 		default: "Software Engineer",
 	},
-	jobDetails: {
-		type: "text",
-		selector: ".eb-job-details",
+
+	//
+	showDescs: {
+		type: "boolean",
+		default: true,
+	},
+
+	// member description
+	description: {
+		type: "string",
 		default:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
 	},
-	contactAlign: {
+
+	//
+	imageUrl: {
 		type: "string",
-		default: "center",
+		source: "attribute",
+		selector: ".avatar",
+		attribute: "src",
+		// default: "https://source.unsplash.com/5vg_SarQimA/150x150",
+		// default: "../wp-content/plugins/essential-blocks/assets/images/person.jpeg",
+		default: "../wp-content/plugins/team-member-block/assets/images/user.jpg",
+
+		// default:
+		// 	"https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTE5NzI3NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150",
+		// default:			"https://assets.wpdeveloper.net/wp-content/uploads/2019/04/wpdev-marketplace-for-users.svg",
+	},
+
+	//
+	imageId: {
+		type: "string",
+	},
+
+	//
+	isImgHeightAuto: {
+		type: "boolean",
+		default: false,
+	},
+
+	//
+	icnEffect: {
+		type: "string",
+	},
+
+	//
+	descsColor: {
+		type: "string",
 	},
 	nameColor: {
 		type: "string",
 	},
-	jobTitleColor: {
+	jobColor: {
 		type: "string",
 	},
-	jobDetailsColor: {
-		type: "string",
+
+	// social profiles
+
+	showSocials: {
+		type: "boolean",
+		default: true,
 	},
-	nameFontSize: {
-		type: "number",
-	},
-	nameFontSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	jobTitleFontSize: {
-		type: "number",
-	},
-	jobTitleFontSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	jobDetailsFontSize: {
-		type: "number",
-	},
-	socialIconSize: {
-		type: "number",
-	},
-	socialProfiles: {
-		type: "array",
-		default: [
-			{
-				icon: "facebook",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "twitter",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "linkedin",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "instagram",
-				link: "#",
-				isExpanded: false,
-			},
-			{
-				icon: "github",
-				link: "#",
-				isExpanded: false,
-			},
-		],
-	},
-	socialIconSpacing: {
-		type: "number",
-	},
-	socialIconColor: {
-		type: "string",
-	},
-	socialIconAlign: {
+
+	iconsJustify: {
 		type: "string",
 		default: "center",
 	},
-	linkedMargin: {
-		type: "boolean",
-		default: "false",
+	iconsVAlign: {
+		type: "string",
+		default: "center",
 	},
-	marginTop: {
-		type: "number",
+
+	profilesOnly: {
+		type: "array",
 	},
-	marginRight: {
-		type: "number",
+
+	socialDetails: {
+		type: "array",
+		default: [],
 	},
-	marginBottom: {
-		type: "number",
+
+	//
+	contentsAlign: {
+		type: "string",
+		default: "center",
 	},
-	marginLeft: {
-		type: "number",
+	imageAlign: {
+		type: "string",
+		default: "center",
 	},
-	linkedPadding: {
-		type: "boolean",
+
+	//
+	preset: {
+		type: "string",
+		default: "default",
 	},
-	paddingTop: {
-		type: "number",
+
+	//
+	socialInImage: {
+		type: "Boolean",
+		default: false,
 	},
-	paddingRight: {
-		type: "number",
+
+	//
+	imgBeforeEl: {
+		type: "Boolean",
+		default: false,
 	},
-	paddingBottom: {
-		type: "number",
+
+	//
+	showCSeparator: {
+		type: "Boolean",
+		default: false,
 	},
-	paddingLeft: {
-		type: "number",
+	showSSeparator: {
+		type: "Boolean",
+		default: false,
 	},
-	shadowColor: {
+	cSepAlign: {
+		type: "string",
+		default: "center",
+	},
+	sSepAlign: {
+		type: "string",
+		default: "center",
+	},
+	cSepColor: {
 		type: "string",
 	},
-	shadowHOffset: {
-		type: "number",
+	sSepColor: {
+		type: "string",
 	},
-	shadowVOffset: {
-		type: "number",
-	},
-	shadowBlur: {
-		type: "number",
-	},
-	shadowSpread: {
-		type: "number",
-	},
-	borderWidth: {
-		type: "number",
-	},
-	borderStyle: {
+	cSepType: {
 		type: "string",
 		default: "solid",
 	},
-	borderColor: {
+	sSepType: {
+		type: "string",
+		default: "solid",
+	},
+
+	//
+	isIconsDevider: {
+		type: "boolean",
+		default: false,
+	},
+
+	icnsDevideColor: {
 		type: "string",
 	},
-	nameUnit: {
-		type: "string",
-		default: "px",
-	},
-	jobTitleUnit: {
-		type: "string",
-		default: "px",
-	},
-	jobDetailsUnit: {
-		type: "string",
-		default: "px",
-	},
-	marginUnit: {
-		type: "string",
-		default: "px",
-	},
-	paddingUnit: {
-		type: "string",
-		default: "px",
-	},
-	iconSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	iconSpaceUnit: {
-		tyepe: "string",
-		default: "px",
-	},
-	nameFontFamily: {
-		type: "string",
-	},
-	nameFontWeight: {
-		type: "string",
-		default: "normal",
-	},
-	nameTextDecoration: {
-		type: "string",
-	},
-	nameTextTransform: {
-		type: "string",
-	},
-	nameLineHeight: {
+	icnSepW: {
 		type: "number",
+		default: 1,
 	},
-	nameLineHeightUnit: {
-		type: "string",
-		default: "px",
-	},
-	nameLetterSpacing: {
+	icnSepH: {
 		type: "number",
+		default: 30,
 	},
-	nameLetterSpacingUnit: {
-		type: "string",
-		default: "px",
-	},
-	jobTitleFontFamily: {
+
+	hvIcnColor: {
 		type: "string",
 	},
-	jobTitleFontWeight: {
-		type: "string",
-		default: "normal",
-	},
-	jobTitleTextDecoration: {
+	hvIcnBgc: {
 		type: "string",
 	},
-	jobTitleTextTransform: {
+
+	conVtAlign: {
+		type: "string",
+		default: "center",
+	},
+
+	isConBgGradient: {
+		type: "boolean",
+		default: true,
+	},
+
+	conBgGradient: {
+		type: "string",
+		default: "linear-gradient(45deg, #7967ff, rgba(194,119,242,0.8))",
+	},
+	conBgColor: {
 		type: "string",
 	},
-	jobTitleLineHeight: {
-		type: "number",
-	},
-	jobTitleLineHeightUnit: {
+
+	imgCnVtAlign: {
 		type: "string",
-		default: "px",
+		default: "flex-start",
 	},
-	jobTitleLetterSpacing: {
-		type: "number",
+
+	isP9reverse: {
+		type: "boolean",
+		default: false,
 	},
-	jobTitleLetterSpacingUnit: {
-		type: "string",
-		default: "px",
-	},
-	detailsFontFamily: {
-		type: "string",
-	},
-	detailsFontSizeUnit: {
-		type: "string",
-		default: "px",
-	},
-	detailsFontWeight: {
-		type: "string",
-		default: "normal",
-	},
-	detailsTextDecoration: {
-		type: "string",
-	},
-	detailsTextTransform: {
-		type: "string",
-	},
-	detailsLineHeight: {
-		type: "number",
-	},
-	detailsLineHeightUnit: {
-		type: "string",
-		default: "px",
-	},
-	detailsLetterSpacing: {
-		type: "number",
-	},
-	detailsLetterSpacingUnit: {
-		type: "string",
-		default: "px",
-	},
+
+	// typography attributes
+	...generateTypographyAttributes(Object.values(typoPrefixs)),
+
+	// Responsive Range Controller attributes
+	...generateResponsiveRangeAttributes(imageWidth, {
+		defaultRange: 200,
+	}),
+
+	...generateResponsiveRangeAttributes(imageHeight, {
+		defaultRange: 200,
+	}),
+
+	...generateResponsiveRangeAttributes(rangeIconSize, {
+		defaultRange: 20,
+		noUnits: true,
+	}),
+
+	...generateResponsiveRangeAttributes(rangeIconPadding, {
+		defaultRange: 1,
+		noUnits: true,
+	}),
+
+	...generateResponsiveRangeAttributes(rangeIconDistance, {
+		defaultRange: 20,
+		noUnits: true,
+	}),
+
+	...generateResponsiveRangeAttributes(rangeIconRowGap, {
+		// defaultRange: 10,
+		noUnits: true,
+	}),
+
+	...generateResponsiveRangeAttributes(wrapperWidth, {
+		defaultUnit: "%",
+		defaultRange: 100,
+	}),
+
+	...generateResponsiveRangeAttributes(imgTopBgHeight, {
+		defaultRange: 150,
+	}),
+
+	...generateResponsiveRangeAttributes(cSepWPrefix, {
+		defaultRange: 70,
+	}),
+
+	...generateResponsiveRangeAttributes(sSepWPrefix, {
+		defaultUnit: "%",
+		defaultRange: 90,
+	}),
+
+	...generateResponsiveRangeAttributes(cSepHPrefix, {
+		defaultRange: 3,
+	}),
+
+	...generateResponsiveRangeAttributes(sSepHPrefix, {
+		defaultRange: 1,
+	}),
+
+	...generateResponsiveRangeAttributes(sclDeviderPosRight, {
+		defaultRange: 23,
+	}),
+
+	...generateResponsiveRangeAttributes(p9LGap, {
+		defaultRange: 20,
+	}),
+
+	// boxs background attributes ⬇
+	...generateBackgroundAttributes(WrpBgConst, {
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	...generateBackgroundAttributes(socialWrpBg, {
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true',
+		noMainBgi: true,
+		noOverlay: true,
+	}),
+	...generateBackgroundAttributes(imgTopBgPrefix, {
+		defaultFillColor: "#84AFFF",
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+	// ...generateBackgroundAttributes(cdBoxsBgConst, {
+	// 	// defaultFillColor: "#7967ff",
+	// 	isBgDefaultGradient: true,
+	// 	noOverlay: true,
+	// 	noMainBgi: true,
+	// 	defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	// }),
+
+	// boxs BorderShadow attributes ⬇
+	...generateBorderShadowAttributes(WrpBdShadowConst, {
+		// noShadow: true,
+		// noBorder: true,
+	}),
+	...generateBorderShadowAttributes(prefixImgBd, {
+		// noShadow: true,
+		// noBorder: true,
+	}),
+	...generateBorderShadowAttributes(prefixSocialBdShadow, {
+		noShadow: true,
+		bdrDefaults: {
+			top: 1,
+			bottom: 1,
+			right: 1,
+			left: 1,
+		},
+		// noBorder: true,
+	}),
+	...generateBorderShadowAttributes(ovlBdPrefix, {
+		noShadow: true,
+		noBdrHover: true,
+		// bdrDefaults: {
+		// 	top: 1,
+		// 	bottom: 1,
+		// 	right: 1,
+		// 	left: 1,
+		// },
+		// noBorder: true,
+	}),
+	// ...generateBorderShadowAttributes(cdBoxsBdShadowConst, {
+	// 	// bdrDefaults: {
+	// 	// 	top: 0,
+	// 	// 	bottom: 0,
+	// 	// 	right: 0,
+	// 	// 	left: 0,
+	// 	// },
+	// 	rdsDefaults: {
+	// 		top: 10,
+	// 		bottom: 10,
+	// 		right: 10,
+	// 		left: 10,
+	// 	},
+	// 	// noShadow: true,
+	// 	// noBorder: true,
+	// }),
+
+	// dimensions Control related Attributes
+
+	...generateDimensionsAttributes(tmbWrapMarginConst),
+	...generateDimensionsAttributes(tmbWrapPaddingConst),
+	...generateDimensionsAttributes(imageMarginConst),
+	...generateDimensionsAttributes(imagePaddingConst),
+	...generateDimensionsAttributes(tmbDescsPaddingConst, {
+		top: 15,
+		bottom: 20,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(contentsMargin, {
+		top: 20,
+		bottom: 20,
+		left: 20,
+		right: 20,
+	}),
+	...generateDimensionsAttributes(contentsPad, {
+		top: 50,
+		bottom: 50,
+		left: 50,
+		right: 50,
+	}),
+	...generateDimensionsAttributes(tmbNamePaddingConst, {
+		top: 20,
+		bottom: 15,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(tmbJobPaddingConst, {
+		// top: 10,
+		// bottom: 20,
+		// isLinked: false,
+	}),
+	...generateDimensionsAttributes(iconsWrapPadding, {
+		top: 10,
+		// bottom: 20,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(iconsWrapMargin, {
+		// top: 10,
+		// bottom: 20,
+		// isLinked: false,
+	}),
 };
 
 export default attributes;

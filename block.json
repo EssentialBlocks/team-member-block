@@ -1,9 +1,11 @@
 {
-	"name": "block/team-member",
+	"name": "team-member-block/team-member-block",
 	"title": "Team Member",
 	"category": "widgets",
 	"description": "Present your team members beautifully & gain instant credibility",
 	"textdomain": "team-member-block",
-	"editorScript": "file:./build/index.js",
-	"style": "file:./build/style-index.css"
+	"editorScript": "create-block-team-member-block-editor",
+	"supports": {
+		"align": ["wide", "full"]
+	}
 }

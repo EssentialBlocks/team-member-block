@@ -1,10 +1,10 @@
 {
 	"name": "team-member",
-	"version": "0.1.0",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
-	"author": "The WordPress Contributors",
-	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
+	"version": "1.1.0",
+	"description": "Present your team members beautifully & gain instant credibility",
+	"author": "WPDeveloper",
+	"license": "GPL-3.0-or-later",
+	"main": "Gruntfile.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format:js": "wp-scripts format-js",
@@ -14,14 +14,17 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@wordpress/scripts": "^12.1.1"
+		"@babel/plugin-proposal-class-properties": "^7.16.5",
+		"@wordpress/scripts": "^19.2.2",
+		"@wordpress/block-editor": "^8.0.12",
+		"@wordpress/blocks": "^11.1.5",
+		"@wordpress/i18n": "^4.2.4"
 	},
 	"dependencies": {
-		"@fonticonpicker/react-fonticonpicker": "^1.2.0",
-		"classnames": "^2.2.6",
-		"prop-types": "^15.7.2",
-		"react-sortable-hoc": "^1.11.0",
-		"react-transition-group": "^4.4.1"
+		"@fonticonpicker/react-fonticonpicker": "hz-tyfoon/react-fonticonpicker#master",
+		"classnames": "^2.3.1",
+		"react-sortable-hoc": "^2.0.0",
+		"array-move": "^3.0.1",
+		"react-transition-group": "^4.4.2"
 	}
 }

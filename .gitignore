@@ -25,3 +25,16 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+.DS_Store
+
+package-lock.json
+yarn.lock
+
+
+dist/controls.js.map
+dist/controls.css.map
+
+dist/index.js.map
+dist/style.css.map
+
