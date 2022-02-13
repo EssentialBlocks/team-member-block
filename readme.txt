@@ -88,7 +88,7 @@ Yes, it will work with any standard WordPress theme.
 == Changelog ==
 
 
-= 1.1.0 - 10-02-2022 =
+= 1.1.0 - 13-02-2022 =
 * Added: Wide width & full width support
 * Added: Dynamic asset generation instead of inline styles
 * Added: Responsive controls with preview

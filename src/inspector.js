@@ -202,7 +202,7 @@ const defaultPresetAttrsObj = {
 function Inspector({ attributes, setAttributes }) {
 	const {
 		resOption,
-		// blockId,
+		blockId,
 		// blockRoot,
 		// blockMeta,
 
@@ -722,6 +722,44 @@ function Inspector({ attributes, setAttributes }) {
 													}
 												/>
 											)}
+
+											<style>
+												{`${
+													preset === "preset2"
+														? `
+
+					div.${blockId}.eb-team-wrapper div.contents{
+						top: 50%;
+					}
+
+				`
+														: ""
+												}
+
+
+												${
+													preset === "preset3"
+														? `
+				div.${blockId}.eb-team-wrapper ul.socials {
+					opacity: 1;
+				}
+														`
+														: ""
+												}
+
+
+												${
+													preset === "preset4"
+														? `
+				div.${blockId}.eb-team-wrapper div.contents {
+					opacity: 1;
+				}	
+														`
+														: ""
+												}
+
+												`}
+											</style>
 										</PanelBody>
 									)}
 
