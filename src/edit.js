@@ -746,25 +746,28 @@ export default function Edit({
 		${
 			preset === "preset2"
 				? `
-				.${blockId}.eb-team-wrapper:hover .contents{
+				.${blockId}.eb-team-wrapper .contents{
 					${
 						isConBgGradient
 							? `background-image: ${conBgGradient};`
 							: `background-color: ${conBgColor};`
 					}
-					top: 50%;
 					height: 50%;
 					display: flex;
 					flex-direction: column;
 					justify-content: center;		
 				}
-
-				.${blockId}.eb-team-wrapper:hover .contents .job_title {
+				
+				.${blockId}.eb-team-wrapper div.contents .job_title {
 					display: block;
 				}
 				
-				.${blockId}.eb-team-wrapper:hover .contents ul.socials {
+				.${blockId}.eb-team-wrapper div.contents ul.socials {
 					display: flex;
+				}
+
+				.${blockId}.eb-team-wrapper:hover .contents{
+					top: 50%;
 				}
 			
 				`
@@ -955,10 +958,6 @@ ${
 			position: relative;
 		}
 
-		.${blockId}.eb-team-wrapper:hover .contents {
-			opacity: 1;
-		}
-
 		.${blockId}.eb-team-wrapper .contents {
 			transition: 0.5s;
 			opacity: 0;
@@ -978,6 +977,10 @@ ${
 					? `background-image: ${conBgGradient};`
 					: `background-color: ${conBgColor};`
 			}
+		}
+
+		.${blockId}.eb-team-wrapper:hover .contents {
+			opacity: 1;
 		}
 
 		`
