@@ -1,5 +1,5 @@
 === Team Member Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
 Requires at least: 5.6
 Tested up to: 6.0
