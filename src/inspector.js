@@ -26,30 +26,6 @@ const {
 	LeftAlignIcon,
 	RightAlignIcon,
 	CenterAlignIcon,
-} = window.EBTeamMemberControls;
-
-// import TypographyDropdown from "../../../util/typography-control-v2";
-// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
-// import ResponsiveRangeController from "../../../util/responsive-range-control";
-// import ImageAvatar from "../../../util/image-avatar/";
-// import ColorControl from "../../../util/color-control";
-// import ResetControl from "../../../util/reset-control";
-// import GradientColorControl from "../../../util/gradient-color-controller";
-// import BorderShadowControl from "../../../util/border-shadow-control";
-// import BackgroundControl from "../../../util/background-control";
-// import DealSocialProfiles from "../../../util/social-profiles-v2/DealSocialProfiles";
-// import IconList from "../../../util/faIcons";
-// import {
-// 	mimmikCssForResBtns,
-// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-// } from "../../../util/helpers";
-
-const {
-	//
-	// mimmikCssForResBtns,
-	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
-
-	//
 	TypographyDropdown,
 	ResponsiveDimensionsControl,
 	ResponsiveRangeController,
@@ -61,10 +37,11 @@ const {
 	BackgroundControl,
 	DealSocialProfiles,
 	faIcons: IconList,
+	AdvancedControls,
 } = window.EBTeamMemberControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
@@ -483,7 +460,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Presets", "essential-blocks")}
-										// initialOpen={false}
+									// initialOpen={false}
 									>
 										<BaseControl
 											label={__("Design Preset", "essential-blocks")}
@@ -524,7 +501,7 @@ function Inspector({ attributes, setAttributes }) {
 
 									<PanelBody
 										title={__("Avatar", "essential-blocks")}
-										// initialOpen={false}
+									// initialOpen={false}
 									>
 										{!imageUrl && (
 											<MediaUpload
@@ -562,7 +539,7 @@ function Inspector({ attributes, setAttributes }) {
 
 									<PanelBody
 										title={__("Social Profiles", "essential-blocks")}
-										// initialOpen={false}
+									// initialOpen={false}
 									>
 										<>
 											<ToggleControl
@@ -588,7 +565,7 @@ function Inspector({ attributes, setAttributes }) {
 
 									<PanelBody
 										title={__("Separators", "essential-blocks")}
-										// initialOpen={false}
+									// initialOpen={false}
 									>
 										<ToggleControl
 											label={__("Enable Content Separator", "essential-blocks")}
@@ -621,7 +598,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Container width", "essential-blocks")}
-										// initialOpen={false}
+									// initialOpen={false}
 									>
 										<ResponsiveRangeController
 											// noUnits
@@ -637,7 +614,7 @@ function Inspector({ attributes, setAttributes }) {
 									{/preset[2,3,4]/i.test(preset || "") && (
 										<PanelBody
 											title={__("Overlay Contents", "essential-blocks")}
-											// initialOpen={false}
+										// initialOpen={false}
 										>
 											{/preset[3,4]/i.test(preset || "") && (
 												<>
@@ -664,7 +641,6 @@ function Inspector({ attributes, setAttributes }) {
 																		({ value, label }, index) => (
 																			<Button
 																				key={index}
-																				// isLarge
 																				isSecondary={conVtAlign !== value}
 																				isPrimary={conVtAlign === value}
 																				onClick={() =>
@@ -685,8 +661,8 @@ function Inspector({ attributes, setAttributes }) {
 														resRequiredProps={resRequiredProps}
 														noShadow
 														noBdrHover
-														// noBorder
-														// noShdowHover
+													// noBorder
+													// noShdowHover
 													/>
 												</>
 											)}
@@ -724,8 +700,7 @@ function Inspector({ attributes, setAttributes }) {
 											)}
 
 											<style>
-												{`${
-													preset === "preset2"
+												{`${preset === "preset2"
 														? `
 
 					div.${blockId}.eb-team-wrapper div.contents{
@@ -734,29 +709,27 @@ function Inspector({ attributes, setAttributes }) {
 
 				`
 														: ""
-												}
+													}
 
 
-												${
-													preset === "preset3"
+												${preset === "preset3"
 														? `
 				div.${blockId}.eb-team-wrapper ul.socials {
 					opacity: 1;
 				}
 														`
 														: ""
-												}
+													}
 
 
-												${
-													preset === "preset4"
+												${preset === "preset4"
 														? `
 				div.${blockId}.eb-team-wrapper div.contents {
 					opacity: 1;
 				}	
 														`
 														: ""
-												}
+													}
 
 												`}
 											</style>
@@ -1034,8 +1007,8 @@ function Inspector({ attributes, setAttributes }) {
 												<BorderShadowControl
 													controlName={prefixImgBd}
 													resRequiredProps={resRequiredProps}
-													// noShadow
-													// noBorder
+												// noShadow
+												// noBorder
 												/>
 
 												<ToggleControl
@@ -1294,7 +1267,7 @@ function Inspector({ attributes, setAttributes }) {
 													controlName={prefixSocialBdShadow}
 													resRequiredProps={resRequiredProps}
 													noShadow
-													// noBorder
+												// noBorder
 												/>
 											</PanelBody>
 
@@ -1425,7 +1398,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Margin & Padding")}
-										// initialOpen={true}
+									// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}
@@ -1453,10 +1426,12 @@ function Inspector({ attributes, setAttributes }) {
 										<BorderShadowControl
 											controlName={WrpBdShadowConst}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 									</PanelBody>
+
+									<AdvancedControls attributes={attributes} setAttributes={setAttributes} />
 								</>
 							)}
 						</div>
