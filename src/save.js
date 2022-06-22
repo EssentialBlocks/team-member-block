@@ -1,39 +1,26 @@
 import { useBlockProps, RichText } from "@wordpress/block-editor";
-
 import SocialLinks from "./components/social-links";
 
 export default function Save({ attributes }) {
 	const {
 		blockId,
-
-		// member name
 		name,
-
-		// job title
 		jobTitle,
-
-		// member description
 		description,
-
-		//
 		showDescs,
 		showSocials,
 		showCSeparator,
 		showSSeparator,
-		//
 		imageUrl,
-
-		// social profiles
-		// socialDetails,
 		profilesOnly,
-
-		//
 		socialInImage,
 		icnEffect,
+		classHook,
 	} = attributes;
 
 	return (
 		<div {...useBlockProps.save()}>
+		<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
 			<div className={`${blockId} eb-team-wrapper`}>
 				<div className="eb-team-inner">
 					<div className="image">
@@ -72,6 +59,7 @@ export default function Save({ attributes }) {
 						)}
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 	);

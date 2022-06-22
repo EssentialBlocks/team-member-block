@@ -110,13 +110,12 @@ const attributes = {
 
 	//
 	imageUrl: {
-		type: "string",
 		source: "attribute",
 		selector: ".avatar",
 		attribute: "src",
 		// default: "https://source.unsplash.com/5vg_SarQimA/150x150",
 		// default: "../wp-content/plugins/essential-blocks/assets/images/person.jpeg",
-		default: "../wp-content/plugins/team-member-block/assets/images/user.jpg",
+		default: "../wp-content/plugins/essential-blocks/assets/images/user.jpg",
 
 		// default:
 		// 	"https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTE5NzI3NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150",

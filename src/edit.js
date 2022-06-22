@@ -10,17 +10,6 @@ import { select } from "@wordpress/data";
  * Internal dependencies
  */
 
-// import {
-// 	softMinifyCssStrings,
-// 	generateBackgroundControlStyles,
-// 	generateDimensionsControlStyles,
-// 	generateTypographyStyles,
-// 	generateBorderShadowStyles,
-// 	generateResponsiveRangeStyles,
-// 	mimmikCssForPreviewBtnClick,
-// 	duplicateBlockIdFix,
-// } from "../../../util/helpers";
-
 const {
 	//
 	softMinifyCssStrings,
@@ -34,7 +23,7 @@ const {
 } = window.EBTeamMemberControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
@@ -104,81 +93,48 @@ export default function Edit({
 		resOption,
 		blockId,
 		blockMeta,
-
-		// member name
 		name,
-
-		// job title
 		jobTitle,
-
-		// member description
 		description,
-
-		//
 		showDescs,
-
-		//
 		imageUrl,
 		imageId,
-
-		//
 		isImgHeightAuto,
-
-		//
 		descsColor = "#9f9f9f",
 		jobColor = "#4b4b4b",
 		nameColor = "#4b4b4b",
-
-		// social profiles
 		showSocials,
 		socialDetails,
 		profilesOnly,
-
-		//
 		iconsJustify,
 		iconsVAlign,
-
-		//
 		contentsAlign,
 		imageAlign,
 		cSepAlign,
 		sSepAlign,
-
-		//
 		preset,
 		socialInImage,
-
-		//
 		imgBeforeEl,
-
-		//
 		showCSeparator,
 		showSSeparator,
 		cSepType = "solid",
 		sSepType = "solid",
 		cSepColor = "#84AFFF",
 		sSepColor = "#CACACA",
-
-		//
 		isIconsDevider,
 		icnsDevideColor = "#cacaca",
 		icnSepW = 1,
 		icnSepH = 30,
-
-		//
 		hvIcnColor,
 		hvIcnBgc,
-
-		//
 		conVtAlign,
 		isConBgGradient,
 		conBgGradient,
 		conBgColor = "rgba(0,0,0,.4)",
-
-		//
 		imgCnVtAlign,
 		isP9reverse,
 		icnEffect,
+		classHook,
 	} = attributes;
 
 	//
@@ -254,25 +210,17 @@ export default function Edit({
 			clientId,
 		});
 
-		// // this codes is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-		// mimmikCssForPreviewBtnClick({
-		// 	domObj: document,
-		// 	select,
-		// });
-
 		//
 		if (
 			// imageUrl ===
 			// "../wp-content/plugins/essential-blocks/assets/images/user.jpg"
-			/assets\/images\/user\.jpg/gi.test(imageUrl || " ")
+			/essential\-blocks.assets\/images\/user\.jpg/gi.test(imageUrl || " ")
 		) {
 			setAttributes({
 				imageUrl: `${TeamMemberLocalize.eb_plugins_url}assets/images/user.jpg`,
 			});
 		}
 	}, []);
-
-	// console.log({ EssentialBlocksLocalize, TeamMemberLocalize });
 
 	const blockProps = useBlockProps({
 		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
@@ -958,6 +906,10 @@ ${
 			position: relative;
 		}
 
+		.${blockId}.eb-team-wrapper:hover .contents {
+			opacity: 1;
+		}
+
 		.${blockId}.eb-team-wrapper .contents {
 			transition: 0.5s;
 			opacity: 0;
@@ -977,10 +929,6 @@ ${
 					? `background-image: ${conBgGradient};`
 					: `background-color: ${conBgColor};`
 			}
-		}
-
-		.${blockId}.eb-team-wrapper:hover .contents {
-			opacity: 1;
 		}
 
 		`
@@ -1510,73 +1458,75 @@ ${
 				`}
 				</style>
 
-				<div className={`${blockId} eb-team-wrapper`}>
-					<div className="eb-team-inner">
-						<div className="image">
-							<MediaUpload
-								onSelect={({ id, url }) =>
-									setAttributes({ imageUrl: url, imageId: id })
-								}
-								type="image"
-								value={imageId}
-								render={({ open }) => {
-									if (!imageUrl) {
-										return (
-											<Button
-												className="eb-infobox-img-btn components-button"
-												label={__("Upload Image", "essential-blocks")}
-												icon="format-image"
-												onClick={open}
-											/>
-										);
-									} else {
-										return (
-											<img className="avatar" alt="member" src={imageUrl} />
-										);
+				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
+					<div className={`${blockId} eb-team-wrapper`}>
+						<div className="eb-team-inner">
+							<div className="image">
+								<MediaUpload
+									onSelect={({ id, url }) =>
+										setAttributes({ imageUrl: url, imageId: id })
 									}
-								}}
-							/>
-							{socialInImage && showSocials && (
-								<SocialLinks
-									socialDetails={profilesOnly}
-									icnEffect={icnEffect}
+									type="image"
+									value={imageId}
+									render={({ open }) => {
+										if (!imageUrl) {
+											return (
+												<Button
+													className="eb-infobox-img-btn components-button"
+													label={__("Upload Image", "essential-blocks")}
+													icon="format-image"
+													onClick={open}
+												/>
+											);
+										} else {
+											return (
+												<img className="avatar" alt="member" src={imageUrl} />
+											);
+										}
+									}}
 								/>
-							)}
-						</div>
-						<div className="contents">
-							<div className="texts">
-								<RichText
-									tagName="h3"
-									className="name"
-									value={name}
-									onChange={(name) => setAttributes({ name })}
-								/>
-								<RichText
-									tagName="h4"
-									className="job_title"
-									value={jobTitle}
-									onChange={(jobTitle) => setAttributes({ jobTitle })}
-								/>
-								{showCSeparator && <hr className="content_separator" />}
-
-								{showDescs && (
-									<RichText
-										tagName="p"
-										className="description"
-										value={description}
-										onChange={(description) => setAttributes({ description })}
-									/>
-								)}
-							</div>
-							{!socialInImage && showSocials && (
-								<>
-									{showSSeparator && <hr className="social_separator" />}
+								{socialInImage && showSocials && (
 									<SocialLinks
 										socialDetails={profilesOnly}
 										icnEffect={icnEffect}
 									/>
-								</>
-							)}
+								)}
+							</div>
+							<div className="contents">
+								<div className="texts">
+									<RichText
+										tagName="h3"
+										className="name"
+										value={name}
+										onChange={(name) => setAttributes({ name })}
+									/>
+									<RichText
+										tagName="h4"
+										className="job_title"
+										value={jobTitle}
+										onChange={(jobTitle) => setAttributes({ jobTitle })}
+									/>
+									{showCSeparator && <hr className="content_separator" />}
+
+									{showDescs && (
+										<RichText
+											tagName="p"
+											className="description"
+											value={description}
+											onChange={(description) => setAttributes({ description })}
+										/>
+									)}
+								</div>
+								{!socialInImage && showSocials && (
+									<>
+										{showSSeparator && <hr className="social_separator" />}
+										<SocialLinks
+											socialDetails={profilesOnly}
+											icnEffect={icnEffect}
+										/>
+									</>
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
