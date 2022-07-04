@@ -154,6 +154,7 @@ export default function Edit({
 				color: "#fff",
 				bgColor: "#3b5998",
 				link: "#",
+				linkOpenNewTab: false,
 				isExpanded: false,
 			},
 			{
@@ -161,6 +162,7 @@ export default function Edit({
 				color: "#fff",
 				bgColor: "#1da1f2",
 				link: "#",
+				linkOpenNewTab: false,
 				isExpanded: false,
 			},
 			{
@@ -168,6 +170,7 @@ export default function Edit({
 				color: "#fff",
 				bgColor: "#0077b5",
 				link: "#",
+				linkOpenNewTab: false,
 				isExpanded: false,
 			},
 			{
@@ -175,6 +178,7 @@ export default function Edit({
 				color: "#fff",
 				bgColor: "#cd201f",
 				link: "#",
+				linkOpenNewTab: false,
 				isExpanded: false,
 			},
 		];
@@ -184,10 +188,13 @@ export default function Edit({
 
 	//
 	useEffect(() => {
-		const profilesOnly = socialDetails.map(({ icon, link }) => ({
-			icon,
-			link,
-		}));
+		const profilesOnly = socialDetails.map(
+			({ icon, link, linkOpenNewTab }) => ({
+				icon,
+				link,
+				linkOpenNewTab,
+			})
+		);
 
 		setAttributes({ profilesOnly });
 	}, [socialDetails]);
@@ -217,7 +224,7 @@ export default function Edit({
 			/essential\-blocks.assets\/images\/user\.jpg/gi.test(imageUrl || " ")
 		) {
 			setAttributes({
-				imageUrl: `${TeamMemberLocalize.eb_plugins_url}assets/images/user.jpg`,
+				imageUrl: `${EssentialBlocksLocalize.eb_plugins_url}assets/images/user.jpg`,
 			});
 		}
 	}, []);
