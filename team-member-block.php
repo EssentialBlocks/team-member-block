@@ -32,7 +32,6 @@ require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_team_member_block_init()
 {
-	eb_migrate_old_blocks('block/team-member', 'team-member-block/team-member-block');
 
 	$script_asset_path = TEAM_MEMBER_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
@@ -115,10 +114,10 @@ function create_block_team_member_block_init()
 		'create-block-team-member-frontend-style',
 		$style_css,
 		array(
-			'fontpicker-default-theme', 
-			'fontpicker-matetial-theme', 
-			'essential-blocks-hover-css', 
-			'fontawesome-frontend-css', 
+			'fontpicker-default-theme',
+			'fontpicker-matetial-theme',
+			'essential-blocks-hover-css',
+			'fontawesome-frontend-css',
 			'essential-blocks-animation'
 		),
 		TEAM_MEMBER_BLOCK_VERSION
@@ -146,14 +145,3 @@ function create_block_team_member_block_init()
 }
 
 add_action('init', 'create_block_team_member_block_init', 99);
-
-if (!function_exists('eb_migrate_old_blocks')) {
-	function eb_migrate_old_blocks($old_namespace, $new_namespace)
-	{
-		global $wpdb;
-		$posts = $wpdb->query("select * from  " . $wpdb->prefix . "posts where `post_content` like '%wp:" . $old_namespace . "%'");
-		if ($posts) {
-			$wpdb->query("update " . $wpdb->prefix . "posts set `post_content`= replace(post_content, 'wp:" . $old_namespace . "', 'wp:" . $new_namespace . "') where `post_content` like '%wp:" . $old_namespace . "%'");
-		}
-	}
-}
