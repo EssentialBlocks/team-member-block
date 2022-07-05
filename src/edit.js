@@ -1506,12 +1506,14 @@ ${
 										className="name"
 										value={name}
 										onChange={(name) => setAttributes({ name })}
+										placeholder={__("Add name here", "team-member-block")}
 									/>
 									<RichText
 										tagName="h4"
 										className="job_title"
 										value={jobTitle}
 										onChange={(jobTitle) => setAttributes({ jobTitle })}
+										placeholder={__("Add job title", "team-member-block")}
 									/>
 									{showCSeparator && <hr className="content_separator" />}
 
@@ -1521,6 +1523,7 @@ ${
 											className="description"
 											value={description}
 											onChange={(description) => setAttributes({ description })}
+											placeholder={__("Add description", "team-member-block")}
 										/>
 									)}
 								</div>

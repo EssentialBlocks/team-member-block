@@ -59,6 +59,7 @@ class Team_Member_Helper
             wp_localize_script('team-member-block-controls-util', 'EssentialBlocksLocalize', array(
                 'eb_wp_version' => (float) get_bloginfo('version'),
                 'rest_rootURL' => get_rest_url(),
+                'eb_plugins_url' => TEAM_MEMBER_BLOCK_ADMIN_URL,
             ));
 
             wp_localize_script('team-member-block-controls-util', 'TeamMemberLocalize', array(
