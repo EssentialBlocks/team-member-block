@@ -224,7 +224,7 @@ export default function Edit({
 			/essential\-blocks.assets\/images\/user\.jpg/gi.test(imageUrl || " ")
 		) {
 			setAttributes({
-				imageUrl: `${EssentialBlocksLocalize.eb_plugins_url}assets/images/user.jpg`,
+				imageUrl: `${TeamMemberLocalize.eb_plugins_url}assets/images/user.jpg`,
 			});
 		}
 	}, []);
