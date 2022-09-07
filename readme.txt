@@ -87,7 +87,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.1.2 - dev =
+= 1.1.2 - 07/09/2022 =
 * Added: Open link in new tab option
 * Improved: style-handler code for reusable blocks
 * Improved: Controls & structure
