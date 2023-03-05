@@ -87,6 +87,10 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
+= 1.1.4 - 05/03/2023 =
+* Added: Avatar link option
+* Improved: Font loader and style
+
 = 1.1.3 - 18/12/2022 =
 * Improved: Controls & structure
 * Fixed: Minor bugs
