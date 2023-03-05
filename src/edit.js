@@ -637,7 +637,7 @@ export default function Edit({
 	const socialStyles = socialDetails.reduce(
 		(acc, curr, i) => `
 		 ${acc}
-		 .${blockId}.eb-team-wrapper ul.socials li:nth-child(${i + 1}) a {			
+		 .${blockId}.eb-team-wrapper ul.socials li:nth-child(${i + 1}) a {
 			 background-color: ${curr.bgColor || "#000"};
 			 color: ${curr.color || "#fff"};
 		 }
@@ -653,16 +653,16 @@ export default function Edit({
 			 margin: 0;
 			 padding:0;
 		 }
- 
+
 		 .social-icon {
 			 font-style: normal;
 		 }
-		 
- 
+
+
 		 .${blockId}.eb-team-wrapper > *{
 			 position:relative;
 		 }
- 
+
 		 .${blockId}.eb-team-wrapper {
 			 position:relative;
 			 overflow:hidden;
@@ -674,8 +674,8 @@ export default function Edit({
 			 ${wrpBdShdStyesDesktop}
 			 transition: ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
 		 }
- 
- 
+
+
 		 ${
 				preset === "preset3"
 					? `
@@ -685,7 +685,7 @@ export default function Edit({
 				 `
 					: ""
 			}
- 
+
 		 ${
 				preset === "preset2"
 					? `
@@ -698,26 +698,26 @@ export default function Edit({
 					 height: 50%;
 					 display: flex;
 					 flex-direction: column;
-					 justify-content: center;		
+					 justify-content: center;
 				 }
-				 
+
 				 .${blockId}.eb-team-wrapper div.contents .job_title {
 					 display: block;
 				 }
-				 
+
 				 .${blockId}.eb-team-wrapper div.contents ul.socials {
 					 display: flex;
 				 }
- 
+
 				 .${blockId}.eb-team-wrapper:hover .contents{
 					 top: 50%;
 				 }
-			 
+
 				 `
 					: ""
 			}
- 
-		 
+
+
 		 ${
 				preset === "preset5"
 					? `
@@ -728,39 +728,39 @@ export default function Edit({
 					 align-items: ${imgCnVtAlign || "flex-start"};
 					 ${p9flexGapDesktop}
 				 }
-				 
+
 				 .${blockId}.eb-team-wrapper .image {
 					 ${imgWidthDesktop}
 				 }
- 
+
 				 .${blockId}.eb-team-wrapper .contents {
 					 flex:1;
 				 }
 				 `
 					: ""
 			}
-		 
-   
- 
+
+
+
 		 .${blockId}.eb-team-wrapper:hover{
 			 ${preset === "preset2" ? `overflow:hidden;` : ""}
- 
+
 			 ${wrpHoverBackgroundStylesDesktop}
 			 ${wrpBdShdStylesHoverDesktop}
 		 }
-		 
+
 		 .${blockId}.eb-team-wrapper:before{
 			 ${wrpOverlayStylesDesktop}
 			 transition: ${wrpOvlTransitionStyle};
- 
+
 		 }
-		 
+
 		 .${blockId}.eb-team-wrapper:hover:before{
 			 ${wrpHoverOverlayStylesDesktop}
- 
+
 		 }
-		 
-		 .${blockId}.eb-team-wrapper .image > img {
+
+		 .${blockId}.eb-team-wrapper .image img {
 			 max-width: 100%;
 			 object-fit: cover;
 			 display:block;
@@ -783,8 +783,8 @@ export default function Edit({
 						: ""
 				}
 		 }
- 
- 
+
+
 		 ${
 				imgBeforeEl
 					? `
@@ -794,23 +794,23 @@ export default function Edit({
 				 ${imgTopBgHeightDesktop}
 				 ${imgTopBackgroundStyles}
 				 transition: ${imgTopBgTransitionStyle};
-				 
+
 			 }
- 
+
 			 .${blockId}.eb-team-wrapper .image:hover:before{
 				 ${imgTopHoverBackgroundStyles}
 			 }
 			 `
 					: ""
 			}
-		 
- 
- 
+
+
+
 		 .${blockId}.eb-team-wrapper .image:hover > img {
 			 ${imageBdShdStylesHoverDesktop}
 			 transition: ${imageBdShdTransitionStyle};
 		 }
-		 
+
 		 .${blockId}.eb-team-wrapper .contents {
 			 text-align: ${contentsAlign};
 			 box-sizing: border-box;
@@ -826,20 +826,20 @@ export default function Edit({
 						: ""
 				}
 		 }
-		 
+
 		 .${blockId}.eb-team-wrapper .contents .name {
 			 ${nameTypoStylesDesktop}
 			 ${namePaddingDesktop}
 			 color: ${nameColor};
 		 }
-		 
+
 		 .${blockId}.eb-team-wrapper .contents .job_title {
 			 ${jobTypoStylesDesktop}
 			 ${jobPaddingDesktop}
 			 color: ${jobColor};
 			 ${preset === "preset2" ? `display:none;` : ""}
 		 }
-		 
+
 		 ${
 				showDescs
 					? `
@@ -850,8 +850,8 @@ export default function Edit({
 				 }
 				 `
 					: ""
-			}		
-		 
+			}
+
  ${
 		showCSeparator
 			? `
@@ -872,7 +872,7 @@ export default function Edit({
 		 `
 			: ""
  }
- 
+
  ${
 		showSocials && showSSeparator
 			? `
@@ -893,18 +893,18 @@ export default function Edit({
 		 `
 			: ""
  }
- 
+
  ${
 		preset === "preset4"
 			? `
 		 .${blockId}.eb-team-wrapper .eb-team-inner {
 			 position: relative;
 		 }
- 
+
 		 .${blockId}.eb-team-wrapper:hover .contents {
 			 opacity: 1;
 		 }
- 
+
 		 .${blockId}.eb-team-wrapper .contents {
 			 transition: 0.5s;
 			 opacity: 0;
@@ -925,16 +925,16 @@ export default function Edit({
 						: `background-color: ${conBgColor};`
 				}
 		 }
- 
+
 		 `
 			: ""
  }
- 
+
  ${
 		showSocials
 			? `
 		 ${socialStyles}
-		 
+
 		 .${blockId}.eb-team-wrapper ul.socials {
 			 list-style: none;
 			 flex-wrap: wrap;
@@ -970,7 +970,7 @@ export default function Edit({
 					 `
 				}
 		 }
- 
+
 		 ${
 				preset === "preset3"
 					? `
@@ -980,18 +980,18 @@ export default function Edit({
 				 `
 					: ""
 			}
- 
+
 		 .${blockId}.eb-team-wrapper ul.socials:hover {
 			 ${socialWrapHoverBackgroundStyles}
 		 }
- 
+
 	 ${
 			isIconsDevider
 				? `
 		 .${blockId}.eb-team-wrapper ul.socials li{
 			 position:relative;
 		 }
- 
+
 		 .${blockId}.eb-team-wrapper ul.socials li + li:before {
 			 content: "";
 			 background-color: ${icnsDevideColor};
@@ -1005,8 +1005,8 @@ export default function Edit({
 		 `
 				: ""
 		}
- 
-		 .${blockId}.eb-team-wrapper ul.socials li a {			
+
+		 .${blockId}.eb-team-wrapper ul.socials li a {
 			 box-sizing:content-box;
 			 text-decoration: none;
 			 cursor: pointer;
@@ -1020,19 +1020,19 @@ export default function Edit({
 			 ${socialBorderDesktop}
 			 transition: color 0.5s, background-color 0.5s, ${socialBorderTransitionStyle};
 		 }
-		 
-		 .${blockId}.eb-team-wrapper ul.socials li:hover a {	
+
+		 .${blockId}.eb-team-wrapper ul.socials li:hover a {
 			 background-color:${hvIcnBgc};
 			 color:${hvIcnColor};
 			 ${socialBordersHoverDesktop}
 		 }
-		 
+
 		 `
 			: ""
  }
-	 
-   
- 
+
+
+
 	 `;
 
 	const wrapperStylesTab = `
@@ -1043,40 +1043,40 @@ export default function Edit({
 		 ${wrpPaddingTab}
 		 ${wrpBdShdStyesTab}
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper:hover{
 		 ${wrpHoverBackgroundStylesTab}
 		 ${wrpBdShdStylesHoverTab}
-		 
+
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper:before{
 		 ${wrpOverlayStylesTab}
- 
+
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper:hover:before{
 		 ${wrpHoverOverlayStylesTab}
- 
+
 	 }
- 
-	 
+
+
 	 ${
 			preset === "preset5"
-				? `			
+				? `
 			 .${blockId}.eb-team-wrapper .image {
 				 ${imgWidthTab}
 			 }
- 
+
 			 .${blockId}.eb-team-wrapper .eb-team-inner {
 				 ${p9flexGapTab}
 			 }
-			 
+
 			 `
 				: ""
 		}
- 
- 
+
+
 	 ${
 			imgBeforeEl
 				? `
@@ -1086,46 +1086,46 @@ export default function Edit({
 		 `
 				: ""
 		}
-		 
- 
+
+
 	 .${blockId}.eb-team-wrapper .image > img {
 		 ${imageBdShdStyleTab}
 		 ${imageMarginTab}
 		 ${imagePaddingTab}
-		 ${preset === "preset5" ? "" : imgWidthTab}		
+		 ${preset === "preset5" ? "" : imgWidthTab}
 		 ${isImgHeightAuto ? "" : imgHeightTab}
 	 }
- 
- 
+
+
 	 .${blockId}.eb-team-wrapper .image:hover > img {
 		 ${imageBdShdStylesHoverTab}
- 
+
 	 }
- 
- 
+
+
 	 ${
 			showDescs
 				? `
 			 .${blockId}.eb-team-wrapper .contents .description {
 				 ${descsTypoStylesTab}
 				 ${descsPaddingTab}
-			 }		
+			 }
 			 `
 				: ""
-		}	
- 
+		}
+
 	 .${blockId}.eb-team-wrapper .contents .name {
 		 ${nameTypoStylesTab}
 		 ${namePaddingTab}
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper .contents .job_title {
 		 ${jobTypoStylesTab}
 		 ${jobPaddingTab}
-	 }	
- 
- 
-		 
+	 }
+
+
+
  ${
 		showCSeparator
 			? `
@@ -1136,7 +1136,7 @@ export default function Edit({
 		 `
 			: ""
  }
- 
+
  ${
 		showSocials && showSSeparator
 			? `
@@ -1147,7 +1147,7 @@ export default function Edit({
 		 `
 			: ""
  }
-	 
+
  ${
 		preset === "preset4"
 			? `
@@ -1159,12 +1159,12 @@ export default function Edit({
 		 `
 			: ""
  }
- 
+
  ${
 		showSocials
 			? `
 		 ${socialStyles}
-		 
+
 		 .${blockId}.eb-team-wrapper ul.socials {
 			 ${iconsWrapMarginTab}
 			 ${iconsWrapPaddingTab}
@@ -1179,9 +1179,9 @@ export default function Edit({
 					 `
 						: ""
 				}
-		 }	
- 
- 
+		 }
+
+
 	 ${
 			isIconsDevider
 				? `
@@ -1191,21 +1191,21 @@ export default function Edit({
 			 `
 				: ""
 		}
- 
+
 		 .${blockId}.eb-team-wrapper ul.socials li a {
 			 ${iconSizeTab}
 			 ${iconPaddingTab}
 			 ${socialBorderTab}
 		 }
-		 
-		 .${blockId}.eb-team-wrapper ul.socials li:hover a {	
+
+		 .${blockId}.eb-team-wrapper ul.socials li:hover a {
 			 ${socialBordersHoverTab}
 		 }
 		 `
 			: ""
  }
- 
-	 
+
+
 	 `;
 
 	const wrapperStylesMobile = `
@@ -1216,38 +1216,38 @@ export default function Edit({
 		 ${wrpPaddingMobile}
 		 ${wrpBdShdStyesMobile}
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper:hover{
 		 ${wrpHoverBackgroundStylesMobile}
 		 ${wrpBdShdStylesHoverMobile}
-		 
+
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper:before{
 		 ${wrpOverlayStylesMobile}
- 
+
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper:hover:before{
 		 ${wrpHoverOverlayStylesMobile}
- 
+
 	 }
- 
+
 	 ${
 			preset === "preset5"
-				? `			
+				? `
 			 .${blockId}.eb-team-wrapper .image {
 				 ${imgWidthMobile}
 			 }
- 
+
 			 .${blockId}.eb-team-wrapper .eb-team-inner {
 				 ${p9flexGapMobile}
 			 }
 			 `
 				: ""
 		}
- 
- 
+
+
 	 ${
 			imgBeforeEl
 				? `
@@ -1257,46 +1257,46 @@ export default function Edit({
 		 `
 				: ""
 		}
- 
+
 	 .${blockId}.eb-team-wrapper .image > img {
 		 ${preset === "preset5" ? "" : imgWidthMobile}
 		 ${imageBdShdStyleMobile}
 		 ${imageMarginMobile}
 		 ${imagePaddingMobile}
- 
+
 		 ${isImgHeightAuto ? "" : imgHeightMobile}
 	 }
- 
- 
-	 
- 
+
+
+
+
 	 .${blockId}.eb-team-wrapper .image:hover > img {
 		 ${imageBdShdStylesHoverMobile}
 	 }
-	 
+
 	 ${
 			showDescs
 				? `
 			 .${blockId}.eb-team-wrapper .contents .description {
 				 ${descsTypoStylesMobile}
 				 ${descsPaddingMobile}
-			 }	
+			 }
 			 `
 				: ""
 		}
-	 
+
 	 .${blockId}.eb-team-wrapper .contents .name {
 		 ${nameTypoStylesMobile}
 		 ${namePaddingMobile}
 	 }
-	 
+
 	 .${blockId}.eb-team-wrapper .contents .job_title {
 		 ${jobTypoStylesMobile}
 		 ${jobPaddingMobile}
 	 }
- 
- 
-			 
+
+
+
 	 ${
 			showCSeparator
 				? `
@@ -1307,7 +1307,7 @@ export default function Edit({
 			 `
 				: ""
 		}
- 
+
 	 ${
 			showSocials && showSSeparator
 				? `
@@ -1318,8 +1318,8 @@ export default function Edit({
 			 `
 				: ""
 		}
- 
- 
+
+
 	 ${
 			preset === "preset4"
 				? `
@@ -1331,12 +1331,12 @@ export default function Edit({
 			 `
 				: ""
 		}
- 
+
 	 ${
 			showSocials
 				? `
 			 ${socialStyles}
- 
+
 			 .${blockId}.eb-team-wrapper ul.socials {
 				 ${iconSpaceMobile}
 				 ${iconRowGapMobile}
@@ -1352,7 +1352,7 @@ export default function Edit({
 							: ""
 					}
 			 }
- 
+
 			 ${
 					isIconsDevider
 						? `
@@ -1362,44 +1362,44 @@ export default function Edit({
 					 `
 						: ""
 				}
-					 
+
 			 .${blockId}.eb-team-wrapper ul.socials li a {
 				 ${iconSizeMobile}
 				 ${iconPaddingMobile}
 				 ${socialBorderMobile}
 			 }
- 
-			 
-			 .${blockId}.eb-team-wrapper ul.socials li:hover a {	
+
+
+			 .${blockId}.eb-team-wrapper ul.socials li:hover a {
 				 ${socialBordersHoverMobile}
 			 }
-			 
+
 			 `
 				: ""
 		}
- 
- 
+
+
 	 `;
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
-	const desktopAllStyles = softMinifyCssStrings(`		
+	const desktopAllStyles = softMinifyCssStrings(`
 		 ${wrapperStylesDesktop}
- 
- 
+
+
 	 `);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStyles = softMinifyCssStrings(`
 		 ${wrapperStylesTab}
- 
- 
+
+
 	 `);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStyles = softMinifyCssStrings(`
 		 ${wrapperStylesMobile}
- 
- 
+
+
 	 `);
 
 	//
@@ -1427,28 +1427,28 @@ export default function Edit({
 				<style>
 					{`
 				 ${desktopAllStyles}
- 
+
 				 /* mimmikcssStart */
- 
+
 				 ${resOption === "Tablet" ? tabAllStyles : " "}
 				 ${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
- 
+
 				 /* mimmikcssEnd */
- 
-				 @media all and (max-width: 1024px) {	
- 
-					 /* tabcssStart */			
+
+				 @media all and (max-width: 1024px) {
+
+					 /* tabcssStart */
 					 ${softMinifyCssStrings(tabAllStyles)}
-					 /* tabcssEnd */			
-				 
+					 /* tabcssEnd */
+
 				 }
-				 
+
 				 @media all and (max-width: 767px) {
-					 
-					 /* mobcssStart */			
+
+					 /* mobcssStart */
 					 ${softMinifyCssStrings(mobileAllStyles)}
-					 /* mobcssEnd */			
-				 
+					 /* mobcssEnd */
+
 				 }
 				 `}
 				</style>
@@ -1459,7 +1459,10 @@ export default function Edit({
 							<div className="image">
 								<MediaUpload
 									onSelect={({ id, url }) =>
-										setAttributes({ imageUrl: url, imageId: id })
+										setAttributes({
+											imageUrl: url,
+											imageId: id,
+										})
 									}
 									type="image"
 									value={imageId}

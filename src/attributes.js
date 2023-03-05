@@ -287,6 +287,15 @@ const attributes = {
 		default: false,
 	},
 
+	avatarURL: {
+		type: "string",
+		default: "",
+	},
+	newWindow: {
+		type: "boolean",
+		default: false,
+	},
+
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
 

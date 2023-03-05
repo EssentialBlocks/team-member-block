@@ -13,6 +13,7 @@ import {
 	BaseControl,
 	ButtonGroup,
 	TabPanel,
+	TextControl,
 } from "@wordpress/components";
 import { select } from "@wordpress/data";
 
@@ -241,6 +242,9 @@ function Inspector({ attributes, setAttributes }) {
 
 		//
 		icnEffect,
+
+		avatarURL,
+		newWindow,
 	} = attributes;
 
 	//
@@ -426,7 +430,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Presets", "essential-blocks")}
-									// initialOpen={false}
+										// initialOpen={false}
 									>
 										<BaseControl
 											label={__("Design Preset", "essential-blocks")}
@@ -467,12 +471,15 @@ function Inspector({ attributes, setAttributes }) {
 
 									<PanelBody
 										title={__("Avatar", "essential-blocks")}
-									// initialOpen={false}
+										// initialOpen={false}
 									>
 										{!imageUrl && (
 											<MediaUpload
 												onSelect={({ id, url }) =>
-													setAttributes({ imageUrl: url, imageId: id })
+													setAttributes({
+														imageUrl: url,
+														imageId: id,
+													})
 												}
 												type="image"
 												value={imageId}
@@ -499,13 +506,34 @@ function Inspector({ attributes, setAttributes }) {
 														})
 													}
 												/>
+
+												<TextControl
+													label={__("URL", "essential-blocks")}
+													value={avatarURL}
+													onChange={(newURL) =>
+														setAttributes({
+															avatarURL: newURL,
+														})
+													}
+												/>
+												{avatarURL && (
+													<ToggleControl
+														label={__("Open in New Tab", "essential-blocks")}
+														checked={newWindow}
+														onChange={() =>
+															setAttributes({
+																newWindow: !newWindow,
+															})
+														}
+													/>
+												)}
 											</>
 										)}
 									</PanelBody>
 
 									<PanelBody
 										title={__("Social Profiles", "essential-blocks")}
-									// initialOpen={false}
+										// initialOpen={false}
 									>
 										<>
 											<ToggleControl
@@ -521,7 +549,9 @@ function Inspector({ attributes, setAttributes }) {
 												<DealSocialProfiles
 													profiles={socialDetails}
 													onProfileAdd={(socialDetails) =>
-														setAttributes({ socialDetails })
+														setAttributes({
+															socialDetails,
+														})
 													}
 													iconList={IconList}
 												/>
@@ -531,7 +561,7 @@ function Inspector({ attributes, setAttributes }) {
 
 									<PanelBody
 										title={__("Separators", "essential-blocks")}
-									// initialOpen={false}
+										// initialOpen={false}
 									>
 										<ToggleControl
 											label={__("Enable Content Separator", "essential-blocks")}
@@ -543,7 +573,7 @@ function Inspector({ attributes, setAttributes }) {
 											}
 										/>
 
-										{showSocials && (
+										{showSocials && "preset3" !== preset && (
 											<ToggleControl
 												label={__(
 													"Enable Social Separator",
@@ -564,7 +594,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Container width", "essential-blocks")}
-									// initialOpen={false}
+										// initialOpen={false}
 									>
 										<ResponsiveRangeController
 											// noUnits
@@ -580,7 +610,7 @@ function Inspector({ attributes, setAttributes }) {
 									{/preset[2,3,4]/i.test(preset || "") && (
 										<PanelBody
 											title={__("Overlay Contents", "essential-blocks")}
-										// initialOpen={false}
+											// initialOpen={false}
 										>
 											{/preset[3,4]/i.test(preset || "") && (
 												<>
@@ -610,7 +640,9 @@ function Inspector({ attributes, setAttributes }) {
 																				isSecondary={conVtAlign !== value}
 																				isPrimary={conVtAlign === value}
 																				onClick={() =>
-																					setAttributes({ conVtAlign: value })
+																					setAttributes({
+																						conVtAlign: value,
+																					})
 																				}
 																			>
 																				{label}
@@ -627,8 +659,8 @@ function Inspector({ attributes, setAttributes }) {
 														resRequiredProps={resRequiredProps}
 														noShadow
 														noBdrHover
-													// noBorder
-													// noShdowHover
+														// noBorder
+														// noShdowHover
 													/>
 												</>
 											)}
@@ -652,7 +684,9 @@ function Inspector({ attributes, setAttributes }) {
 												<GradientColorControl
 													gradientColor={conBgGradient}
 													onChange={(conBgGradient) =>
-														setAttributes({ conBgGradient })
+														setAttributes({
+															conBgGradient,
+														})
 													}
 												/>
 											) : (
@@ -660,13 +694,16 @@ function Inspector({ attributes, setAttributes }) {
 													label={__("Color", "essential-blocks")}
 													color={conBgColor}
 													onChange={(conBgColor) =>
-														setAttributes({ conBgColor })
+														setAttributes({
+															conBgColor,
+														})
 													}
 												/>
 											)}
 
 											<style>
-												{`${preset === "preset2"
+												{`${
+													preset === "preset2"
 														? `
 
 					div.${blockId}.eb-team-wrapper div.contents{
@@ -675,27 +712,29 @@ function Inspector({ attributes, setAttributes }) {
 
 				`
 														: ""
-													}
+												}
 
 
-												${preset === "preset3"
+												${
+													preset === "preset3"
 														? `
 				div.${blockId}.eb-team-wrapper ul.socials {
 					opacity: 1;
 				}
 														`
 														: ""
-													}
+												}
 
 
-												${preset === "preset4"
+												${
+													preset === "preset4"
 														? `
 				div.${blockId}.eb-team-wrapper div.contents {
 					opacity: 1;
-				}	
+				}
 														`
 														: ""
-													}
+												}
 
 												`}
 											</style>
@@ -713,7 +752,9 @@ function Inspector({ attributes, setAttributes }) {
 													value={imgCnVtAlign}
 													options={ContentsVerticalAligns}
 													onChange={(imgCnVtAlign) =>
-														setAttributes({ imgCnVtAlign })
+														setAttributes({
+															imgCnVtAlign,
+														})
 													}
 												/>
 											</BaseControl>
@@ -730,7 +771,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ imageAlign: "left" })
+															setAttributes({
+																imageAlign: "left",
+															})
 														}
 													/>
 													<Button
@@ -740,7 +783,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ imageAlign: "center" })
+															setAttributes({
+																imageAlign: "center",
+															})
 														}
 													/>
 													<Button
@@ -750,7 +795,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ imageAlign: "right" })
+															setAttributes({
+																imageAlign: "right",
+															})
 														}
 													/>
 												</ButtonGroup>
@@ -769,7 +816,9 @@ function Inspector({ attributes, setAttributes }) {
 														/>
 													)}
 													onClick={() =>
-														setAttributes({ contentsAlign: "left" })
+														setAttributes({
+															contentsAlign: "left",
+														})
 													}
 												/>
 												<Button
@@ -779,7 +828,9 @@ function Inspector({ attributes, setAttributes }) {
 														/>
 													)}
 													onClick={() =>
-														setAttributes({ contentsAlign: "center" })
+														setAttributes({
+															contentsAlign: "center",
+														})
 													}
 												/>
 												<Button
@@ -789,7 +840,9 @@ function Inspector({ attributes, setAttributes }) {
 														/>
 													)}
 													onClick={() =>
-														setAttributes({ contentsAlign: "right" })
+														setAttributes({
+															contentsAlign: "right",
+														})
 													}
 												/>
 											</ButtonGroup>
@@ -806,7 +859,9 @@ function Inspector({ attributes, setAttributes }) {
 														value={iconsJustify}
 														options={IconsHzAligns}
 														onChange={(iconsJustify) =>
-															setAttributes({ iconsJustify })
+															setAttributes({
+																iconsJustify,
+															})
 														}
 													/>
 												</BaseControl>
@@ -821,7 +876,9 @@ function Inspector({ attributes, setAttributes }) {
 															value={iconsVAlign}
 															options={ContentsVerticalAligns}
 															onChange={(iconsVAlign) =>
-																setAttributes({ iconsVAlign })
+																setAttributes({
+																	iconsVAlign,
+																})
 															}
 														/>
 													</BaseControl>
@@ -841,7 +898,11 @@ function Inspector({ attributes, setAttributes }) {
 																color={cSepAlign === "left" && "#6c40f7"}
 															/>
 														)}
-														onClick={() => setAttributes({ cSepAlign: "left" })}
+														onClick={() =>
+															setAttributes({
+																cSepAlign: "left",
+															})
+														}
 													/>
 													<Button
 														icon={() => (
@@ -850,7 +911,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ cSepAlign: "center" })
+															setAttributes({
+																cSepAlign: "center",
+															})
 														}
 													/>
 													<Button
@@ -860,7 +923,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ cSepAlign: "right" })
+															setAttributes({
+																cSepAlign: "right",
+															})
 														}
 													/>
 												</ButtonGroup>
@@ -879,7 +944,11 @@ function Inspector({ attributes, setAttributes }) {
 																color={sSepAlign === "left" && "#6c40f7"}
 															/>
 														)}
-														onClick={() => setAttributes({ sSepAlign: "left" })}
+														onClick={() =>
+															setAttributes({
+																sSepAlign: "left",
+															})
+														}
 													/>
 													<Button
 														icon={() => (
@@ -888,7 +957,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ sSepAlign: "center" })
+															setAttributes({
+																sSepAlign: "center",
+															})
 														}
 													/>
 													<Button
@@ -898,7 +969,9 @@ function Inspector({ attributes, setAttributes }) {
 															/>
 														)}
 														onClick={() =>
-															setAttributes({ sSepAlign: "right" })
+															setAttributes({
+																sSepAlign: "right",
+															})
 														}
 													/>
 												</ButtonGroup>
@@ -913,7 +986,10 @@ function Inspector({ attributes, setAttributes }) {
 										{!imageUrl && (
 											<MediaUpload
 												onSelect={({ id, url }) =>
-													setAttributes({ imageUrl: url, imageId: id })
+													setAttributes({
+														imageUrl: url,
+														imageId: id,
+													})
 												}
 												type="image"
 												value={imageId}
@@ -973,8 +1049,8 @@ function Inspector({ attributes, setAttributes }) {
 												<BorderShadowControl
 													controlName={prefixImgBd}
 													resRequiredProps={resRequiredProps}
-												// noShadow
-												// noBorder
+													// noShadow
+													// noBorder
 												/>
 
 												<ToggleControl
@@ -1065,7 +1141,11 @@ function Inspector({ attributes, setAttributes }) {
 										<ToggleControl
 											label={__("Enable Description", "essential-blocks")}
 											checked={showDescs}
-											onChange={() => setAttributes({ showDescs: !showDescs })}
+											onChange={() =>
+												setAttributes({
+													showDescs: !showDescs,
+												})
+											}
 										/>
 
 										{showDescs && (
@@ -1074,7 +1154,9 @@ function Inspector({ attributes, setAttributes }) {
 													label={__("Color", "essential-blocks")}
 													color={descsColor}
 													onChange={(descsColor) =>
-														setAttributes({ descsColor })
+														setAttributes({
+															descsColor,
+														})
 													}
 												/>
 
@@ -1101,7 +1183,11 @@ function Inspector({ attributes, setAttributes }) {
 											<ColorControl
 												label={__("Hover Color", "essential-blocks")}
 												color={hvIcnColor}
-												onChange={(hvIcnColor) => setAttributes({ hvIcnColor })}
+												onChange={(hvIcnColor) =>
+													setAttributes({
+														hvIcnColor,
+													})
+												}
 											/>
 
 											<ColorControl
@@ -1179,14 +1265,20 @@ function Inspector({ attributes, setAttributes }) {
 														label={__("Color", "essential-blocks")}
 														color={icnsDevideColor}
 														onChange={(icnsDevideColor) =>
-															setAttributes({ icnsDevideColor })
+															setAttributes({
+																icnsDevideColor,
+															})
 														}
 													/>
 
 													<RangeControl
 														label={__("Width", "essential-blocks")}
 														value={icnSepW}
-														onChange={(icnSepW) => setAttributes({ icnSepW })}
+														onChange={(icnSepW) =>
+															setAttributes({
+																icnSepW,
+															})
+														}
 														step={1}
 														min={1}
 														max={50}
@@ -1195,7 +1287,11 @@ function Inspector({ attributes, setAttributes }) {
 													<RangeControl
 														label={__("Height", "essential-blocks")}
 														value={icnSepH}
-														onChange={(icnSepH) => setAttributes({ icnSepH })}
+														onChange={(icnSepH) =>
+															setAttributes({
+																icnSepH,
+															})
+														}
 														step={1}
 														min={1}
 														max={300}
@@ -1221,7 +1317,9 @@ function Inspector({ attributes, setAttributes }) {
 												options={HOVER_EFFECT}
 												// onChange={(preset) => setAttributes({ preset })}
 												onChange={(icnEffect) => {
-													setAttributes({ icnEffect });
+													setAttributes({
+														icnEffect,
+													});
 												}}
 											/>
 
@@ -1233,7 +1331,7 @@ function Inspector({ attributes, setAttributes }) {
 													controlName={prefixSocialBdShadow}
 													resRequiredProps={resRequiredProps}
 													noShadow
-												// noBorder
+													// noBorder
 												/>
 											</PanelBody>
 
@@ -1308,7 +1406,9 @@ function Inspector({ attributes, setAttributes }) {
 													options={separatorTypes}
 													// onChange={(preset) => setAttributes({ preset })}
 													onChange={(cSepType) => {
-														setAttributes({ cSepType });
+														setAttributes({
+															cSepType,
+														});
 													}}
 												/>
 											</BaseControl>
@@ -1352,7 +1452,9 @@ function Inspector({ attributes, setAttributes }) {
 													options={separatorTypes}
 													// onChange={(preset) => setAttributes({ preset })}
 													onChange={(sSepType) => {
-														setAttributes({ sSepType });
+														setAttributes({
+															sSepType,
+														});
 													}}
 												/>
 											</BaseControl>
@@ -1364,7 +1466,7 @@ function Inspector({ attributes, setAttributes }) {
 								<>
 									<PanelBody
 										title={__("Margin & Padding")}
-									// initialOpen={true}
+										// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}
@@ -1392,12 +1494,15 @@ function Inspector({ attributes, setAttributes }) {
 										<BorderShadowControl
 											controlName={WrpBdShadowConst}
 											resRequiredProps={resRequiredProps}
-										// noShadow
-										// noBorder
+											// noShadow
+											// noBorder
 										/>
 									</PanelBody>
 
-									<AdvancedControls attributes={attributes} setAttributes={setAttributes} />
+									<AdvancedControls
+										attributes={attributes}
+										setAttributes={setAttributes}
+									/>
 								</>
 							)}
 						</div>
