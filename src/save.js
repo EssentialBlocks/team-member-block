@@ -16,6 +16,8 @@ export default function Save({ attributes }) {
 		socialInImage,
 		icnEffect,
 		classHook,
+		avatarURL,
+		newWindow,
 	} = attributes;
 
 	return (
@@ -24,7 +26,21 @@ export default function Save({ attributes }) {
 				<div className={`${blockId} eb-team-wrapper`}>
 					<div className="eb-team-inner">
 						<div className="image">
-							<img className="avatar" src={imageUrl} alt="member" />
+							{avatarURL && (
+								<a
+									// className={`eb-button-anchor`}
+									href={avatarURL ? avatarURL : ""}
+									{...(newWindow && { target: "_blank" })}
+									rel="noopener"
+								>
+									<img className="avatar" src={imageUrl} alt="member" />
+								</a>
+							)}
+
+							{!avatarURL && (
+								<img className="avatar" src={imageUrl} alt="member" />
+							)}
+
 							{socialInImage && showSocials && (
 								<SocialLinks
 									socialDetails={profilesOnly}
