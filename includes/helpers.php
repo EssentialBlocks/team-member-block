@@ -41,12 +41,12 @@ class Team_Member_Helper {
          * Only for admin add/edit pages/posts
          */
         if ( $pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ( $pagenow == 'themes.php' && ! empty( $_SERVER['QUERY_STRING'] ) && str_contains( $_SERVER['QUERY_STRING'], 'gutenberg-edit-site' ) ) ) {
-            $controls_dependencies = include_once TEAM_MEMBER_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+            $controls_dependencies = include_once TEAM_MEMBER_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
 
             wp_register_script(
                 "team-member-block-controls-util",
-                TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/controls.js',
-                array_merge( $controls_dependencies['dependencies'] ),
+                TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/modules.js',
+                array_merge( $controls_dependencies['dependencies'], ['lodash'] ),
                 $controls_dependencies['version'],
                 true
             );
@@ -73,7 +73,7 @@ class Team_Member_Helper {
 
             wp_enqueue_style(
                 'essential-blocks-editor-css',
-                TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/controls.css',
+                TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/modules.css',
                 [],
                 $controls_dependencies['version'],
                 'all'

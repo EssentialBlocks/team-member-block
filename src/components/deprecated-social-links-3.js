@@ -1,4 +1,3 @@
-const { EBDisplayIcon } = window.EBTeamMemberControls;
 export default function SocialLinks({
     socialDetails = [],
     icnEffect,
@@ -19,7 +18,7 @@ export default function SocialLinks({
                         rel="noopener"
                         title={title ? title : ""}
                     >
-                        <EBDisplayIcon className={'hvr-icon social-icon'} icon={icon} />
+                        <i className={`hvr-icon social-icon ${icon}`}></i>
                         {preset === 'new-preset3' && title ? title : ""}
                     </a>
                 </li>
