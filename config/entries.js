@@ -13,6 +13,7 @@ export { default as ImageAvatar } from "../controls/src/controls/image-avatar";
 export { default as GradientColorControl } from "../controls/src/controls/gradient-color-controller";
 export { default as DealSocialProfiles } from "../controls/src/controls/social-profiles-v2/DealSocialProfiles";
 export { default as DynamicInputValueHandler } from "../controls/src/controls/dynamic-field/DynamicInputValueHandler";
+export { EBIconPicker, EBDisplayIcon } from "../controls/src/controls/icon-picker";
 export {
 	LeftAlignIcon,
 	RightAlignIcon,
@@ -38,4 +39,5 @@ export {
 	generateResponsiveRangeAttributes,
 	ebConditionalRegisterBlockType,
 	StyleComponent,
+
 } from "../controls/src/helpers";

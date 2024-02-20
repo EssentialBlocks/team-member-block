@@ -92,7 +92,7 @@ function create_block_team_member_block_init() {
 
     wp_register_style(
         'fontawesome-frontend-css',
-        TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/font-awesome5.css',
+        TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/fontawesome/css/all.min.css',
         [],
         TEAM_MEMBER_BLOCK_VERSION,
         "all"
