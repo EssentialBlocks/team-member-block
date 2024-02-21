@@ -4,7 +4,7 @@
  * Plugin Name:     Team Member Block
  * Plugin URI:         https://essential-blocks.com
  * Description:     Present your team members beautifully & gain instant credibility
- * Version:         1.1.4
+ * Version:         1.2.0
  * Author:          WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -21,7 +21,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TEAM_MEMBER_BLOCK_VERSION', "1.1.4" );
+define( 'TEAM_MEMBER_BLOCK_VERSION', "1.2.0" );
 define( 'TEAM_MEMBER_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TEAM_MEMBER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -92,7 +92,7 @@ function create_block_team_member_block_init() {
 
     wp_register_style(
         'fontawesome-frontend-css',
-        TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/font-awesome5.css',
+        TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/fontawesome/css/all.min.css',
         [],
         TEAM_MEMBER_BLOCK_VERSION,
         "all"
@@ -129,8 +129,7 @@ function create_block_team_member_block_init() {
                 'editor_style'    => 'create-block-team-member-frontend-style',
                 'render_callback' => function ( $attributes, $content ) {
                     if ( ! is_admin() ) {
-                        wp_enqueue_style( 'fontawesome-frontend-css' );
-                        wp_enqueue_style( 'essential-blocks-hover-css' );
+                        wp_enqueue_style( 'create-block-team-member-frontend-style' );
                         wp_enqueue_style( 'essential-blocks-animation' );
                         wp_enqueue_script( 'essential-blocks-eb-animation' );
                     }

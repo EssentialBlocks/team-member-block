@@ -1,5 +1,5 @@
 //Export All Controls
-import "../controls/src/backend-css";
+import "../controls/src/backend.scss";
 
 //Export All Controls
 export { default as ResponsiveDimensionsControl } from "../controls/src/controls/dimensions-control-v2";
@@ -12,6 +12,9 @@ export { default as faIcons } from "../controls/src/extras/faIcons";
 export { default as ImageAvatar } from "../controls/src/controls/image-avatar";
 export { default as GradientColorControl } from "../controls/src/controls/gradient-color-controller";
 export { default as DealSocialProfiles } from "../controls/src/controls/social-profiles-v2/DealSocialProfiles";
+export { default as DynamicInputValueHandler } from "../controls/src/controls/dynamic-field/DynamicInputValueHandler";
+export { EBIconPicker, EBDisplayIcon } from "../controls/src/controls/icon-picker";
+export { default as DynamicInputControl } from "../controls/src/controls/dynamic-field";
 export {
 	LeftAlignIcon,
 	RightAlignIcon,
@@ -36,4 +39,6 @@ export {
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
 	ebConditionalRegisterBlockType,
+	StyleComponent,
+
 } from "../controls/src/helpers";

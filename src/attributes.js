@@ -14,18 +14,9 @@ import {
 	contentsMargin,
 } from "./constants/dimensionsConstants";
 
-import {
-	WrpBgConst,
-	imgTopBgPrefix,
-	socialWrpBg,
-} from "./constants/backgroundsConstants";
+import { WrpBgConst, imgTopBgPrefix, socialWrpBg } from "./constants/backgroundsConstants";
 
-import {
-	WrpBdShadowConst,
-	prefixSocialBdShadow,
-	prefixImgBd,
-	ovlBdPrefix,
-} from "./constants/borderShadowConstants";
+import { WrpBdShadowConst, prefixSocialBdShadow, prefixImgBd, ovlBdPrefix } from "./constants/borderShadowConstants";
 
 import {
 	wrapperWidth,
@@ -100,6 +91,10 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+	showDesignation: {
+		type: "boolean",
+		default: true,
+	},
 
 	// member description
 	description: {
@@ -111,19 +106,16 @@ const attributes = {
 	//
 	imageUrl: {
 		source: "attribute",
-		selector: ".avatar",
+		selector: ".eb-team-member-avatar",
 		attribute: "src",
-		// default: "https://source.unsplash.com/5vg_SarQimA/150x150",
-		// default: "../wp-content/plugins/essential-blocks/assets/images/person.jpeg",
-		default: "../wp-content/plugins/essential-blocks/assets/images/user.jpg",
-
-		// default:
-		// 	"https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTE5NzI3NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150",
-		// default:			"https://assets.wpdeveloper.net/wp-content/uploads/2019/04/wpdev-marketplace-for-users.svg",
+		default: EssentialBlocksLocalize?.eb_plugins_url + "assets/images/user.jpg",
 	},
 
 	//
 	imageId: {
+		type: "string",
+	},
+	imageAlt: {
 		type: "string",
 	},
 
@@ -152,6 +144,10 @@ const attributes = {
 	// social profiles
 
 	showSocials: {
+		type: "boolean",
+		default: true,
+	},
+	showLinkNewTab: {
 		type: "boolean",
 		default: true,
 	},
@@ -271,7 +267,7 @@ const attributes = {
 
 	conBgGradient: {
 		type: "string",
-		default: "linear-gradient(45deg, #7967ff, rgba(194,119,242,0.8))",
+		default: "linear-gradient(211deg, #C8D2E3 0%, rgb(154 164 182 / 60%) 100%)",
 	},
 	conBgColor: {
 		type: "string",
@@ -294,6 +290,20 @@ const attributes = {
 	newWindow: {
 		type: "boolean",
 		default: false,
+	},
+
+
+	isContentOverlay: {
+		type: "boolean",
+		default: false,
+	},
+	showSocialTitle: {
+		type: "boolean",
+		default: false,
+	},
+	hoverPreset: {
+		type: "string",
+		default: "hover-left",
 	},
 
 	// typography attributes
@@ -324,7 +334,7 @@ const attributes = {
 	}),
 
 	...generateResponsiveRangeAttributes(rangeIconRowGap, {
-		// defaultRange: 10,
+		defaultRange: 4,
 		noUnits: true,
 	}),
 
@@ -407,7 +417,7 @@ const attributes = {
 		// noBorder: true,
 	}),
 	...generateBorderShadowAttributes(ovlBdPrefix, {
-		noShadow: true,
+		// noShadow: true,
 		noBdrHover: true,
 		// bdrDefaults: {
 		// 	top: 1,

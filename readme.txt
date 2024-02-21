@@ -2,8 +2,8 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
 Requires at least: 5.6
-Tested up to: 6.1
-Stable tag: 1.1.4
+Tested up to: 6.4
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -86,6 +86,11 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.2.0 - 21/02/2024 =
+* Added: New preset
+* Improved: Modules & structure
+* Fixed: Minor bugs
 
 = 1.1.4 - 05/03/2023 =
 * Added: Avatar link option
