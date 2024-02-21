@@ -130,6 +130,8 @@ function create_block_team_member_block_init() {
                 'render_callback' => function ( $attributes, $content ) {
                     if ( ! is_admin() ) {
                         wp_enqueue_style( 'create-block-team-member-frontend-style' );
+                        wp_enqueue_style( 'essential-blocks-animation' );
+                        wp_enqueue_script( 'essential-blocks-eb-animation' );
                     }
                     return $content;
                 }
