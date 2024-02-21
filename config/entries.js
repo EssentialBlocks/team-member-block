@@ -14,6 +14,7 @@ export { default as GradientColorControl } from "../controls/src/controls/gradie
 export { default as DealSocialProfiles } from "../controls/src/controls/social-profiles-v2/DealSocialProfiles";
 export { default as DynamicInputValueHandler } from "../controls/src/controls/dynamic-field/DynamicInputValueHandler";
 export { EBIconPicker, EBDisplayIcon } from "../controls/src/controls/icon-picker";
+export { default as DynamicInputControl } from "../controls/src/controls/dynamic-field";
 export {
 	LeftAlignIcon,
 	RightAlignIcon,
