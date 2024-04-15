@@ -54,7 +54,8 @@ class Team_Member_Helper {
             wp_localize_script( 'team-member-block-controls-util', 'EssentialBlocksLocalize', [
                 'eb_wp_version'  => (float) get_bloginfo( 'version' ),
                 'rest_rootURL'   => get_rest_url(),
-                'eb_plugins_url' => TEAM_MEMBER_BLOCK_ADMIN_URL
+                'eb_plugins_url' => TEAM_MEMBER_BLOCK_ADMIN_URL,
+				'fontAwesome' => "true"
             ] );
 
             wp_localize_script( 'team-member-block-controls-util', 'TeamMemberLocalize', [
@@ -71,10 +72,18 @@ class Team_Member_Helper {
                 ] );
             }
 
+			wp_register_style(
+				'essential-blocks-iconpicker-css',
+				TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/style-modules.css',
+				[],
+				TEAM_MEMBER_BLOCK_VERSION,
+				'all'
+			);
+
             wp_enqueue_style(
                 'essential-blocks-editor-css',
                 TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/modules.css',
-                [],
+                ['essential-blocks-iconpicker-css'],
                 $controls_dependencies['version'],
                 'all'
             );

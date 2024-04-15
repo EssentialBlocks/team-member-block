@@ -4,7 +4,7 @@
  * Plugin Name:     Team Member Block
  * Plugin URI:         https://essential-blocks.com
  * Description:     Present your team members beautifully & gain instant credibility
- * Version:         1.2.0
+ * Version:         1.2.1
  * Author:          WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -21,7 +21,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TEAM_MEMBER_BLOCK_VERSION', "1.2.0" );
+define( 'TEAM_MEMBER_BLOCK_VERSION', "1.2.1" );
 define( 'TEAM_MEMBER_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TEAM_MEMBER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -75,22 +75,6 @@ function create_block_team_member_block_init() {
     );
 
     wp_register_style(
-        'fontpicker-default-theme',
-        TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.base-theme.react.css',
-        [],
-        TEAM_MEMBER_BLOCK_VERSION,
-        "all"
-    );
-
-    wp_register_style(
-        'fontpicker-matetial-theme',
-        TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.material-theme.react.css',
-        [],
-        TEAM_MEMBER_BLOCK_VERSION,
-        "all"
-    );
-
-    wp_register_style(
         'fontawesome-frontend-css',
         TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/fontawesome/css/all.min.css',
         [],
@@ -112,8 +96,6 @@ function create_block_team_member_block_init() {
         'create-block-team-member-frontend-style',
         $style_css,
         [
-            'fontpicker-default-theme',
-            'fontpicker-matetial-theme',
             'essential-blocks-hover-css',
             'fontawesome-frontend-css',
             'essential-blocks-animation'

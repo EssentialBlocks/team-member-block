@@ -4,7 +4,6 @@
 	"category": "widgets",
 	"description": "Present your team members beautifully & gain instant credibility",
 	"textdomain": "team-member-block",
-	"editorScript": "create-block-team-member-block-editor",
 	"supports": {
 		"align": ["wide", "full"]
 	}
