@@ -1,56 +1,125 @@
-# A set of files you probably don't want in your WordPress.org distribution
-.babelrc
+# A set of files you probably don't want in your WordPress.org distribution.
+# Keep this file in sync with .gitattributes (export-ignore) — the WP.org deploy
+# action prefers .distignore, but git archive reads .gitattributes.
+
+# Version control
+# `**/.git` is required in addition to `.git`: submodules carry a .git *file*
+# (a gitdir pointer), and the bare pattern only matches at the archive root.
+.git
+**/.git
+.gitignore
+.gitattributes
+.gitmodules
+.github
+.gitlab-ci.yml
+
+# CI / deployment
+.travis.yml
+.circleci/config.yml
+bitbucket-pipelines.yml
+behat.yml
+dependencies.yml
+wp-cli.local.yml
 .deployignore
 .distignore
-.editorconfig
-.eslintignore
+.wordpress-org
+
+# Build tooling & bundler config
+webpack.config.js
+Gruntfile.js
+gulpfile.js
+postcss.config.js
+config
+
+# Babel config (all supported filenames)
+.babelrc
+.babelrc.js
+.babelrc.cjs
+.babelrc.mjs
+.babelrc.json
+babel.config.js
+babel.config.cjs
+babel.config.mjs
+babel.config.json
+
+# Linting & formatting
 .eslintrc
-.gitmodules
-.git
-.gitignore
-.github
-.gitattributes
-.gitlab-ci.yml
-.travis.yml
-.DS_Store
-Thumbs.db
-behat.yml
-bitbucket-pipelines.yml
-bin
-.circleci/config.yml
+.eslintrc.js
+.eslintrc.cjs
+.eslintrc.json
+.eslintrc.yml
+.eslintignore
+.eslintcache
+.prettierrc
+.prettierrc.js
+.prettierrc.json
+.prettierignore
+.stylelintrc
+.stylelintrc.js
+.stylelintrc.json
+.stylelintignore
+.editorconfig
+.phpcs.xml
+.phpcs.xml.dist
+phpcs.xml
+phpcs.xml.dist
+
+# Dependencies & lockfiles
+node_modules
+vendor
 composer.json
 composer.lock
-dependencies.yml
-Gruntfile.js
 package.json
 package-lock.json
+npm-shrinkwrap.json
+pnpm-lock.yaml
+yarn.lock
+.npm
+.nvmrc
+
+# Source — only the built output in dist/ ships
+src
+controls
+lib/style-handler/style-handler.js
+lib/style-handler/helpers.js
+
+# Source maps
+*.map
+
+# Tests & coverage
+tests
 phpunit.xml
 phpunit.xml.dist
 multisite.xml
 multisite.xml.dist
-.phpcs.xml
-phpcs.xml
-.phpcs.xml.dist
-phpcs.xml.dist
-README.md
-webpack.config.js
-wp-cli.local.yml
-yarn.lock
-tests
-vendor
-node_modules
+coverage
+
+# Local dev environment
+.env
+.env.*
+.wp-env.json
+.wp-env.override.json
+bin
+
+# Editor & OS cruft
+.idea
+.vscode
+.zed
+.fleet
+.claude
+.DS_Store
+Thumbs.db
+
+# Docs & internal notes — readme.txt is the only doc WP.org needs
+*.md
+
+# Logs & archives
+*.log
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tgz
 *.sql
 *.tar.gz
 *.zip
-gulpfile.js
-.git
-node_modules/**/*.*
-**/*.zip
-src
-controls
-config
-lib/style-handler/style-handler.js
-lib/style-handler/helpers.js
-dist/*.*.map
-.wordpress-org
-.idea

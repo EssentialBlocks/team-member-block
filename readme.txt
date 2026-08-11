@@ -1,9 +1,10 @@
 === Team Member Block ===
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
-Requires at least: 5.6
-Tested up to: 6.5
-Stable tag: 1.2.1
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 1.5.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -86,6 +87,12 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 1.5.0 - 10/08/2026 =
+* Improved: Compatibility with PHP 7.4 through PHP 8.5
+* Improved: Compatibility with WordPress 6.0 through WordPress 7.0
+* Fixed: Fatal error when the bundled style-handler library was missing
+* Fixed: Editor assets could fail to load with a PHP 8 TypeError
 
 = 1.2.1 - 15/04/2024 =
 * Fixed: compatibility support with wordpress 6.5 version
