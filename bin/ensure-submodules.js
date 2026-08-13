@@ -9,6 +9,12 @@
  * ships an empty lib/style-handler/ and every install shows the missing-build
  * admin notice. This script turns that silent failure into either a self-heal
  * or a loud error.
+ *
+ * Pass --soft to warn instead of failing. That mode exists for the `prepare`
+ * lifecycle hook: a developer without credentials for the private submodule
+ * repositories should still be able to finish `npm install`. The build and
+ * package hooks call this without --soft and stay strict, so an incomplete tree
+ * can never reach a build or a zip.
  */
 
 const { existsSync } = require("fs");
@@ -77,9 +83,21 @@ function ensureSubmodules() {
 module.exports = { REQUIRED_FILES, root, ensureSubmodules };
 
 if (require.main === module) {
+	const soft = process.argv.includes("--soft");
+
 	try {
 		ensureSubmodules();
 	} catch (error) {
+		if (soft) {
+			console.warn(
+				`\nWarning: ${error.message}\n\n` +
+					"Continuing anyway. Editing and installing dependencies still work, but\n" +
+					"`npm run build` and `npm run dist` will refuse to run until this is resolved,\n" +
+					"and WordPress will show a missing-files notice for this checkout.\n" +
+					"See CONTRIBUTING.md.\n"
+			);
+			process.exit(0);
+		}
 		console.error(`\n${error.message}\n`);
 		process.exit(1);
 	}
