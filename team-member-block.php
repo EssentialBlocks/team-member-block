@@ -193,3 +193,75 @@ function create_block_team_member_block_init() {
 }
 
 add_action( 'init', 'create_block_team_member_block_init', 99 );
+
+/**
+ * Absolute URL of the Font Awesome stylesheet this plugin ships (6.5.1).
+ *
+ * @return string
+ */
+function team_member_block_fontawesome_src() {
+    return TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/css/fontawesome/css/all.min.css';
+}
+
+/**
+ * Makes sure the shared `fontawesome-frontend-css` handle resolves to Font
+ * Awesome 6.5.1 rather than an older copy from another Essential Blocks plugin.
+ *
+ * Several EB plugins register this same handle from their own bundle, and
+ * wp_register_style() is a silent no-op once a handle exists, so the first
+ * plugin to run wins purely on alphabetical load order. When that winner ships
+ * Font Awesome 5 (advanced-heading ships 5.15.2), every icon added in Font
+ * Awesome 6 loses its glyph — `fa-x-twitter` among 749 others — while this
+ * plugin still believes its dependency is satisfied.
+ *
+ * Re-pointing the existing handle keeps a single Font Awesome stylesheet and a
+ * single webfont download, and leaves the other plugin's dependency graph and
+ * queue position untouched. 6.5.1 is a superset of 5.15.2 for every icon class
+ * those plugins emit, and it also declares the Font Awesome 5 family names, so
+ * older markup keeps rendering.
+ */
+function team_member_block_ensure_fontawesome6() {
+    $handle = 'fontawesome-frontend-css';
+    $ours   = team_member_block_fontawesome_src();
+    $styles = wp_styles();
+
+    if ( ! isset( $styles->registered[ $handle ] ) ) {
+        return;
+    }
+
+    $registered = $styles->registered[ $handle ];
+
+    if ( $registered->src === $ours ) {
+        return;
+    }
+
+    // Preserve everything the current owner set up, so re-registering is not
+    // observable to it beyond the file that ends up being served.
+    $deps     = $registered->deps;
+    $args     = null !== $registered->args ? $registered->args : 'all';
+    $extra    = $registered->extra;
+    $enqueued = wp_style_is( $handle, 'enqueued' );
+
+    wp_deregister_style( $handle );
+    wp_register_style( $handle, $ours, $deps, TEAM_MEMBER_BLOCK_VERSION, $args );
+
+    foreach ( $extra as $key => $value ) {
+        wp_style_add_data( $handle, $key, $value );
+    }
+
+    if ( $enqueued ) {
+        wp_enqueue_style( $handle );
+    }
+}
+
+/**
+ * Run after every plugin has had its chance to register the handle.
+ *
+ * `init` priority 100 covers the plugins that register at 99 like this one.
+ * The enqueue hooks re-assert it for anything registering later, and the
+ * function is idempotent, so repeating it costs a single string comparison.
+ */
+add_action( 'init', 'team_member_block_ensure_fontawesome6', 100 );
+add_action( 'wp_enqueue_scripts', 'team_member_block_ensure_fontawesome6', 0 );
+add_action( 'admin_enqueue_scripts', 'team_member_block_ensure_fontawesome6', 0 );
+add_action( 'enqueue_block_assets', 'team_member_block_ensure_fontawesome6', 0 );
