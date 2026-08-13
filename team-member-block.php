@@ -47,19 +47,51 @@ $team_member_block_style_handler = __DIR__ . '/lib/style-handler/style-handler.p
 if ( file_exists( $team_member_block_style_handler ) ) {
     require_once $team_member_block_style_handler;
 } else {
-    add_action( 'admin_notices', 'team_member_block_missing_build_notice' );
+    team_member_block_flag_missing_file( 'lib/style-handler/style-handler.php' );
 }
 unset( $team_member_block_style_handler );
 
 /**
- * Admin notice shown when a required build artefact or submodule is missing.
+ * Records a required file that could not be found and makes sure the admin
+ * notice is hooked exactly once.
+ *
+ * @param string $relative_path Path of the missing file, relative to the plugin root.
+ * @return array Every path recorded so far.
+ */
+function team_member_block_flag_missing_file( $relative_path = null ) {
+    static $missing = [];
+
+    if ( null !== $relative_path && ! in_array( $relative_path, $missing, true ) ) {
+        $missing[] = $relative_path;
+        if ( ! has_action( 'admin_notices', 'team_member_block_missing_build_notice' ) ) {
+            add_action( 'admin_notices', 'team_member_block_missing_build_notice' );
+        }
+    }
+
+    return $missing;
+}
+
+/**
+ * Admin notice shown when a required runtime file is missing.
+ *
+ * Names the actual missing files rather than guessing at a cause: the files
+ * under lib/style-handler/ come from a git submodule and are unrelated to
+ * `npm run build`, which the previous wording incorrectly prescribed.
  */
 function team_member_block_missing_build_notice() {
     if ( ! current_user_can( 'activate_plugins' ) ) {
         return;
     }
+    $missing = team_member_block_flag_missing_file();
+    if ( empty( $missing ) ) {
+        return;
+    }
     echo '<div class="notice notice-error"><p>';
-    echo esc_html__( 'Team Member Block is missing its build files. Run `git submodule update --init --recursive` and `npm run build` in the plugin directory.', 'team-member-block' );
+    printf(
+        /* translators: %s: comma separated list of missing file paths. */
+        esc_html__( 'Team Member Block is missing required files: %s. This copy of the plugin is incomplete, so please reinstall it from an official release. If you are running it from a git checkout, run `npm run ensure-submodules` in the plugin directory.', 'team-member-block' ),
+        '<code>' . implode( '</code>, <code>', array_map( 'esc_html', $missing ) ) . '</code>'
+    );
     echo '</p></div>';
 }
 
@@ -67,7 +99,7 @@ function create_block_team_member_block_init() {
 
     $script_asset_path = TEAM_MEMBER_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
     if ( ! file_exists( $script_asset_path ) ) {
-        add_action( 'admin_notices', 'team_member_block_missing_build_notice' );
+        team_member_block_flag_missing_file( 'dist/index.asset.php' );
         return;
     }
     $script_asset = require $script_asset_path;
