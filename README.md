@@ -1,16 +1,16 @@
-=== Team Member Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
-Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
-Requires at least: 6.0
-Tested up to: 7.0
-Requires PHP: 7.4
-Stable tag: 1.3.0
-License: GPLv3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+# Team Member Block #
+**Contributors:** [wpdevteam](https://profiles.wordpress.org/wpdevteam), [re_enter_rupok](https://profiles.wordpress.org/re_enter_rupok), [Asif2BD](https://profiles.wordpress.org/Asif2BD), [hztyfoon](https://profiles.wordpress.org/hztyfoon), [rahat89](https://profiles.wordpress.org/rahat89), [fencermonir](https://profiles.wordpress.org/fencermonir)  
+**Tags:** gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks  
+**Requires at least:** 6.0  
+**Tested up to:** 7.0  
+**Requires PHP:** 7.4  
+**Stable tag:** 1.3.0  
+**License:** GPLv3 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
 Present your team members beautifully & gain instant credibility.
 
-== Description ==
+## Description ##
 
 Want to display your **team members** on your website? Use this plugin within Gutenberg & present your team & gain instant credibility as potential customers trend to make the purchase decision faster when they see real people involved.
 
@@ -63,32 +63,32 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 
 Visit [WPDeveloper](https://wpdeveloper.com/) to learn more about how to do better in WordPress with [Help Tutorial, Tips & Tricks](https://wpdeveloper.com/blog).
 
-== Installation ==
+## Installation ##
 
-= Modern Way: =
+### Modern Way: ###
 1. Go to the WordPress Block/Gutenberg Editor
 2. Search For "Team Member".
 3. Install in 1-click
 
-= Old Way: =
+### Old Way: ###
 1. Upload `team-member-block` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Follow the [Documentation](https://essential-blocks.com/docs/)
 
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
-= Does it work with any WordPress theme? =
+### Does it work with any WordPress theme? ###
 
 Yes, it will work with any standard WordPress theme.
 
 
-== Screenshots ==
+## Screenshots ##
 
 
-== Changelog ==
+## Changelog ##
 
-= 1.3.0 - 13/08/2026 =
+### 1.3.0 - 13/08/2026 ###
 * Fixed: PHP 8.0 - 8.5 compatibility issues
 * Fixed: WordPress version detection
 * Fixed: PHP 7.x compatibility
@@ -96,34 +96,34 @@ Yes, it will work with any standard WordPress theme.
 * Improved: Asset loading and overall stability
 * Tested up to WordPress 7.0.3
 
-= 1.2.1 - 15/04/2024 =
+### 1.2.1 - 15/04/2024 ###
 * Fixed: compatibility support with wordpress 6.5 version
 * Improved: controls
 
-= 1.2.0 - 21/02/2024 =
+### 1.2.0 - 21/02/2024 ###
 * Added: New preset
 * Improved: Modules & structure
 * Fixed: Minor bugs
 
-= 1.1.4 - 05/03/2023 =
+### 1.1.4 - 05/03/2023 ###
 * Added: Avatar link option
 * Improved: Font loader and style
 
-= 1.1.3 - 18/12/2022 =
+### 1.1.3 - 18/12/2022 ###
 * Improved: Controls & structure
 * Fixed: Minor bugs
 
-= 1.1.2 - 07/09/2022 =
+### 1.1.2 - 07/09/2022 ###
 * Added: Open link in new tab option
 * Improved: style-handler code for reusable blocks
 * Improved: Controls & structure
 
-= 1.1.1 - 22/06/2022 =
+### 1.1.1 - 22/06/2022 ###
 * Added: Animation, Custom Css and Responsive Options
 * Added: Converted style-handler to php for working perfectly with Reusable blocks and FSE
 * Improved: Controls & structure
 
-= 1.1.0 - 13-02-2022 =
+### 1.1.0 - 13-02-2022 ###
 * Added: Wide width & full width support
 * Added: Dynamic asset generation instead of inline styles
 * Added: Responsive controls with preview
@@ -136,14 +136,13 @@ Yes, it will work with any standard WordPress theme.
 * Improved: Controls, styling options and structure.
 * Improved: Removed all unnecessary enqueues from frontend.
 
-= 1.0.0 - 09-09-2020 =
+### 1.0.0 - 09-09-2020 ###
 
 * Fix: Missing css, js files
 
-= 1.0.0 - 26-07-2020 =
+### 1.0.0 - 26-07-2020 ###
 
 * Initial release
 
 
-== Upgrade Notice ==
-
+## Upgrade Notice ##
