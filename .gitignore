@@ -23,6 +23,9 @@ node_modules/
 # Output of 'npm pack'
 *.tgz
 
+# Output of 'npm run dist'
+*.zip
+
 # dotenv environment variables file
 .env
 
