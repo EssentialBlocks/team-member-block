@@ -165,7 +165,14 @@ if ( ! class_exists( 'Team_Member_Block_Copy_Settings' ) ) {
                         $value = '' !== $url ? $url : null;
                         break;
                     case 'imageId':
-                        $value = is_numeric( $value ) ? absint( $value ) : null;
+                        // Declared as a string, but the media picker stores a number: keep the type.
+                        if ( is_int( $value ) ) {
+                            $value = absint( $value );
+                        } elseif ( is_string( $value ) && preg_match( '/^[0-9]{1,20}$/', $value ) ) {
+                            $value = (string) $value;
+                        } else {
+                            $value = null;
+                        }
                         break;
                     case 'imageAlt':
                         $value = is_string( $value ) ? sanitize_text_field( $value ) : null;
