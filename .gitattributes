@@ -63,6 +63,8 @@ yarn.lock export-ignore
 .npm export-ignore
 .nvmrc export-ignore
 src export-ignore
+CONTRIBUTING.md export-ignore
+compatibility-report.md export-ignore
 controls export-ignore
 lib/style-handler/style-handler.js export-ignore
 lib/style-handler/helpers.js export-ignore

@@ -16,7 +16,7 @@
 import { __, sprintf } from "@wordpress/i18n";
 import { addFilter } from "@wordpress/hooks";
 import { createHigherOrderComponent } from "@wordpress/compose";
-import { createElement, Fragment, useEffect, useRef, useState } from "@wordpress/element";
+import { createElement, createPortal, Fragment, useEffect, useRef, useState } from "@wordpress/element";
 import { BlockControls, InspectorControls } from "@wordpress/block-editor";
 import { Button, DropdownMenu, MenuGroup, MenuItem, PanelBody, ToggleControl, ToolbarGroup } from "@wordpress/components";
 import { select, dispatch, useDispatch } from "@wordpress/data";
@@ -27,11 +27,32 @@ import { TEAM_MEMBER_BLOCK, buildUpdate, getDefaultSettings, getSettings } from 
 const CLIPBOARD_KEY = "teamMemberBlockCopiedSettings";
 const REST_PATH = "/team-member-block/v1/default-settings";
 
-// Dashicons: available in every supported WordPress version.
 // Inline styles: the build extracts every stylesheet into dist/style.css (the block's
 // frontend CSS), so this editor-only panel carries its few rules itself.
-const HELP_STYLE = { marginTop: 0, color: "#757575", fontSize: "12px" };
-const BUTTONS_STYLE = { display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "12px" };
+const HELP_STYLE = { margin: "0 0 12px", color: "#757575", fontSize: "12px" };
+const BUTTONS_STYLE = { display: "grid", gridTemplateColumns: "1fr", gap: "8px", marginBottom: "16px" };
+// Inside the block's tabs, its own CSS restyles buttons (pale secondary, capitalised labels);
+// keep sentence case and let long labels wrap instead of overflowing.
+const BUTTON_STYLE = {
+    width: "100%",
+    height: "auto",
+    minHeight: "36px",
+    justifyContent: "center",
+    textAlign: "center",
+    textTransform: "none",
+    whiteSpace: "normal",
+    lineHeight: 1.4,
+};
+// The block's pale secondary colour would otherwise win over the destructive red.
+const DESTRUCTIVE_STYLE = { ...BUTTON_STYLE, color: "#cc1818" };
+
+// The block renders its own tabbed sidebar (.eb-panel-control > .eb-parent-tab-panel) and each
+// tab's panels inside `.eb-tab-controls{tab}`. The Copy Settings panel is mounted in the
+// General tab so it shows on that tab only and gets the same panel styling as its neighbours.
+const TABS_SELECTOR = ".block-editor-block-inspector .eb-panel-control .eb-parent-tab-panel";
+const GENERAL_TAB_SELECTOR = `${TABS_SELECTOR} .eb-tab-controlsgeneral`;
+
+// Dashicons: available in every supported WordPress version.
 
 const ICONS = { menu: "admin-page", copy: "admin-page", paste: "clipboard", design: "admin-appearance", all: "groups", reset: "undo", check: "yes" };
 
@@ -89,11 +110,86 @@ function getAllTeamMemberClientIds() {
     return ids;
 }
 
+/**
+ * Where the panel goes while the block is selected:
+ * - { mode: "tab", host }  inside the General tab (host is a node kept as its last child);
+ * - { mode: "tab", host: null }  another tab is open, so the panel is hidden;
+ * - { mode: "plain" }  the block's tab structure isn't there; use a regular sidebar panel.
+ */
+function usePanelPlacement(isSelected) {
+    const [placement, setPlacement] = useState({ mode: "tab", host: null });
+
+    useEffect(() => {
+        if (!isSelected) {
+            return undefined;
+        }
+        let host = null;
+        let current = null;
+        const update = (next) => {
+            if (!current || current.mode !== next.mode || current.host !== next.host) {
+                current = next;
+                setPlacement(next);
+            }
+        };
+        const place = () => {
+            const inspector = document.querySelector(".block-editor-block-inspector");
+            if (!inspector) {
+                return;
+            }
+            if (!document.querySelector(TABS_SELECTOR)) {
+                update({ mode: "plain", host: null });
+                return;
+            }
+            const generalTab = document.querySelector(GENERAL_TAB_SELECTOR);
+            if (!generalTab) {
+                update({ mode: "tab", host: null });
+                return;
+            }
+            if (!host || !generalTab.contains(host)) {
+                host = document.createElement("div");
+                host.className = "tmb-copy-settings-host";
+            }
+            // Keep it after the block's own panels, also when one of them appears later.
+            if (generalTab.lastElementChild !== host) {
+                generalTab.appendChild(host);
+            }
+            update({ mode: "tab", host });
+        };
+
+        place();
+        // The tab content is re-created when the user switches tabs or the sidebar re-renders.
+        // Checks are batched to one per animation frame.
+        let frame = 0;
+        const schedule = () => {
+            if (!frame) {
+                frame = window.requestAnimationFrame(() => {
+                    frame = 0;
+                    place();
+                });
+            }
+        };
+        const observer = new window.MutationObserver(schedule);
+        observer.observe(document.body, { childList: true, subtree: true });
+        return () => {
+            observer.disconnect();
+            if (frame) {
+                window.cancelAnimationFrame(frame);
+            }
+            if (host && host.parentNode) {
+                host.parentNode.removeChild(host);
+            }
+        };
+    }, [isSelected]);
+
+    return placement;
+}
+
 function CopySettings({ clientId, attributes, setAttributes, isSelected }) {
     const { createSuccessNotice, createErrorNotice } = useDispatch("core/notices");
     const [, rerender] = useState(0);
     const [isBusy, setIsBusy] = useState(false);
     const initialBlockId = useRef(attributes.blockId);
+    const placement = usePanelPlacement(isSelected);
 
     // No blockId on first render means the block was just inserted (copies/duplicates keep theirs).
     useEffect(() => {
@@ -210,7 +306,7 @@ function CopySettings({ clientId, attributes, setAttributes, isSelected }) {
                         {__("Paste design only", "team-member-block")}
                     </MenuItem>
                     <MenuItem icon={ICONS.all} onClick={run(onApplyDesignToAll)}>
-                        {__("Apply this design to all Team Members", "team-member-block")}
+                        {__("Apply design to all members", "team-member-block")}
                     </MenuItem>
                 </MenuGroup>
                 {(hasDefault() || state.canManage) && (
@@ -247,6 +343,67 @@ function CopySettings({ clientId, attributes, setAttributes, isSelected }) {
         );
     };
 
+    const panel = (
+        <PanelBody title={__("Copy Settings", "team-member-block")} initialOpen={false}>
+            <p style={HELP_STYLE}>
+                {__(
+                    "Copy this member's settings, then paste them into another member. \"Paste all settings\" also brings the photo, social profiles and text; \"Paste design only\" keeps that member's own name, photo, text and links.",
+                    "team-member-block"
+                )}
+            </p>
+            <div style={BUTTONS_STYLE}>
+                <Button variant="primary" icon={ICONS.copy} style={BUTTON_STYLE} onClick={onCopy}>
+                    {__("Copy settings", "team-member-block")}
+                </Button>
+                <Button variant="primary" icon={ICONS.paste} style={BUTTON_STYLE} disabled={!clipboard} onClick={() => onPaste("all")}>
+                    {__("Paste all settings", "team-member-block")}
+                </Button>
+                <Button variant="primary" icon={ICONS.design} style={BUTTON_STYLE} disabled={!clipboard} onClick={() => onPaste("design")}>
+                    {__("Paste design only", "team-member-block")}
+                </Button>
+                <Button variant="primary" icon={ICONS.all} style={BUTTON_STYLE} onClick={onApplyDesignToAll}>
+                    {__("Apply design to all members", "team-member-block")}
+                </Button>
+            </div>
+            {(state.canManage || hasDefault()) && (
+                <>
+                    <p style={HELP_STYLE}>
+                        {__(
+                            "Default settings: every newly added Team Member starts with them, on any page. The design, photo and social networks are kept; name, text and links are not.",
+                            "team-member-block"
+                        )}
+                    </p>
+                    <div style={BUTTONS_STYLE}>
+                        {hasDefault() && (
+                            <Button variant="primary" style={BUTTON_STYLE} onClick={onApplyDefault}>
+                                {__("Apply default design", "team-member-block")}
+                            </Button>
+                        )}
+                        {state.canManage && (
+                            <Button variant="primary" style={BUTTON_STYLE} isBusy={isBusy} disabled={isBusy} onClick={onSaveDefault}>
+                                {__("Save as default", "team-member-block")}
+                            </Button>
+                        )}
+                        {state.canManage && hasDefault() && (
+                            <Button variant="secondary" isDestructive style={DESTRUCTIVE_STYLE} disabled={isBusy} onClick={onRemoveDefault}>
+                                {__("Remove default", "team-member-block")}
+                            </Button>
+                        )}
+                    </div>
+                    {state.canManage && hasDefault() && (
+                        <ToggleControl
+                            __nextHasNoMarginBottom
+                            label={__("Use default for new members", "team-member-block")}
+                            checked={state.autoApply}
+                            disabled={isBusy}
+                            onChange={onToggleAutoApply}
+                        />
+                    )}
+                </>
+            )}
+        </PanelBody>
+    );
+
     return (
         <>
             <BlockControls group="other">
@@ -260,68 +417,8 @@ function CopySettings({ clientId, attributes, setAttributes, isSelected }) {
                     </DropdownMenu>
                 </ToolbarGroup>
             </BlockControls>
-            <InspectorControls>
-                <PanelBody title={__("Copy Settings", "team-member-block")} initialOpen={false}>
-                    <p style={HELP_STYLE}>
-                        {__(
-                            "Copy this member's settings and paste them into another member, so you don't set everything up again.",
-                            "team-member-block"
-                        )}
-                    </p>
-                    <div style={BUTTONS_STYLE}>
-                        <Button variant="secondary" icon={ICONS.copy} onClick={onCopy}>
-                            {__("Copy settings", "team-member-block")}
-                        </Button>
-                        <Button variant="secondary" icon={ICONS.paste} disabled={!clipboard} onClick={() => onPaste("all")}>
-                            {__("Paste all", "team-member-block")}
-                        </Button>
-                        <Button variant="secondary" icon={ICONS.design} disabled={!clipboard} onClick={() => onPaste("design")}>
-                            {__("Paste design only", "team-member-block")}
-                        </Button>
-                    </div>
-                    <p style={HELP_STYLE}>
-                        {__(
-                            "\"Paste all\" also copies the photo, social profiles and text. \"Paste design only\" keeps this member's own name, photo, text and links.",
-                            "team-member-block"
-                        )}
-                    </p>
-                    {(state.canManage || hasDefault()) && <hr />}
-                    {state.canManage && (
-                        <>
-                            <p style={HELP_STYLE}>
-                                {__(
-                                    "Default settings: every newly added Team Member starts with them, on any page. The photo, design and social networks are kept; name, text and links are not.",
-                                    "team-member-block"
-                                )}
-                            </p>
-                            <div style={BUTTONS_STYLE}>
-                                <Button variant="primary" isBusy={isBusy} disabled={isBusy} onClick={onSaveDefault}>
-                                    {__("Save as default", "team-member-block")}
-                                </Button>
-                                {hasDefault() && (
-                                    <Button variant="tertiary" isDestructive disabled={isBusy} onClick={onRemoveDefault}>
-                                        {__("Remove default", "team-member-block")}
-                                    </Button>
-                                )}
-                            </div>
-                            {hasDefault() && (
-                                <ToggleControl
-                                    __nextHasNoMarginBottom
-                                    label={__("Use default for new members", "team-member-block")}
-                                    checked={state.autoApply}
-                                    disabled={isBusy}
-                                    onChange={onToggleAutoApply}
-                                />
-                            )}
-                        </>
-                    )}
-                    {hasDefault() && (
-                        <Button variant="secondary" onClick={onApplyDefault}>
-                            {__("Apply default design to this member", "team-member-block")}
-                        </Button>
-                    )}
-                </PanelBody>
-            </InspectorControls>
+            {placement.mode === "plain" && <InspectorControls>{panel}</InspectorControls>}
+            {placement.mode === "tab" && placement.host && createPortal(panel, placement.host)}
         </>
     );
 }
