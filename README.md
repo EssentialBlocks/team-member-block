@@ -88,6 +88,11 @@ Yes, it will work with any standard WordPress theme.
 
 ## Changelog ##
 
+### 1.4.0 - 13/10/2026 ###
+* Added: Copy Settings: copy one member's settings to another (all settings or design only)
+* Added: Apply one member's design to all Team Members on the page
+* Added: Default settings that new Team Members start with
+
 ### 1.3.0 - 13/08/2026 ###
 * Fixed: PHP 8.0 - 8.5 compatibility issues
 * Fixed: WordPress version detection
