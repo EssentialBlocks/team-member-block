@@ -36,6 +36,7 @@ define( 'TEAM_MEMBER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
+require_once __DIR__ . '/includes/copy-settings.php';
 
 /**
  * `lib/style-handler` ships as a git submodule. If the plugin is running from a

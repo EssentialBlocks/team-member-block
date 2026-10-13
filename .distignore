@@ -79,6 +79,10 @@ yarn.lock
 
 # Source — only the built output in dist/ ships
 src
+
+# Developer documentation
+CONTRIBUTING.md
+compatibility-report.md
 controls
 lib/style-handler/style-handler.js
 lib/style-handler/helpers.js

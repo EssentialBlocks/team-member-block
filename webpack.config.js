@@ -10,6 +10,8 @@ const plugins = defaultConfig.plugins.filter(
 
 let allEntries = {
 	dist: "./src/index.js",
+	// Copy Settings editor extension -> dist/copy-settings/index.js (+ index.asset.php).
+	"dist/copy-settings": "./src/copy-settings/index.js",
 };
 
 const config = {
