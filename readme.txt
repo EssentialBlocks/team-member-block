@@ -4,7 +4,7 @@ Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gute
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
