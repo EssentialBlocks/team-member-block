@@ -1,9 +1,14 @@
+import sanitizeLink from "../sanitize-link";
+
 const { EBDisplayIcon } = window.EBTeamMemberControls;
 export default function SocialLinks({
     socialDetails = [],
     icnEffect,
     linkNewTab,
-    preset
+    preset,
+    // The editor shows links straight from the block attributes; saved markup
+    // is left as is, so existing blocks keep validating.
+    isEditor = false,
 }) {
     return (
         <ul className={`socials ${preset === 'new-preset3' ? 'socials-title' : ""}`}>
@@ -11,7 +16,7 @@ export default function SocialLinks({
                 <li key={index}>
                     <a
                         className={icnEffect || " "}
-                        href={link ? link : "#"}
+                        href={link ? (isEditor ? sanitizeLink(link) : link) : "#"}
                         {...(link && {
                             target: linkNewTab ? "_blank" : "_self",
                         })}

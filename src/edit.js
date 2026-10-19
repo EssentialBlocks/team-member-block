@@ -199,6 +199,7 @@ export default function Edit(props) {
                                 {socialInImage && showSocials && (
                                     <SocialLinks
                                         socialDetails={profilesOnly}
+                                        isEditor
                                         icnEffect={icnEffect}
                                         preset={preset}
                                     />
@@ -270,6 +271,7 @@ export default function Edit(props) {
                                                 )}
                                                 <SocialLinks
                                                     socialDetails={profilesOnly}
+                                                    isEditor
                                                     icnEffect={icnEffect}
                                                     preset={preset}
                                                 />
@@ -331,6 +333,7 @@ export default function Edit(props) {
                                                 )}
                                                 <SocialLinks
                                                     socialDetails={profilesOnly}
+                                                    isEditor
                                                     icnEffect={icnEffect}
                                                     preset={preset}
                                                 />
