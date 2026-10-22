@@ -110,9 +110,15 @@ class Team_Member_Helper {
 
             // The photo's delete button is absolutely positioned but its box was not, so the
             // button landed outside the photo, away from where it is hovered and clicked.
+            //
+            // Social Profiles list: core gives .dashicons `vertical-align: top`, so a Dashicon sat
+            // at the top of its 2.5em-tall row while the label stayed centred. Centre both, and give
+            // every icon the same 20px column so the labels line up whatever the icon's width.
             wp_add_inline_style(
                 'essential-blocks-editor-css',
                 '.image-avatar{position:relative}.image-avatar .image-avatar-delete{top:10px}'
+                . '.profile-icon-container{display:flex;align-items:center}'
+                . '.profile-icon-container>:first-child{flex:0 0 20px;text-align:center}'
             );
         }
     }

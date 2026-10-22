@@ -108,6 +108,7 @@ Yes, it will work with any standard WordPress theme.
 * Fixed: Choosing a photo in Style > Avatar did nothing
 * Fixed: Dashicons (such as the menu icon) showed as empty boxes in the editor and on the front end
 * Fixed: The photo's delete button sat outside the photo in the editor
+* Fixed: Dashicons in the Social Profiles list sat above their labels in the editor sidebar
 * Fixed: "Icons Divider" label typo
 
 = 1.4.0 - 13/10/2026 =
