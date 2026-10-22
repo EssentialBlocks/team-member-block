@@ -2061,7 +2061,7 @@ function Inspector({ attributes, setAttributes }) {
                                             <label
                                                 style={{
                                                     display: "block",
-                                                    margin: "-20px 0 20px",
+                                                    margin: "0 0 20px",
                                                 }}
                                             >
                                                 <i>
