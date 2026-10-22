@@ -107,6 +107,13 @@ class Team_Member_Helper {
                 $controls_dependencies['version'],
                 'all'
             );
+
+            // The photo's delete button is absolutely positioned but its box was not, so the
+            // button landed outside the photo, away from where it is hovered and clicked.
+            wp_add_inline_style(
+                'essential-blocks-editor-css',
+                '.image-avatar{position:relative}.image-avatar .image-avatar-delete{top:10px}'
+            );
         }
     }
 

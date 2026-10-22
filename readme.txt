@@ -104,6 +104,11 @@ Yes, it will work with any standard WordPress theme.
 * Removed: Unused `_eb_attr` post meta registration
 * Improved: Release package no longer includes the unused frontend helper script
 * Added: External services section documenting Google Fonts
+* Fixed: A deleted member photo came back after saving and the block showed "This block contains unexpected or invalid content"
+* Fixed: Choosing a photo in Style > Avatar did nothing
+* Fixed: Dashicons (such as the menu icon) showed as empty boxes in the editor and on the front end
+* Fixed: The photo's delete button sat outside the photo in the editor
+* Fixed: "Icons Divider" label typo
 
 = 1.4.0 - 13/10/2026 =
 * Added: Copy Settings: copy one member's settings to another (all settings or design only)

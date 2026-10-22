@@ -161,14 +161,22 @@ function create_block_team_member_block_init() {
     );
 
     $style_css = TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/style.css';
-    //Frontend & Editor Style
+    /**
+     * Frontend & Editor Style
+     *
+     * `dashicons` is core's icon font, which the icon picker's Dashicons tab uses
+     * (e.g. "dashicons dashicons-menu"). Nothing else loads it into the editor canvas
+     * iframe, or onto the front end for logged-out visitors, so those icons rendered
+     * as empty boxes. Font Awesome icons were fine because it is a dependency here.
+     */
     wp_register_style(
         'create-block-team-member-frontend-style',
         $style_css,
         [
             'essential-blocks-hover-css',
             'fontawesome-frontend-css',
-            'essential-blocks-animation'
+            'essential-blocks-animation',
+            'dashicons'
         ],
         TEAM_MEMBER_BLOCK_VERSION
     );

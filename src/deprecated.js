@@ -3,12 +3,19 @@
  */
 import { useBlockProps, RichText } from "@wordpress/block-editor";
 
-import attributes from "./attributes";
+import currentAttributes, { DEFAULT_IMAGE_URL } from "./attributes";
 import SocialLinksDeprecated1 from "./components/deprecated-social-links-1";
 import SocialLinksDeprecated2 from "./components/deprecated-social-links-2";
 import SocialLinksDeprecated3 from "./components/deprecated-social-links-3";
 import SocialLinks from "./components/social-links";
 const { omit } = lodash;
+
+// imageUrl lost its default in 1.4.1. These saves use class="avatar", which imageUrl's selector
+// never matches, so they only ever validated through that default: keep it for them.
+const attributes = {
+    ...currentAttributes,
+    imageUrl: { ...currentAttributes.imageUrl, default: DEFAULT_IMAGE_URL },
+};
 
 const deprecated = [
     {

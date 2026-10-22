@@ -1,5 +1,12 @@
 .eb-team-wrapper {
 
+	// A member whose photo was deleted saves an <img> without src: show nothing, not its alt text.
+	// !important beats the per-block generated `.eb-team-member-image img { display: inline-block }`.
+	.eb-team-member-avatar:not([src]),
+	.eb-team-member-avatar[src=""] {
+		display: none !important;
+	}
+
 	.socials {
 		&.socials-title {
 			li a {
