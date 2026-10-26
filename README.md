@@ -1,5 +1,5 @@
 # Team Member Block #
-**Contributors:** [wpdevteam](https://profiles.wordpress.org/wpdevteam), [re_enter_rupok](https://profiles.wordpress.org/re_enter_rupok), [Asif2BD](https://profiles.wordpress.org/Asif2BD), [hztyfoon](https://profiles.wordpress.org/hztyfoon), [rahat89](https://profiles.wordpress.org/rahat89), [fencermonir](https://profiles.wordpress.org/fencermonir)  
+**Contributors:** [wpdevteam](https://profiles.wordpress.org/wpdevteam), [re_enter_rupok](https://profiles.wordpress.org/re_enter_rupok), [Asif2BD](https://profiles.wordpress.org/Asif2BD), [rahat89](https://profiles.wordpress.org/rahat89)  
 **Tags:** gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks  
 **Requires at least:** 6.0  
 **Tested up to:** 7.0  
