@@ -90,6 +90,10 @@ lib/style-handler/helpers.js
 # Source maps
 *.map
 
+# Unused controls helper bundle; nothing registers or enqueues it
+dist/frontend.js
+dist/frontend.asset.php
+
 # Tests & coverage
 tests
 phpunit.xml
