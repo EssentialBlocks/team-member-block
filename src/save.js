@@ -1,5 +1,6 @@
 import { useBlockProps, RichText } from "@wordpress/block-editor";
 import SocialLinks from "./components/social-links";
+import sanitizeLink from "./sanitize-link";
 
 export default function Save({ attributes }) {
     const {
@@ -37,7 +38,7 @@ export default function Save({ attributes }) {
                             {avatarURL && (
                                 <a
                                     // className={`eb-button-anchor`}
-                                    href={avatarURL ? avatarURL : ""}
+                                    href={avatarURL ? sanitizeLink(avatarURL) : ""}
                                     {...(newWindow && { target: "_blank" })}
                                     rel="noopener"
                                 >

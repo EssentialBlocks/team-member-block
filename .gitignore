@@ -40,3 +40,6 @@ dist/controls.css.map
 dist/index.js.map
 dist/style.css.map
 
+
+# Source maps expose the private controls source
+*.map
