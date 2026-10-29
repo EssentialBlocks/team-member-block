@@ -1,10 +1,10 @@
 === Team Member Block ===
-Contributors: wpdevteam, re_enter_rupok, Asif2BD, hztyfoon, rahat89, fencermonir
+Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,12 +98,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.4.1 - 19/10/2026 =
-* Security: Hardened social profile links and block style generation
-* Fixed: Animation stylesheet replaced with animate.css 3.7.2 (MIT licence)
-* Removed: Unused `_eb_attr` post meta registration
-* Improved: Release package no longer includes the unused frontend helper script
-* Added: External services section documenting Google Fonts
+= 1.4.2 - Oct 29 2026 =
 * Fixed: A deleted member photo came back after saving and the block showed "This block contains unexpected or invalid content"
 * Fixed: Choosing a photo in Style > Avatar did nothing
 * Fixed: Dashicons (such as the menu icon) showed as empty boxes in the editor and on the front end
@@ -111,6 +106,10 @@ Yes, it will work with any standard WordPress theme.
 * Fixed: Dashicons in the Social Profiles list sat above their labels in the editor sidebar
 * Fixed: Range controls' reset buttons sat above or over their number boxes in the editor
 * Fixed: "Icons Divider" label typo
+
+= 1.4.1 - 26/10/2026 =
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.4.0 - 13/10/2026 =
 * Added: Copy Settings: copy one member's settings to another (all settings or design only)
