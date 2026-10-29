@@ -6,8 +6,8 @@ export default function SocialLinks({
     icnEffect,
     linkNewTab,
     preset,
-    // The editor shows links straight from the block attributes; saved markup
-    // is left as is, so existing blocks keep validating.
+    // Kept for call-site compatibility; links are sanitized in both the
+    // editor and saved markup. Allowed links are returned unchanged.
     isEditor = false,
 }) {
     return (
@@ -16,7 +16,7 @@ export default function SocialLinks({
                 <li key={index}>
                     <a
                         className={icnEffect || " "}
-                        href={link ? (isEditor ? sanitizeLink(link) : link) : "#"}
+                        href={link ? sanitizeLink(link) : "#"}
                         {...(link && {
                             target: linkNewTab ? "_blank" : "_self",
                         })}
