@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { useEffect } from "@wordpress/element";
+import { useEffect, useRef } from "@wordpress/element";
 import { useBlockProps, MediaUpload } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
 import { select } from "@wordpress/data";
@@ -20,6 +20,7 @@ import classnames from "classnames";
 import Inspector from "./inspector";
 import SocialLinks from "./components/social-links";
 import Style from "./style";
+import { DEFAULT_IMAGE_URL } from "./attributes";
 
 export default function Edit(props) {
     const {
@@ -123,6 +124,9 @@ export default function Edit(props) {
 
 
 
+    // No blockId on first render means the block was just inserted (copies/duplicates keep theirs).
+    const initialBlockId = useRef(blockId);
+
     useEffect(() => {
         // this codes is for creating a unique blockId for each block's unique className
         const BLOCK_PREFIX = "eb-team-member";
@@ -133,6 +137,11 @@ export default function Edit(props) {
             select,
             clientId,
         });
+
+        // Starting photo for a new block only, so a photo the user deleted stays deleted.
+        if (!initialBlockId.current && imageUrl === undefined) {
+            setAttributes({ imageUrl: DEFAULT_IMAGE_URL });
+        }
 
         //
         if (/essential\-blocks.assets\/images\/user\.jpg/gi.test(imageUrl || " ")

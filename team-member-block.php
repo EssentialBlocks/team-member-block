@@ -4,7 +4,7 @@
  * Plugin Name:     Team Member Block
  * Plugin URI:         https://essential-blocks.com
  * Description:     Present your team members beautifully & gain instant credibility
- * Version:         1.4.1
+ * Version:         1.4.2
  * Author:          WPDeveloper
  * Author URI:         https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TEAM_MEMBER_BLOCK_VERSION', "1.4.1" );
+define( 'TEAM_MEMBER_BLOCK_VERSION', "1.4.2" );
 define( 'TEAM_MEMBER_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TEAM_MEMBER_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -161,15 +161,27 @@ function create_block_team_member_block_init() {
     );
 
     $style_css = TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/style.css';
-    //Frontend & Editor Style
+    /**
+     * Frontend & Editor Style
+     *
+     * `dashicons` is core's icon font, which the icon picker's Dashicons tab uses
+     * (e.g. "dashicons dashicons-menu"). Nothing else loads it into the editor canvas
+     * iframe, or onto the front end for logged-out visitors, so those icons rendered
+     * as empty boxes. In the editor it is a dependency here; on the front end the
+     * render callback enqueues it only when the block's markup uses a Dashicon, as
+     * Essential Blocks does.
+     */
     wp_register_style(
         'create-block-team-member-frontend-style',
         $style_css,
-        [
-            'essential-blocks-hover-css',
-            'fontawesome-frontend-css',
-            'essential-blocks-animation'
-        ],
+        array_merge(
+            [
+                'essential-blocks-hover-css',
+                'fontawesome-frontend-css',
+                'essential-blocks-animation',
+            ],
+            is_admin() ? [ 'dashicons' ] : []
+        ),
         TEAM_MEMBER_BLOCK_VERSION
     );
 
@@ -184,6 +196,9 @@ function create_block_team_member_block_init() {
                         wp_enqueue_style( 'create-block-team-member-frontend-style' );
                         wp_enqueue_style( 'essential-blocks-animation' );
                         wp_enqueue_script( 'essential-blocks-eb-animation' );
+                        if ( is_string( $content ) && false !== strpos( $content, 'dashicons' ) ) {
+                            wp_enqueue_style( 'dashicons' );
+                        }
                     }
                     return $content;
                 }
