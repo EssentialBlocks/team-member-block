@@ -119,11 +119,19 @@ class Team_Member_Helper {
                 '.image-avatar{position:relative}.image-avatar .image-avatar-delete{top:10px}'
                 . '.profile-icon-container{display:flex;align-items:center}'
                 . '.profile-icon-container>:first-child{flex:0 0 20px;text-align:center}'
+            );
+
+            // The handle above is shared with Essential Blocks, and the rules below aren't scoped to
+            // this block (popovers render outside its panel), so they'd restyle every EB block's sidebar.
+            if ( defined( 'ESSENTIAL_BLOCKS_VERSION' ) ) {
+                return;
+            }
+
+            wp_add_inline_style(
+                'essential-blocks-editor-css',
                 // Range controls' reset button: in the responsive variant it sat at the top of the
                 // row, above the centred number box and against its corner. Centre it, add a gap.
-                // `top:0` cancels the 5px nudge Essential Blocks' controls.css adds when it is active,
-                // and `button` outranks that stylesheet's equally specific rules whatever the load order.
-                . '.eb-component-wrapper>button.eb-range-reset-button{align-self:center;top:0;margin-left:4px}'
+                '.eb-component-wrapper>button.eb-range-reset-button{align-self:center;top:0;margin-left:4px}'
                 // Range control layout rules the newer controls build ships but this plugin's
                 // dist/modules.css lacks. Without them the number box overflowed under the reset
                 // button and the row's 10px bottom margin pushed the centred button low. Other
