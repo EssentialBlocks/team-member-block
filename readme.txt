@@ -106,6 +106,13 @@ Yes, it will work with any standard WordPress theme.
 * Fixed: Dashicons in the Social Profiles list sat above their labels in the editor sidebar
 * Fixed: Range controls' reset buttons sat above or over their number boxes in the editor
 * Fixed: "Icons Divider" label typo
+* Improved: Security enhancements
+* Fixed: Existing Team Member blocks stopped working on the front end when Essential Blocks is active
+* Fixed: Editor styles changed the Essential Blocks sidebar when both plugins are active
+* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
+* Fixed: Entrance animations not previewing in the block editor
+* Fixed: Block icon hard to see when highlighted in the inserter and List View
+* Fixed: Chrome console warning about a deprecated DOM event
 
 = 1.4.1 - 26/10/2026 =
 * Improved: Security enhancements
