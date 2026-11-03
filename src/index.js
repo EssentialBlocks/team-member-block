@@ -23,9 +23,9 @@ ebConditionalRegisterBlockType(metadata, {
     icon: TeamMembersIcon,
     attributes,
     keywords: [
-        __("team", "essential-blocks"),
-        __("member", "essential-blocks"),
-        __("eb essential", "essential-blocks"),
+        __("team", "team-member-block"),
+        __("member", "team-member-block"),
+        __("eb essential", "team-member-block"),
     ],
     edit: Edit,
     save: Save,

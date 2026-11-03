@@ -2,7 +2,7 @@
 Contributors: wpdevteam, re_enter_rupok, Asif2BD, rahat89
 Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gutenberg blocks
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.4.2
 License: GPLv3 or later
@@ -98,7 +98,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.4.2 - Oct 29 2026 =
+= 1.4.2 - 29/10/2026 =
 * Fixed: A deleted member photo came back after saving and the block showed "This block contains unexpected or invalid content"
 * Fixed: Choosing a photo in Style > Avatar did nothing
 * Fixed: Dashicons (such as the menu icon) showed as empty boxes in the editor and on the front end

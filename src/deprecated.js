@@ -10,7 +10,7 @@ import SocialLinksDeprecated3 from "./components/deprecated-social-links-3";
 import SocialLinks from "./components/social-links";
 const { omit } = lodash;
 
-// imageUrl lost its default in 1.4.1. These saves use class="avatar", which imageUrl's selector
+// imageUrl lost its default in 1.4.2. These saves use class="avatar", which imageUrl's selector
 // never matches, so they only ever validated through that default: keep it for them.
 const attributes = {
     ...currentAttributes,

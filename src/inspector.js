@@ -1038,12 +1038,12 @@ function Inspector({ attributes, setAttributes }) {
                             {tab.name === "general" && (
                                 <>
                                     <PanelBody
-                                        title={__("Presets", "essential-blocks")}
+                                        title={__("Presets", "team-member-block")}
                                     // initialOpen={false}
                                     >
-                                        <BaseControl label={__("Design Preset", "essential-blocks")}>
+                                        <BaseControl label={__("Design Preset", "team-member-block")}>
                                             <SelectControl
-                                                // label={__("Design Preset", "essential-blocks")}
+                                                // label={__("Design Preset", "team-member-block")}
                                                 value={preset}
                                                 options={STYLE_PRESETS}
                                                 // onChange={(preset) => setAttributes({ preset })}
@@ -1054,7 +1054,7 @@ function Inspector({ attributes, setAttributes }) {
                                         {preset === "preset5" && (
                                             <>
                                                 <ToggleControl
-                                                    label={__("Reverse Layout", "essential-blocks")}
+                                                    label={__("Reverse Layout", "team-member-block")}
                                                     checked={isP9reverse}
                                                     onChange={() =>
                                                         setAttributes({
@@ -1065,7 +1065,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                                 <ResponsiveRangeController
                                                     // noUnits
-                                                    baseLabel={__("Gap", "essential-blocks")}
+                                                    baseLabel={__("Gap", "team-member-block")}
                                                     controlName={p9LGap}
                                                     resRequiredProps={resRequiredProps}
                                                     min={0}
@@ -1078,7 +1078,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                         {preset === "new-preset3" && (
                                             <SelectControl
-                                                label={__("Hover Alignment", "essential-blocks")}
+                                                label={__("Hover Alignment", "team-member-block")}
                                                 value={hoverPreset}
                                                 options={HOVER_ALIGN}
                                                 onChange={(hoverPreset) => setAttributes({ hoverPreset })}
@@ -1089,7 +1089,7 @@ function Inspector({ attributes, setAttributes }) {
                                             <ToggleControl
                                                 label={__(
                                                     "Content Overlay",
-                                                    "essential-blocks"
+                                                    "team-member-block"
                                                 )}
                                                 checked={isContentOverlay}
                                                 onChange={() =>
@@ -1104,7 +1104,7 @@ function Inspector({ attributes, setAttributes }) {
                                         <ToggleControl
                                             label={__(
                                                 "Enable Designation",
-                                                "essential-blocks"
+                                                "team-member-block"
                                             )}
                                             checked={showDesignation}
                                             onChange={() =>
@@ -1116,7 +1116,7 @@ function Inspector({ attributes, setAttributes }) {
                                         <ToggleControl
                                             label={__(
                                                 "Enable Description",
-                                                "essential-blocks"
+                                                "team-member-block"
                                             )}
                                             checked={showDescs}
                                             onChange={() =>
@@ -1128,7 +1128,7 @@ function Inspector({ attributes, setAttributes }) {
                                         <ToggleControl
                                             label={__(
                                                 "Enable Social Profiles",
-                                                "essential-blocks"
+                                                "team-member-block"
                                             )}
                                             checked={showSocials}
                                             onChange={() =>
@@ -1140,7 +1140,7 @@ function Inspector({ attributes, setAttributes }) {
                                     </PanelBody>
 
                                     <PanelBody
-                                        title={__("Content", "essential-blocks")}
+                                        title={__("Content", "team-member-block")}
                                         initialOpen={false}
                                     >
                                         {!imageUrl && (
@@ -1158,7 +1158,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     return (
                                                         <Button
                                                             className="eb-background-control-inspector-panel-img-btn components-button"
-                                                            label={__("Upload Image", "essential-blocks")}
+                                                            label={__("Upload Image", "team-member-block")}
                                                             icon="format-image"
                                                             onClick={open}
                                                         />
@@ -1180,7 +1180,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 <DynamicInputControl
                                                     label={__(
                                                         "URL",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                     attrName="avatarURL"
                                                     inputValue={avatarURL}
@@ -1196,7 +1196,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 <DynamicInputControl
                                                     label={__(
                                                         "Title",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                     attrName="name"
                                                     inputValue={name}
@@ -1212,7 +1212,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 <DynamicInputControl
                                                     label={__(
                                                         "Designation",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                     attrName="jobTitle"
                                                     inputValue={jobTitle}
@@ -1228,7 +1228,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 <DynamicInputControl
                                                     label={__(
                                                         "Description",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                     attrName="description"
                                                     inputValue={description}
@@ -1244,7 +1244,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 />
                                                 {avatarURL && (
                                                     <ToggleControl
-                                                        label={__("Open in New Tab", "essential-blocks")}
+                                                        label={__("Open in New Tab", "team-member-block")}
                                                         checked={newWindow}
                                                         onChange={() =>
                                                             setAttributes({
@@ -1260,7 +1260,7 @@ function Inspector({ attributes, setAttributes }) {
                                     <PanelBody
                                         title={__(
                                             "Social Profiles",
-                                            "essential-blocks"
+                                            "team-member-block"
                                         )}
                                     // initialOpen={false}
                                     >
@@ -1269,7 +1269,7 @@ function Inspector({ attributes, setAttributes }) {
                                             {showSocials && (
                                                 <>
                                                     <ToggleControl
-                                                        label={__("Show link in new tab", "essential-blocks")}
+                                                        label={__("Show link in new tab", "team-member-block")}
                                                         checked={showLinkNewTab}
                                                         onChange={() =>
                                                             setAttributes({
@@ -1295,12 +1295,12 @@ function Inspector({ attributes, setAttributes }) {
                                     <PanelBody
                                         title={__(
                                             "Separators",
-                                            "essential-blocks"
+                                            "team-member-block"
                                         )}
                                     // initialOpen={false}
                                     >
                                         <ToggleControl
-                                            label={__("Enable Content Separator", "essential-blocks")}
+                                            label={__("Enable Content Separator", "team-member-block")}
                                             checked={showCSeparator}
                                             onChange={() =>
                                                 setAttributes({
@@ -1311,7 +1311,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                         {showSocials && "preset3" !== preset && (
                                             <ToggleControl
-                                                label={__("Enable Social Separator", "essential-blocks")}
+                                                label={__("Enable Social Separator", "team-member-block")}
                                                 checked={showSSeparator}
                                                 onChange={() =>
                                                     setAttributes({
@@ -1328,13 +1328,13 @@ function Inspector({ attributes, setAttributes }) {
                                     <PanelBody
                                         title={__(
                                             "Container width",
-                                            "essential-blocks"
+                                            "team-member-block"
                                         )}
                                     // initialOpen={false}
                                     >
                                         <ResponsiveRangeController
                                             // noUnits
-                                            baseLabel={__("Max Width", "essential-blocks")}
+                                            baseLabel={__("Max Width", "team-member-block")}
                                             controlName={wrapperWidth}
                                             resRequiredProps={resRequiredProps}
                                             min={100}
@@ -1349,7 +1349,7 @@ function Inspector({ attributes, setAttributes }) {
                                             <PanelBody
                                                 title={__(
                                                     "Overlay Contents",
-                                                    "essential-blocks"
+                                                    "team-member-block"
                                                 )}
                                             // initialOpen={false}
                                             >
@@ -1442,13 +1442,13 @@ function Inspector({ attributes, setAttributes }) {
                                                 <BaseControl
                                                     label={__(
                                                         "Background",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                 ></BaseControl>
                                                 <ToggleControl
                                                     label={__(
                                                         "Use Background Gradient",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                     checked={isConBgGradient}
                                                     onChange={() =>
@@ -1473,7 +1473,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     <ColorControl
                                                         label={__(
                                                             "Color",
-                                                            "essential-blocks"
+                                                            "team-member-block"
                                                         )}
                                                         color={conBgColor}
                                                         onChange={(conBgColor) =>
@@ -1531,7 +1531,7 @@ function Inspector({ attributes, setAttributes }) {
                                     <PanelBody
                                         title={__(
                                             "Alignments",
-                                            "essential-blocks"
+                                            "team-member-block"
                                         )}
                                     >
                                         {preset === "preset5" ? (
@@ -1540,7 +1540,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 label="Avatar/Content Vertical Alignment"
                                             >
                                                 <SelectControl
-                                                    // label={__("Icons Horizontal Alignment", "essential-blocks")}
+                                                    // label={__("Icons Horizontal Alignment", "team-member-block")}
                                                     value={imgCnVtAlign}
                                                     options={ContentsVerticalAligns}
                                                     onChange={(imgCnVtAlign) =>
@@ -1671,7 +1671,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     label="Social Icons Horizontal Alignments"
                                                 >
                                                     <SelectControl
-                                                        // label={__("Icons Horizontal Alignment", "essential-blocks")}
+                                                        // label={__("Icons Horizontal Alignment", "team-member-block")}
                                                         value={iconsJustify}
                                                         options={IconsHzAligns}
                                                         onChange={(iconsJustify) =>
@@ -1688,7 +1688,7 @@ function Inspector({ attributes, setAttributes }) {
                                                         label="Social Icons Vertical Alignments"
                                                     >
                                                         <SelectControl
-                                                            // label={__("Icons Horizontal Alignment", "essential-blocks")}
+                                                            // label={__("Icons Horizontal Alignment", "team-member-block")}
                                                             value={iconsVAlign}
                                                             options={ContentsVerticalAligns}
                                                             onChange={(iconsVAlign) =>
@@ -1818,7 +1818,7 @@ function Inspector({ attributes, setAttributes }) {
                                             </BaseControl>
                                         )}
                                     </PanelBody>
-                                    <PanelBody title={__("Avatar", "essential-blocks")} initialOpen={false}>
+                                    <PanelBody title={__("Avatar", "team-member-block")} initialOpen={false}>
                                         {!imageUrl && (
                                             <MediaUpload
                                                 onSelect={({ id, url, alt }) =>
@@ -1834,7 +1834,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     return (
                                                         <Button
                                                             className="eb-background-control-inspector-panel-img-btn components-button"
-                                                            label={__("Upload Image", "essential-blocks")}
+                                                            label={__("Upload Image", "team-member-block")}
                                                             icon="format-image"
                                                             onClick={open}
                                                         />
@@ -1845,14 +1845,14 @@ function Inspector({ attributes, setAttributes }) {
                                         {imageUrl && (
                                             <>
                                                 <ResponsiveRangeController
-                                                    baseLabel={__("Image Width", "essential-blocks")}
+                                                    baseLabel={__("Image Width", "team-member-block")}
                                                     controlName={imageWidth}
                                                     resRequiredProps={resRequiredProps}
                                                     units={sizeUnitTypes}
                                                     max={2000}
                                                 />
                                                 <ToggleControl
-                                                    label={__("Auto Image Height", "essential-blocks")}
+                                                    label={__("Auto Image Height", "team-member-block")}
                                                     checked={isImgHeightAuto}
                                                     onChange={() =>
                                                         setAttributes({
@@ -1863,7 +1863,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                                 {!isImgHeightAuto && (
                                                     <ResponsiveRangeController
-                                                        baseLabel={__("Image Height", "essential-blocks")}
+                                                        baseLabel={__("Image Height", "team-member-block")}
                                                         controlName={imageHeight}
                                                         resRequiredProps={resRequiredProps}
                                                         units={sizeUnitTypes}
@@ -1893,7 +1893,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 />
 
                                                 <ToggleControl
-                                                    label={__("Enable Background before Image", "essential-blocks")}
+                                                    label={__("Enable Background before Image", "team-member-block")}
                                                     checked={imgBeforeEl}
                                                     onChange={() =>
                                                         setAttributes({
@@ -1913,7 +1913,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                                         <ResponsiveRangeController
                                                             noUnits
-                                                            baseLabel={__("Height", "essential-blocks")}
+                                                            baseLabel={__("Height", "team-member-block")}
                                                             controlName={imgTopBgHeight}
                                                             resRequiredProps={resRequiredProps}
                                                             min={0}
@@ -1927,11 +1927,11 @@ function Inspector({ attributes, setAttributes }) {
                                     </PanelBody>
 
                                     <PanelBody
-                                        title={__("Name", "essential-blocks")}
+                                        title={__("Name", "team-member-block")}
                                         initialOpen={false}
                                     >
                                         <ColorControl
-                                            label={__("Color", "essential-blocks")}
+                                            label={__("Color", "team-member-block")}
                                             color={nameColor}
                                             onChange={(nameColor) => setAttributes({ nameColor })}
                                         />
@@ -1947,9 +1947,9 @@ function Inspector({ attributes, setAttributes }) {
                                             baseLabel="Padding"
                                         />
                                     </PanelBody>
-                                    <PanelBody title={__("Job Title", "essential-blocks")} initialOpen={false}>
+                                    <PanelBody title={__("Job Title", "team-member-block")} initialOpen={false}>
                                         <ColorControl
-                                            label={__("Color", "essential-blocks")}
+                                            label={__("Color", "team-member-block")}
                                             color={jobColor}
                                             onChange={(jobColor) => setAttributes({ jobColor })}
                                         />
@@ -1968,7 +1968,7 @@ function Inspector({ attributes, setAttributes }) {
                                     <PanelBody
                                         title={__(
                                             "Description",
-                                            "essential-blocks"
+                                            "team-member-block"
                                         )}
                                         initialOpen={false}
                                     >
@@ -1977,7 +1977,7 @@ function Inspector({ attributes, setAttributes }) {
                                         {showDescs && (
                                             <>
                                                 <ColorControl
-                                                    label={__("Color", "essential-blocks")}
+                                                    label={__("Color", "team-member-block")}
                                                     color={descsColor}
                                                     onChange={(descsColor) =>
                                                         setAttributes({
@@ -2001,9 +2001,9 @@ function Inspector({ attributes, setAttributes }) {
                                         )}
                                     </PanelBody>
                                     {showSocials && (
-                                        <PanelBody title={__("Social Icons", "essential-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("Social Icons", "team-member-block")} initialOpen={false}>
                                             <ColorControl
-                                                label={__("Hover Color", "essential-blocks")}
+                                                label={__("Hover Color", "team-member-block")}
                                                 color={hvIcnColor}
                                                 onChange={(hvIcnColor) =>
                                                     setAttributes({
@@ -2013,14 +2013,14 @@ function Inspector({ attributes, setAttributes }) {
                                             />
 
                                             <ColorControl
-                                                label={__("Hover Background", "essential-blocks")}
+                                                label={__("Hover Background", "team-member-block")}
                                                 color={hvIcnBgc}
                                                 onChange={(hvIcnBgc) => setAttributes({ hvIcnBgc })}
                                             />
 
                                             <ResponsiveRangeController
                                                 noUnits
-                                                baseLabel={__("Size", "essential-blocks")}
+                                                baseLabel={__("Size", "team-member-block")}
                                                 controlName={rangeIconSize}
                                                 resRequiredProps={resRequiredProps}
                                                 min={5}
@@ -2030,7 +2030,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                             <ResponsiveRangeController
                                                 noUnits
-                                                baseLabel={__("Padding", "essential-blocks")}
+                                                baseLabel={__("Padding", "team-member-block")}
                                                 controlName={rangeIconPadding}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2040,7 +2040,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                             <ResponsiveRangeController
                                                 noUnits
-                                                baseLabel={__("Spacing", "essential-blocks")}
+                                                baseLabel={__("Spacing", "team-member-block")}
                                                 controlName={rangeIconDistance}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2050,7 +2050,7 @@ function Inspector({ attributes, setAttributes }) {
 
                                             <ResponsiveRangeController
                                                 noUnits
-                                                baseLabel={__("Rows Gap", "essential-blocks")}
+                                                baseLabel={__("Rows Gap", "team-member-block")}
                                                 controlName={rangeIconRowGap}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2071,7 +2071,7 @@ function Inspector({ attributes, setAttributes }) {
                                             </label>
 
                                             <ToggleControl
-                                                label={__("Icons Divider", "essential-blocks")}
+                                                label={__("Icons Divider", "team-member-block")}
                                                 checked={isIconsDevider}
                                                 onChange={() =>
                                                     setAttributes({
@@ -2083,7 +2083,7 @@ function Inspector({ attributes, setAttributes }) {
                                             {isIconsDevider && (
                                                 <>
                                                     <ColorControl
-                                                        label={__("Color", "essential-blocks")}
+                                                        label={__("Color", "team-member-block")}
                                                         color={icnsDevideColor}
                                                         onChange={(icnsDevideColor) =>
                                                             setAttributes({
@@ -2093,7 +2093,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     />
 
                                                     <RangeControl
-                                                        label={__("Width", "essential-blocks")}
+                                                        label={__("Width", "team-member-block")}
                                                         value={icnSepW}
                                                         onChange={(icnSepW) =>
                                                             setAttributes({
@@ -2106,7 +2106,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     />
 
                                                     <RangeControl
-                                                        label={__("Height", "essential-blocks")}
+                                                        label={__("Height", "team-member-block")}
                                                         value={icnSepH}
                                                         onChange={(icnSepH) =>
                                                             setAttributes({
@@ -2119,7 +2119,7 @@ function Inspector({ attributes, setAttributes }) {
                                                     />
 
                                                     <ResponsiveRangeController
-                                                        baseLabel={__("Position From Right", "essential-blocks")}
+                                                        baseLabel={__("Position From Right", "team-member-block")}
                                                         controlName={sclDeviderPosRight}
                                                         resRequiredProps={resRequiredProps}
                                                         min={0}
@@ -2130,7 +2130,7 @@ function Inspector({ attributes, setAttributes }) {
                                             )}
 
                                             <SelectControl
-                                                label={__("Icon Hover Effect", "essential-blocks")}
+                                                label={__("Icon Hover Effect", "team-member-block")}
                                                 value={icnEffect}
                                                 options={HOVER_EFFECT}
                                                 // onChange={(preset) => setAttributes({ preset })}
@@ -2142,7 +2142,7 @@ function Inspector({ attributes, setAttributes }) {
                                             />
 
                                             <PanelBody
-                                                title={__("Icons Border", "essential-blocks")}
+                                                title={__("Icons Border", "team-member-block")}
                                                 initialOpen={false}
                                             >
                                                 <BorderShadowControl
@@ -2154,7 +2154,7 @@ function Inspector({ attributes, setAttributes }) {
                                             </PanelBody>
 
                                             <PanelBody
-                                                title={__("Container Background ", "essential-blocks")}
+                                                title={__("Container Background ", "team-member-block")}
                                                 initialOpen={false}
                                             >
                                                 <BackgroundControl
@@ -2165,7 +2165,7 @@ function Inspector({ attributes, setAttributes }) {
                                                 />
                                             </PanelBody>
                                             <PanelBody
-                                                title={__("Container Margin Padding ", "essential-blocks")}
+                                                title={__("Container Margin Padding ", "team-member-block")}
                                                 initialOpen={false}
                                             >
                                                 <ResponsiveDimensionsControl
@@ -2184,17 +2184,17 @@ function Inspector({ attributes, setAttributes }) {
                                     )}
                                     {showCSeparator && (
                                         <PanelBody
-                                            title={__("Content Separator", "essential-blocks")}
+                                            title={__("Content Separator", "team-member-block")}
                                             initialOpen={false}
                                         >
                                             <ColorControl
-                                                label={__("Color", "essential-blocks")}
+                                                label={__("Color", "team-member-block")}
                                                 color={cSepColor}
                                                 onChange={(cSepColor) => setAttributes({ cSepColor })}
                                             />
 
                                             <ResponsiveRangeController
-                                                baseLabel={__("Width", "essential-blocks")}
+                                                baseLabel={__("Width", "team-member-block")}
                                                 controlName={cSepWPrefix}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2203,7 +2203,7 @@ function Inspector({ attributes, setAttributes }) {
                                             />
 
                                             <ResponsiveRangeController
-                                                baseLabel={__("Height", "essential-blocks")}
+                                                baseLabel={__("Height", "team-member-block")}
                                                 controlName={cSepHPrefix}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2211,9 +2211,9 @@ function Inspector({ attributes, setAttributes }) {
                                                 step={1}
                                             />
 
-                                            <BaseControl label={__("Separator Type", "essential-blocks")}>
+                                            <BaseControl label={__("Separator Type", "team-member-block")}>
                                                 <SelectControl
-                                                    // label={__("Design Preset", "essential-blocks")}
+                                                    // label={__("Design Preset", "team-member-block")}
                                                     value={cSepType}
                                                     options={separatorTypes}
                                                     // onChange={(preset) => setAttributes({ preset })}
@@ -2228,17 +2228,17 @@ function Inspector({ attributes, setAttributes }) {
                                     )}
                                     {showSocials && showSSeparator && (
                                         <PanelBody
-                                            title={__("Social Separator", "essential-blocks")}
+                                            title={__("Social Separator", "team-member-block")}
                                             initialOpen={false}
                                         >
                                             <ColorControl
-                                                label={__("Color", "essential-blocks")}
+                                                label={__("Color", "team-member-block")}
                                                 color={sSepColor}
                                                 onChange={(sSepColor) => setAttributes({ sSepColor })}
                                             />
 
                                             <ResponsiveRangeController
-                                                baseLabel={__("Width", "essential-blocks")}
+                                                baseLabel={__("Width", "team-member-block")}
                                                 controlName={sSepWPrefix}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2247,7 +2247,7 @@ function Inspector({ attributes, setAttributes }) {
                                             />
 
                                             <ResponsiveRangeController
-                                                baseLabel={__("Height", "essential-blocks")}
+                                                baseLabel={__("Height", "team-member-block")}
                                                 controlName={sSepHPrefix}
                                                 resRequiredProps={resRequiredProps}
                                                 min={0}
@@ -2255,9 +2255,9 @@ function Inspector({ attributes, setAttributes }) {
                                                 step={1}
                                             />
 
-                                            <BaseControl label={__("Separator Type", "essential-blocks")}>
+                                            <BaseControl label={__("Separator Type", "team-member-block")}>
                                                 <SelectControl
-                                                    // label={__("Design Preset", "essential-blocks")}
+                                                    // label={__("Design Preset", "team-member-block")}
                                                     value={sSepType}
                                                     options={separatorTypes}
                                                     // onChange={(preset) => setAttributes({ preset })}
@@ -2275,7 +2275,7 @@ function Inspector({ attributes, setAttributes }) {
                             {tab.name === "advance" && (
                                 <>
                                     <PanelBody
-                                        title={__("Margin & Padding")}
+                                        title={__("Margin & Padding", "team-member-block")}
                                     // initialOpen={true}
                                     >
                                         <ResponsiveDimensionsControl
@@ -2290,14 +2290,14 @@ function Inspector({ attributes, setAttributes }) {
                                         />
                                     </PanelBody>
 
-                                    <PanelBody title={__("Background ", "essential-blocks")} initialOpen={false}>
+                                    <PanelBody title={__("Background ", "team-member-block")} initialOpen={false}>
                                         <BackgroundControl
                                             controlName={WrpBgConst}
                                             resRequiredProps={resRequiredProps}
                                         />
                                     </PanelBody>
 
-                                    <PanelBody title={__("Border & Shadow")} initialOpen={false}>
+                                    <PanelBody title={__("Border & Shadow", "team-member-block")} initialOpen={false}>
                                         <BorderShadowControl
                                             controlName={WrpBdShadowConst}
                                             resRequiredProps={resRequiredProps}
