@@ -57,12 +57,16 @@ export default function Edit(props) {
 
     //
     useEffect(() => {
-        const newProfiles = socialDetails.map((profile) => ({
-            ...profile,
-            isExpanded: false,
-        }));
+        // Only write when a profile is actually expanded: setting an equal copy on every
+        // load marked the post as edited, so opening the editor alone asked to save.
+        if (socialDetails.some((profile) => profile.isExpanded)) {
+            const newProfiles = socialDetails.map((profile) => ({
+                ...profile,
+                isExpanded: false,
+            }));
 
-        setAttributes({ socialDetails: newProfiles });
+            setAttributes({ socialDetails: newProfiles });
+        }
 
         if (socialDetails.length > 0) return;
 
@@ -110,7 +114,7 @@ export default function Edit(props) {
 
     //
     useEffect(() => {
-        const profilesOnly = socialDetails.map(
+        const newProfilesOnly = socialDetails.map(
             ({ title, icon, link, linkOpenNewTab }) => ({
                 title,
                 icon,
@@ -119,7 +123,10 @@ export default function Edit(props) {
             })
         );
 
-        setAttributes({ profilesOnly });
+        // Skip an unchanged copy, which would mark the post as edited on load.
+        if (JSON.stringify(newProfilesOnly) !== JSON.stringify(profilesOnly)) {
+            setAttributes({ profilesOnly: newProfilesOnly });
+        }
     }, [socialDetails]);
 
 
@@ -188,7 +195,7 @@ export default function Edit(props) {
                                                     className="eb-infobox-img-btn components-button"
                                                     label={__(
                                                         "Upload Image",
-                                                        "essential-blocks"
+                                                        "team-member-block"
                                                     )}
                                                     icon="format-image"
                                                     onClick={open}

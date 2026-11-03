@@ -23,252 +23,252 @@ export const ContentsVerticalAligns = [
 ];
 
 export const STYLE_PRESETS = [
-    { label: __("Default", "essential-blocks"), value: "default" },
-    { label: __("Preset 1", "essential-blocks"), value: "preset1" },
+    { label: __("Default", "team-member-block"), value: "default" },
+    { label: __("Preset 1", "team-member-block"), value: "preset1" },
     // { label: __("Preset 2 (hover overlay)"), value: "preset2" }, // this was preset 3
-    { label: __("Preset 2  (hover overlay)"), value: "preset3" }, // this was preset 5
+    { label: __("Preset 2 (hover overlay)", "team-member-block"), value: "preset3" }, // this was preset 5
     // { label: __("Preset 4 (hover overlay)"), value: "preset4" }, // this was preset 8
-    // { label: __("Preset 5", "essential-blocks"), value: "preset5" }, // this was preset 9
-    // { label: __("Preset 6", "essential-blocks"), value: "preset6" }, // this was preset 15
-    { label: __("Preset 3", "essential-blocks"), value: "new-preset1", isPro: true },
-    { label: __("Preset 4", "essential-blocks"), value: "new-preset2", isPro: true },
-    { label: __("Preset 5", "essential-blocks"), value: "new-preset3", isPro: true },
+    // { label: __("Preset 5", "team-member-block"), value: "preset5" }, // this was preset 9
+    // { label: __("Preset 6", "team-member-block"), value: "preset6" }, // this was preset 15
+    { label: __("Preset 3", "team-member-block"), value: "new-preset1", isPro: true },
+    { label: __("Preset 4", "team-member-block"), value: "new-preset2", isPro: true },
+    { label: __("Preset 5", "team-member-block"), value: "new-preset3", isPro: true },
 ];
 export const HOVER_ALIGN = [
-    { label: __("Left", "essential-blocks"), value: "hover-left" },
-    { label: __("Right", "essential-blocks"), value: "hover-right" },
+    { label: __("Left", "team-member-block"), value: "hover-left" },
+    { label: __("Right", "team-member-block"), value: "hover-right" },
 
 ];
 
 export const separatorTypes = [
-    { label: __("Solid", "essential-blocks"), value: "solid" },
-    { label: __("Dashed", "essential-blocks"), value: "dashed" },
-    { label: __("Dotted", "essential-blocks"), value: "dotted" },
-    { label: __("Double", "essential-blocks"), value: "double" },
-    { label: __("Groove", "essential-blocks"), value: "groove" },
-    { label: __("Inset", "essential-blocks"), value: "inset" },
-    { label: __("Outset", "essential-blocks"), value: "outset" },
-    { label: __("Ridge", "essential-blocks"), value: "ridge" },
+    { label: __("Solid", "team-member-block"), value: "solid" },
+    { label: __("Dashed", "team-member-block"), value: "dashed" },
+    { label: __("Dotted", "team-member-block"), value: "dotted" },
+    { label: __("Double", "team-member-block"), value: "double" },
+    { label: __("Groove", "team-member-block"), value: "groove" },
+    { label: __("Inset", "team-member-block"), value: "inset" },
+    { label: __("Outset", "team-member-block"), value: "outset" },
+    { label: __("Ridge", "team-member-block"), value: "ridge" },
 ];
 
 export const HOVER_EFFECT = [
-    { label: __("Select Hover Effect", "essential-blocks"), value: "" },
-    { label: __("Grow", "essential-blocks"), value: "hvr-grow" },
-    { label: __("Shrink", "essential-blocks"), value: "hvr-shrink" },
-    { label: __("Pulse", "essential-blocks"), value: "hvr-pulse" },
-    { label: __("Pulse Grow", "essential-blocks"), value: "hvr-pulse-grow" },
+    { label: __("Select Hover Effect", "team-member-block"), value: "" },
+    { label: __("Grow", "team-member-block"), value: "hvr-grow" },
+    { label: __("Shrink", "team-member-block"), value: "hvr-shrink" },
+    { label: __("Pulse", "team-member-block"), value: "hvr-pulse" },
+    { label: __("Pulse Grow", "team-member-block"), value: "hvr-pulse-grow" },
     {
-        label: __("Pulse Shrink", "essential-blocks"),
+        label: __("Pulse Shrink", "team-member-block"),
         value: "hvr-pulse-shrink",
     },
-    { label: __("Push", "essential-blocks"), value: "hvr-push" },
-    { label: __("Pop", "essential-blocks"), value: "hvr-pop" },
-    { label: __("Bounce In", "essential-blocks"), value: "hvr-bounce-in" },
-    { label: __("Bounce Out", "essential-blocks"), value: "hvr-bounce-out" },
-    { label: __("Rotate", "essential-blocks"), value: "hvr-rotate" },
-    { label: __("Grow Rotate", "essential-blocks"), value: "hvr-grow-rotate" },
-    { label: __("Float", "essential-blocks"), value: "hvr-float" },
-    { label: __("Sink", "essential-blocks"), value: "hvr-sink" },
-    { label: __("Bob", "essential-blocks"), value: "hvr-bob" },
-    { label: __("Hang", "essential-blocks"), value: "hvr-hang" },
-    { label: __("Skew", "essential-blocks"), value: "hvr-skew" },
+    { label: __("Push", "team-member-block"), value: "hvr-push" },
+    { label: __("Pop", "team-member-block"), value: "hvr-pop" },
+    { label: __("Bounce In", "team-member-block"), value: "hvr-bounce-in" },
+    { label: __("Bounce Out", "team-member-block"), value: "hvr-bounce-out" },
+    { label: __("Rotate", "team-member-block"), value: "hvr-rotate" },
+    { label: __("Grow Rotate", "team-member-block"), value: "hvr-grow-rotate" },
+    { label: __("Float", "team-member-block"), value: "hvr-float" },
+    { label: __("Sink", "team-member-block"), value: "hvr-sink" },
+    { label: __("Bob", "team-member-block"), value: "hvr-bob" },
+    { label: __("Hang", "team-member-block"), value: "hvr-hang" },
+    { label: __("Skew", "team-member-block"), value: "hvr-skew" },
     {
-        label: __("Skew Forward", "essential-blocks"),
+        label: __("Skew Forward", "team-member-block"),
         value: "hvr-skew-forward",
     },
     {
-        label: __("Skew Backward", "essential-blocks"),
+        label: __("Skew Backward", "team-member-block"),
         value: "hvr-skew-backward",
     },
     {
-        label: __("Wobble Horizontal", "essential-blocks"),
+        label: __("Wobble Horizontal", "team-member-block"),
         value: "hvr-wobble-horizontal",
     },
     {
-        label: __("Wobble Vertical", "essential-blocks"),
+        label: __("Wobble Vertical", "team-member-block"),
         value: "hvr-wobble-vertical",
     },
     {
-        label: __("Wobble To Bottom Right", "essential-blocks"),
+        label: __("Wobble To Bottom Right", "team-member-block"),
         value: "hvr-wobble-to-bottom-right",
     },
     {
-        label: __("Wobble To Top Right", "essential-blocks"),
+        label: __("Wobble To Top Right", "team-member-block"),
         value: "hvr-wobble-to-top-right",
     },
-    { label: __("Wobble Top", "essential-blocks"), value: "hvr-wobble-top" },
+    { label: __("Wobble Top", "team-member-block"), value: "hvr-wobble-top" },
     {
-        label: __("Wobble Bottom", "essential-blocks"),
+        label: __("Wobble Bottom", "team-member-block"),
         value: "hvr-wobble-bottom",
     },
-    { label: __("Wobble Skew", "essential-blocks"), value: "hvr-wobble-skew" },
-    { label: __("Buzz", "essential-blocks"), value: "hvr-buzz" },
-    { label: __("Buzz Out", "essential-blocks"), value: "hvr-buzz-out" },
-    { label: __("Forward", "essential-blocks"), value: "hvr-forward" },
-    { label: __("Fade", "essential-blocks"), value: "hvr-fade" },
-    { label: __("Back Pulse", "essential-blocks"), value: "hvr-back-pulse" },
+    { label: __("Wobble Skew", "team-member-block"), value: "hvr-wobble-skew" },
+    { label: __("Buzz", "team-member-block"), value: "hvr-buzz" },
+    { label: __("Buzz Out", "team-member-block"), value: "hvr-buzz-out" },
+    { label: __("Forward", "team-member-block"), value: "hvr-forward" },
+    { label: __("Fade", "team-member-block"), value: "hvr-fade" },
+    { label: __("Back Pulse", "team-member-block"), value: "hvr-back-pulse" },
     {
-        label: __("Sweep To Right", "essential-blocks"),
+        label: __("Sweep To Right", "team-member-block"),
         value: "hvr-sweep-to-right",
     },
     {
-        label: __("Sweep To Left", "essential-blocks"),
+        label: __("Sweep To Left", "team-member-block"),
         value: "hvr-sweep-to-left",
     },
     {
-        label: __("Sweep To Bottom", "essential-blocks"),
+        label: __("Sweep To Bottom", "team-member-block"),
         value: "hvr-sweep-to-bottom",
     },
     {
-        label: __("Sweep To Top", "essential-blocks"),
+        label: __("Sweep To Top", "team-member-block"),
         value: "hvr-sweep-to-top",
     },
     {
-        label: __("Bounce To Right", "essential-blocks"),
+        label: __("Bounce To Right", "team-member-block"),
         value: "hvr-bounce-to-right",
     },
     {
-        label: __("Bounce To Left", "essential-blocks"),
+        label: __("Bounce To Left", "team-member-block"),
         value: "hvr-bounce-to-left",
     },
     {
-        label: __("Bounce To Bottom", "essential-blocks"),
+        label: __("Bounce To Bottom", "team-member-block"),
         value: "hvr-bounce-to-bottom",
     },
     {
-        label: __("Bounce To Top", "essential-blocks"),
+        label: __("Bounce To Top", "team-member-block"),
         value: "hvr-bounce-to-top",
     },
-    { label: __("Radial Out", "essential-blocks"), value: "hvr-radial-out" },
-    { label: __("Radial In", "essential-blocks"), value: "hvr-radial-in" },
+    { label: __("Radial Out", "team-member-block"), value: "hvr-radial-out" },
+    { label: __("Radial In", "team-member-block"), value: "hvr-radial-in" },
     {
-        label: __("Rectangle In", "essential-blocks"),
+        label: __("Rectangle In", "team-member-block"),
         value: "hvr-rectangle-in",
     },
     {
-        label: __("Rectangle Out", "essential-blocks"),
+        label: __("Rectangle Out", "team-member-block"),
         value: "hvr-rectangle-out",
     },
     {
-        label: __("Shutter In Horizontal", "essential-blocks"),
+        label: __("Shutter In Horizontal", "team-member-block"),
         value: "hvr-shutter-in-horizontal",
     },
     {
-        label: __("Shutter Out Horizontal", "essential-blocks"),
+        label: __("Shutter Out Horizontal", "team-member-block"),
         value: "hvr-shutter-out-horizontal",
     },
     {
-        label: __("Shutter In Vertical", "essential-blocks"),
+        label: __("Shutter In Vertical", "team-member-block"),
         value: "hvr-shutter-in-vertical",
     },
     {
-        label: __("Shutter Out Vertical", "essential-blocks"),
+        label: __("Shutter Out Vertical", "team-member-block"),
         value: "hvr-shutter-out-vertical",
     },
-    { label: __("Icon Back", "essential-blocks"), value: "hvr-icon-back" },
+    { label: __("Icon Back", "team-member-block"), value: "hvr-icon-back" },
     {
-        label: __("Icon Forward", "essential-blocks"),
+        label: __("Icon Forward", "team-member-block"),
         value: "hvr-icon-forward",
     },
-    { label: __("Icon Down", "essential-blocks"), value: "hvr-icon-down" },
-    { label: __("Icon Up", "essential-blocks"), value: "hvr-icon-up" },
-    { label: __("Icon Spin", "essential-blocks"), value: "hvr-icon-spin" },
-    { label: __("Icon Drop", "essential-blocks"), value: "hvr-icon-drop" },
-    { label: __("Icon Fade", "essential-blocks"), value: "hvr-icon-fade" },
+    { label: __("Icon Down", "team-member-block"), value: "hvr-icon-down" },
+    { label: __("Icon Up", "team-member-block"), value: "hvr-icon-up" },
+    { label: __("Icon Spin", "team-member-block"), value: "hvr-icon-spin" },
+    { label: __("Icon Drop", "team-member-block"), value: "hvr-icon-drop" },
+    { label: __("Icon Fade", "team-member-block"), value: "hvr-icon-fade" },
     {
-        label: __("Icon Float Away", "essential-blocks"),
+        label: __("Icon Float Away", "team-member-block"),
         value: "hvr-icon-float-away",
     },
     {
-        label: __("Icon Sink Away", "essential-blocks"),
+        label: __("Icon Sink Away", "team-member-block"),
         value: "hvr-icon-sink-away",
     },
     {
-        label: __("Icon Grow", "essential-blocks"),
+        label: __("Icon Grow", "team-member-block"),
         value: "hvr-icon-grow",
     },
     {
-        label: __("Icon Shrink", "essential-blocks"),
+        label: __("Icon Shrink", "team-member-block"),
         value: "hvr-icon-shrink",
     },
     {
-        label: __("Icon Pulse", "essential-blocks"),
+        label: __("Icon Pulse", "team-member-block"),
         value: "hvr-icon-pulse",
     },
     {
-        label: __("Icon Pulse Grow", "essential-blocks"),
+        label: __("Icon Pulse Grow", "team-member-block"),
         value: "hvr-icon-pulse-grow",
     },
     {
-        label: __("Icon Pulse Shrink", "essential-blocks"),
+        label: __("Icon Pulse Shrink", "team-member-block"),
         value: "hvr-icon-pulse-shrink",
     },
     {
-        label: __("Icon Push", "essential-blocks"),
+        label: __("Icon Push", "team-member-block"),
         value: "hvr-icon-push",
     },
     {
-        label: __("Icon Pop", "essential-blocks"),
+        label: __("Icon Pop", "team-member-block"),
         value: "hvr-icon-pop",
     },
     {
-        label: __("Icon Bounce", "essential-blocks"),
+        label: __("Icon Bounce", "team-member-block"),
         value: "hvr-icon-bounce",
     },
     {
-        label: __("Icon Rotate", "essential-blocks"),
+        label: __("Icon Rotate", "team-member-block"),
         value: "hvr-icon-rotate",
     },
     {
-        label: __("Icon Grow Rotate", "essential-blocks"),
+        label: __("Icon Grow Rotate", "team-member-block"),
         value: "hvr-icon-grow-rotate",
     },
     {
-        label: __("Icon Float", "essential-blocks"),
+        label: __("Icon Float", "team-member-block"),
         value: "hvr-icon-float",
     },
     {
-        label: __("Icon Sink", "essential-blocks"),
+        label: __("Icon Sink", "team-member-block"),
         value: "hvr-icon-sink",
     },
     {
-        label: __("Icon Bob", "essential-blocks"),
+        label: __("Icon Bob", "team-member-block"),
         value: "hvr-icon-bob",
     },
     {
-        label: __("Icon Hang", "essential-blocks"),
+        label: __("Icon Hang", "team-member-block"),
         value: "hvr-icon-hang",
     },
     {
-        label: __("Icon Wobble Horizontal", "essential-blocks"),
+        label: __("Icon Wobble Horizontal", "team-member-block"),
         value: "hvr-icon-wobble-horizontal",
     },
     {
-        label: __("Icon Wobble Vertical", "essential-blocks"),
+        label: __("Icon Wobble Vertical", "team-member-block"),
         value: "hvr-icon-wobble-vertical",
     },
     {
-        label: __("Icon Buzz", "essential-blocks"),
+        label: __("Icon Buzz", "team-member-block"),
         value: "hvr-icon-buzz",
     },
     {
-        label: __("Icon Buzz Out", "essential-blocks"),
+        label: __("Icon Buzz Out", "team-member-block"),
         value: "hvr-icon-buzz-out",
     },
     {
-        label: __("Curl Top Left", "essential-blocks"),
+        label: __("Curl Top Left", "team-member-block"),
         value: "hvr-curl-top-left",
     },
     {
-        label: __("Curl Top Right", "essential-blocks"),
+        label: __("Curl Top Right", "team-member-block"),
         value: "hvr-curl-top-right",
     },
     {
-        label: __("Curl Bottom Right", "essential-blocks"),
+        label: __("Curl Bottom Right", "team-member-block"),
         value: "hvr-curl-bottom-right",
     },
     {
-        label: __("Curl Bottom Left", "essential-blocks"),
+        label: __("Curl Bottom Left", "team-member-block"),
         value: "hvr-curl-bottom-left",
     },
 ];

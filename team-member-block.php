@@ -12,7 +12,7 @@
  * Text Domain:     team-member-block
  * Requires PHP:    7.4
  * Requires at least: 6.0
- * Tested up to:    7.0
+ * Tested up to:    7.1
  *
  * @package         team-member-block
  */
@@ -126,6 +126,7 @@ function create_block_team_member_block_init() {
         isset( $script_asset['version'] ) ? $script_asset['version'] : TEAM_MEMBER_BLOCK_VERSION,
         true
     );
+    wp_set_script_translations( 'create-block-team-member-block-editor', 'team-member-block' );
 
     $load_animation_js = TEAM_MEMBER_BLOCK_ADMIN_URL . 'assets/js/eb-animation-load.js';
     wp_register_script(
