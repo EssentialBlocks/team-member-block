@@ -52,6 +52,9 @@ const {
 	generateResponsiveRangeAttributes,
 } = window.EBTeamMemberControls;
 
+// The bundled starting photo for new blocks. It used to be imageUrl's default.
+export const DEFAULT_IMAGE_URL = EssentialBlocksLocalize?.eb_plugins_url + "assets/images/user.jpg";
+
 const attributes = {
 	// the following 4 attributes is must required for responsive options and asset generation for frontend
 	// responsive control attributes ⬇
@@ -104,11 +107,13 @@ const attributes = {
 	},
 
 	//
+	// No default on purpose. A sourced attribute falls back to its default whenever the saved
+	// <img> has no src, so a deleted photo came back on reload and the block failed validation.
+	// New blocks get DEFAULT_IMAGE_URL from edit.js instead.
 	imageUrl: {
 		source: "attribute",
 		selector: ".eb-team-member-avatar",
 		attribute: "src",
-		default: EssentialBlocksLocalize?.eb_plugins_url + "assets/images/user.jpg",
 	},
 
 	//
