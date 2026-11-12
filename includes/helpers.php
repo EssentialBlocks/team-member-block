@@ -101,7 +101,7 @@ class Team_Member_Helper {
 			);
 
             wp_enqueue_style(
-                'essential-blocks-editor-css',
+                'team-member-block-controls-css',
                 TEAM_MEMBER_BLOCK_ADMIN_URL . 'dist/modules.css',
                 ['essential-blocks-iconpicker-css'],
                 $controls_dependencies['version'],
@@ -115,15 +115,23 @@ class Team_Member_Helper {
             // at the top of its 2.5em-tall row while the label stayed centred. Centre both, and give
             // every icon the same 20px column so the labels line up whatever the icon's width.
             wp_add_inline_style(
-                'essential-blocks-editor-css',
+                'team-member-block-controls-css',
                 '.image-avatar{position:relative}.image-avatar .image-avatar-delete{top:10px}'
                 . '.profile-icon-container{display:flex;align-items:center}'
                 . '.profile-icon-container>:first-child{flex:0 0 20px;text-align:center}'
+            );
+
+            // The rules below aren't scoped to
+            // this block (popovers render outside its panel), so they'd restyle every EB block's sidebar.
+            if ( defined( 'ESSENTIAL_BLOCKS_VERSION' ) ) {
+                return;
+            }
+
+            wp_add_inline_style(
+                'team-member-block-controls-css',
                 // Range controls' reset button: in the responsive variant it sat at the top of the
                 // row, above the centred number box and against its corner. Centre it, add a gap.
-                // `top:0` cancels the 5px nudge Essential Blocks' controls.css adds when it is active,
-                // and `button` outranks that stylesheet's equally specific rules whatever the load order.
-                . '.eb-component-wrapper>button.eb-range-reset-button{align-self:center;top:0;margin-left:4px}'
+                '.eb-component-wrapper>button.eb-range-reset-button{align-self:center;top:0;margin-left:4px}'
                 // Range control layout rules the newer controls build ships but this plugin's
                 // dist/modules.css lacks. Without them the number box overflowed under the reset
                 // button and the row's 10px bottom margin pushed the centred button low. Other
@@ -141,7 +149,7 @@ class Team_Member_Helper {
              */
             if ( version_compare( get_bloginfo( 'version' ), '7.0', '>=' ) ) {
                 wp_add_inline_style(
-                    'essential-blocks-editor-css',
+                    'team-member-block-controls-css',
                     '.eb-panel-control .eb-range-controller-container button.eb-range-reset-button{margin-top:28px;margin-left:4px}'
                     . '.eb-panel-control.eb-typography-component-panel .eb-range-controller-container button.eb-range-reset-button{margin-top:23px}'
                 );

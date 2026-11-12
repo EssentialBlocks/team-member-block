@@ -2,8 +2,12 @@
 
 	// A member whose photo was deleted saves an <img> without src: show nothing, not its alt text.
 	// !important beats the per-block generated `.eb-team-member-image img { display: inline-block }`.
-	.eb-team-member-avatar:not([src]),
-	.eb-team-member-avatar[src=""] {
+	// Images a lazy-loader will fill in keep their data attribute, so they stay visible. Blocks not
+	// yet re-saved use the old `.avatar` class.
+	.eb-team-member-avatar:not([src]):not([data-src]):not([data-lazy-src]):not([data-lazy]),
+	.eb-team-member-avatar[src=""]:not([data-src]):not([data-lazy-src]):not([data-lazy]),
+	.avatar:not([src]):not([data-src]):not([data-lazy-src]):not([data-lazy]),
+	.avatar[src=""]:not([data-src]):not([data-lazy-src]):not([data-lazy]) {
 		display: none !important;
 	}
 
