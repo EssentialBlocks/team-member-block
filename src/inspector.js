@@ -1821,7 +1821,7 @@ function Inspector({ attributes, setAttributes }) {
                                     <PanelBody title={__("Avatar", "essential-blocks")} initialOpen={false}>
                                         {!imageUrl && (
                                             <MediaUpload
-                                                onSelect={({ id, url }) =>
+                                                onSelect={({ id, url, alt }) =>
                                                     setAttributes({
                                                         imageUrl: url,
                                                         imageId: id,
@@ -2061,7 +2061,7 @@ function Inspector({ attributes, setAttributes }) {
                                             <label
                                                 style={{
                                                     display: "block",
-                                                    margin: "-20px 0 20px",
+                                                    margin: "0 0 20px",
                                                 }}
                                             >
                                                 <i>
@@ -2071,7 +2071,7 @@ function Inspector({ attributes, setAttributes }) {
                                             </label>
 
                                             <ToggleControl
-                                                label={__("Icons Devider", "essential-blocks")}
+                                                label={__("Icons Divider", "essential-blocks")}
                                                 checked={isIconsDevider}
                                                 onChange={() =>
                                                     setAttributes({
