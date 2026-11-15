@@ -4,7 +4,7 @@ Tags: gutenberg, block, blocks, editor, team, member, team member, profile, gute
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,21 +98,17 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 1.4.2 - Oct 29 2026 =
-* Fixed: A deleted member photo came back after saving and the block showed "This block contains unexpected or invalid content"
-* Fixed: Choosing a photo in Style > Avatar did nothing
-* Fixed: Dashicons (such as the menu icon) showed as empty boxes in the editor and on the front end
-* Fixed: The photo's delete button sat outside the photo in the editor
-* Fixed: Dashicons in the Social Profiles list sat above their labels in the editor sidebar
-* Fixed: Range controls' reset buttons sat above or over their number boxes in the editor
-* Fixed: "Icons Divider" label typo
+= 1.4.3 - 15/11/2026 =
+* Fixed: Unsaved changes issue in editor
 * Improved: Security enhancements
-* Fixed: Existing Team Member blocks stopped working on the front end when Essential Blocks is active
-* Fixed: Editor styles changed the Essential Blocks sidebar when both plugins are active
-* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
-* Fixed: Entrance animations not previewing in the block editor
-* Fixed: Block icon hard to see when highlighted in the inserter and List View
-* Fixed: Chrome console warning about a deprecated DOM event
+* Few minor bug fixes & improvements
+
+= 1.4.2 - 12/11/2026 =
+* Fixed: Deleted member photo coming back after save
+* Fixed: Dashicons not showing
+* Fixed: Frontend conflict with Essential Blocks
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.4.1 - 26/10/2026 =
 * Improved: Security enhancements
