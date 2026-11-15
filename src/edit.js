@@ -6,6 +6,12 @@ import { useEffect, useRef } from "@wordpress/element";
 import { useBlockProps, MediaUpload } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
 import { select } from "@wordpress/data";
+import { isEqual } from "lodash";
+
+// Saved attributes come back from JSON, so compare through JSON too: keys holding
+// `undefined` drop out and a freshly built but equal value counts as unchanged.
+const isSameData = (next, current) =>
+    isEqual(JSON.parse(JSON.stringify(next ?? null)), current ?? null);
 /**
  * Internal dependencies
  */
@@ -62,7 +68,10 @@ export default function Edit(props) {
             isExpanded: false,
         }));
 
-        setAttributes({ socialDetails: newProfiles });
+        // Only write on a real change: an equal but new array still marks the post dirty.
+        if (!isSameData(newProfiles, socialDetails)) {
+            setAttributes({ socialDetails: newProfiles });
+        }
 
         if (socialDetails.length > 0) return;
 
@@ -119,7 +128,9 @@ export default function Edit(props) {
             })
         );
 
-        setAttributes({ profilesOnly });
+        if (!isSameData(profilesOnly, attributes.profilesOnly)) {
+            setAttributes({ profilesOnly });
+        }
     }, [socialDetails]);
 
 
